@@ -1,0 +1,418 @@
+{
+  "categories": {
+    "general": {
+      "name": "Allgemeinwissen",
+      "icon": "🌍",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "question": "Was ist die Hauptstadt von Deutschland?",
+          "answers": ["München", "Hamburg", "Berlin", "Frankfurt"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Kontinente gibt es auf der Erde?",
+          "answers": ["5", "6", "7", "8"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Fluss ist der längste der Welt?",
+          "answers": ["Amazonas", "Nil", "Mississippi", "Yangtze"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "In welchem Jahr begann der Zweite Weltkrieg?",
+          "answers": ["1935", "1937", "1939", "1941"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist das größte Land der Welt nach Fläche?",
+          "answers": ["USA", "China", "Kanada", "Russland"],
+          "correct_index": 3,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Element hat das chemische Symbol 'Au'?",
+          "answers": ["Silber", "Gold", "Aluminium", "Kupfer"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele Planeten hat unser Sonnensystem?",
+          "answers": ["7", "8", "9", "10"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Ozean ist der größte der Welt?",
+          "answers": ["Atlantik", "Indischer Ozean", "Arktischer Ozean", "Pazifik"],
+          "correct_index": 3,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wer schrieb 'Faust'?",
+          "answers": ["Schiller", "Goethe", "Heine", "Kafka"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist die kleinste Primzahl?",
+          "answers": ["0", "1", "2", "3"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welche Sprache wird in Brasilien gesprochen?",
+          "answers": ["Spanisch", "Französisch", "Portugiesisch", "Englisch"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wann fand die erste Mondlandung statt?",
+          "answers": ["1965", "1967", "1969", "1971"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        }
+      ]
+    },
+    "science": {
+      "name": "Wissenschaft",
+      "icon": "🔬",
+      "color": "#10b981",
+      "questions": [
+        {
+          "question": "Was ist die Geschwindigkeit des Lichts (ca.)?",
+          "answers": ["200.000 km/s", "300.000 km/s", "400.000 km/s", "500.000 km/s"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Aus wie vielen Atomen besteht ein Wassermolekül (H₂O)?",
+          "answers": ["1", "2", "3", "4"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist der pH-Wert von reinem Wasser?",
+          "answers": ["5", "6", "7", "8"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Gas macht den größten Teil der Erdatmosphäre aus?",
+          "answers": ["Sauerstoff", "Kohlendioxid", "Stickstoff", "Argon"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist die Einheit der elektrischen Spannung?",
+          "answers": ["Ampere", "Watt", "Volt", "Ohm"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Organ produziert Insulin?",
+          "answers": ["Leber", "Niere", "Milz", "Bauchspeicheldrüse"],
+          "correct_index": 3,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist die chemische Formel von Kochsalz?",
+          "answers": ["KCl", "NaCl", "CaCl₂", "MgCl₂"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wer entwickelte die Relativitätstheorie?",
+          "answers": ["Newton", "Bohr", "Einstein", "Planck"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches ist das häufigste Element im Universum?",
+          "answers": ["Helium", "Sauerstoff", "Kohlenstoff", "Wasserstoff"],
+          "correct_index": 3,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was misst ein Seismograph?",
+          "answers": ["Luftdruck", "Erdbeben", "Schallwellen", "Magnetfelder"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        }
+      ]
+    },
+    "math": {
+      "name": "Mathematik",
+      "icon": "📐",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "question": "Was ist 15 × 17?",
+          "answers": ["245", "255", "265", "275"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist die Quadratwurzel von 144?",
+          "answers": ["10", "11", "12", "13"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viel Grad hat ein Kreis?",
+          "answers": ["180°", "270°", "360°", "720°"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist 2 hoch 10?",
+          "answers": ["512", "1024", "2048", "256"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie lautet die Formel für den Umfang eines Kreises?",
+          "answers": ["π × r²", "2 × π × r", "4 × r", "π × d²"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist der Satz des Pythagoras?",
+          "answers": ["a + b = c", "a² + b² = c²", "a × b = c²", "a² - b² = c"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist die Primfaktorzerlegung von 36?",
+          "answers": ["2² × 3²", "2³ × 3", "2 × 3³", "4 × 9"],
+          "correct_index": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele Nullen hat eine Million?",
+          "answers": ["5", "6", "7", "8"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist 30% von 200?",
+          "answers": ["40", "50", "60", "70"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist 7! (Fakultät von 7)?",
+          "answers": ["2520", "5040", "720", "40320"],
+          "correct_index": 1,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    "history": {
+      "name": "Geschichte",
+      "icon": "📜",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "question": "In welchem Jahr fiel die Berliner Mauer?",
+          "answers": ["1987", "1988", "1989", "1990"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wer war der erste US-Präsident?",
+          "answers": ["Thomas Jefferson", "Benjamin Franklin", "George Washington", "John Adams"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wann begann die Französische Revolution?",
+          "answers": ["1779", "1789", "1799", "1809"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "In welchem Jahr wurde die Titanic versenkt?",
+          "answers": ["1910", "1912", "1914", "1916"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wer war der erste Mensch im Weltraum?",
+          "answers": ["Neil Armstrong", "Buzz Aldrin", "Juri Gagarin", "Alan Shepard"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "In welchem Jahr wurde das Grundgesetz der BRD verabschiedet?",
+          "answers": ["1947", "1948", "1949", "1950"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wer war Kaiser Roms während der Kreuzigung Jesu?",
+          "answers": ["Julius Caesar", "Augustus", "Tiberius", "Nero"],
+          "correct_index": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wann endete der Erste Weltkrieg?",
+          "answers": ["1916", "1917", "1918", "1919"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welche Stadt war die erste Hauptstadt der USA?",
+          "answers": ["Boston", "Philadelphia", "New York", "Washington D.C."],
+          "correct_index": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wer hat die Druckerpresse erfunden?",
+          "answers": ["Leonardo da Vinci", "Galileo Galilei", "Johannes Gutenberg", "Nikolaus Kopernikus"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        }
+      ]
+    },
+    "sports": {
+      "name": "Sport",
+      "icon": "⚽",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "question": "Wie viele Spieler hat eine Fußballmannschaft auf dem Platz?",
+          "answers": ["9", "10", "11", "12"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie oft war Deutschland Fußball-Weltmeister?",
+          "answers": ["3", "4", "5", "6"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie lang ist ein Marathonlauf?",
+          "answers": ["40,195 km", "41,195 km", "42,195 km", "43,195 km"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "In welchem Sport gibt es einen 'Slam Dunk'?",
+          "answers": ["Volleyball", "Basketball", "Handball", "Wasserball"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie oft finden die Olympischen Sommerspiele statt?",
+          "answers": ["Alle 2 Jahre", "Alle 3 Jahre", "Alle 4 Jahre", "Alle 5 Jahre"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Sport wird in Wimbledon gespielt?",
+          "answers": ["Golf", "Cricket", "Tennis", "Squash"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Sets gewinnt man in einem Tennismatch (Best of 5)?",
+          "answers": ["2", "3", "4", "5"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "In welchem Land wurde der Sport 'Sumo' erfunden?",
+          "answers": ["China", "Korea", "Japan", "Mongolei"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Punkte ist ein Touchdown im American Football wert?",
+          "answers": ["4", "5", "6", "7"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wer hat die meisten Grand Slam Titel im Tennis (Herren) gewonnen?",
+          "answers": ["Roger Federer", "Rafael Nadal", "Novak Djokovic", "Pete Sampras"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        }
+      ]
+    },
+    "technology": {
+      "name": "Technologie",
+      "icon": "💻",
+      "color": "#06b6d4",
+      "questions": [
+        {
+          "question": "Was bedeutet 'HTTP'?",
+          "answers": ["HyperText Transfer Protocol", "High Tech Transfer Process", "Hyperlink Text Transfer Protocol", "Home Text Transfer Program"],
+          "correct_index": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wer hat das Internet erfunden?",
+          "answers": ["Bill Gates", "Steve Jobs", "Tim Berners-Lee", "Elon Musk"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist 1 Gigabyte in Megabytes?",
+          "answers": ["512 MB", "1000 MB", "1024 MB", "2048 MB"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Unternehmen entwickelte das Android-Betriebssystem?",
+          "answers": ["Apple", "Microsoft", "Google", "Samsung"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was bedeutet 'CPU'?",
+          "answers": ["Central Processing Unit", "Computer Power Unit", "Central Program Utility", "Core Processing Unit"],
+          "correct_index": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welche Programmiersprache wurde von Guido van Rossum entwickelt?",
+          "answers": ["Java", "Ruby", "Python", "Perl"],
+          "correct_index": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist GitHub?",
+          "answers": ["Eine Social-Media-Plattform", "Ein Versionskontrollsystem", "Eine Cloud-Speicherplattform", "Ein Betriebssystem"],
+          "correct_index": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was macht ein DNS-Server?",
+          "answers": ["E-Mails verschlüsseln", "Domains in IP-Adressen übersetzen", "Netzwerkgeschwindigkeit erhöhen", "Malware erkennen"],
+          "correct_index": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist künstliche Intelligenz (KI)?",
+          "answers": ["Ein Roboter", "Ein Computer der denkt wie ein Mensch", "Simulation menschlicher Intelligenz in Maschinen", "Ein Supercomputer"],
+          "correct_index": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was bedeutet 'SSL' in der Webkommunikation?",
+          "answers": ["Secure Socket Layer", "Safe Server Link", "Secure System Layer", "Simple Socket Login"],
+          "correct_index": 0,
+          "difficulty": "hard"
+        }
+      ]
+    }
+  }
+}

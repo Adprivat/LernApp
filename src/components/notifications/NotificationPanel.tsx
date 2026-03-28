@@ -1,0 +1,103 @@
+import React, { useEffect } from 'react';
+import { Bell, CheckCheck, Zap, Trophy, Star, Users } from 'lucide-react';
+import { useAuthStore } from '@/stores/authStore';
+import { useNotificationStore } from '@/stores/notificationStore';
+import { formatDistanceToNow } from 'date-fns';
+import { de } from 'date-fns/locale';
+import { Button } from '@/components/ui/Button';
+import { useNavigate } from 'react-router-dom';
+
+interface NotificationPanelProps {
+  onClose: () => void;
+}
+
+const typeIcons: Record<string, React.ReactNode> = {
+  challenge_received: <Zap size={16} className="text-amber-400" />,
+  challenge_accepted: <CheckCheck size={16} className="text-emerald-400" />,
+  challenge_declined: <Zap size={16} className="text-red-400" />,
+  tournament_start: <Trophy size={16} className="text-yellow-400" />,
+  achievement_earned: <Star size={16} className="text-purple-400" />,
+  game_invite: <Users size={16} className="text-blue-400" />,
+};
+
+export function NotificationPanel({ onClose }: NotificationPanelProps) {
+  const { user } = useAuthStore();
+  const { notifications, unreadCount, fetchNotifications, markRead, markAllRead } = useNotificationStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) fetchNotifications(user.id);
+  }, [user]);
+
+  const handleNotifClick = async (notif: any) => {
+    if (!notif.is_read) await markRead(notif.id);
+    if (notif.data?.session_id) {
+      navigate(`/game/${notif.data.session_id}`);
+      onClose();
+    } else if (notif.data?.challenge_id) {
+      navigate('/challenge');
+      onClose();
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50" onClick={onClose}>
+      <div
+        className="absolute top-16 right-4 w-96 max-h-[80vh] flex flex-col bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-700">
+          <div className="flex items-center gap-2">
+            <Bell size={18} className="text-slate-400" />
+            <h3 className="font-bold text-white">Benachrichtigungen</h3>
+            {unreadCount > 0 && (
+              <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {unreadCount}
+              </span>
+            )}
+          </div>
+          {unreadCount > 0 && (
+            <Button size="sm" variant="ghost" onClick={() => user && markAllRead(user.id)}>
+              Alle lesen
+            </Button>
+          )}
+        </div>
+
+        <div className="flex-1 overflow-y-auto">
+          {notifications.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-slate-400">
+              <Bell size={40} className="mb-3 opacity-30" />
+              <p className="text-sm">Keine Benachrichtigungen</p>
+            </div>
+          ) : (
+            notifications.map(notif => (
+              <div
+                key={notif.id}
+                onClick={() => handleNotifClick(notif)}
+                className={`flex gap-3 px-5 py-4 cursor-pointer transition-colors hover:bg-slate-700/50 border-b border-slate-700/50 last:border-0 ${
+                  !notif.is_read ? 'bg-indigo-600/5' : ''
+                }`}
+              >
+                <div className="flex-shrink-0 mt-0.5">
+                  {typeIcons[notif.type] || <Bell size={16} className="text-slate-400" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-medium ${!notif.is_read ? 'text-white' : 'text-slate-300'}`}>
+                    {notif.title}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{notif.message}</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {formatDistanceToNow(new Date(notif.created_at), { addSuffix: true, locale: de })}
+                  </p>
+                </div>
+                {!notif.is_read && (
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0 mt-1.5" />
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
