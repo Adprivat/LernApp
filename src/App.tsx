@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
 import { useNotificationStore } from '@/stores/notificationStore';
 import { Navbar } from '@/components/layout/Navbar';
@@ -32,7 +33,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 function AppLayout() {
   const { user, fetchProfile } = useAuthStore();
   const { addNotification } = useNotificationStore();
-  const channelRef = useRef<any>(null);
+  const channelRef = useRef<RealtimeChannel | null>(null);
   const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -48,7 +49,10 @@ function AppLayout() {
 
   useEffect(() => {
     if (!user) {
-      channelRef.current?.unsubscribe();
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
       if (heartbeatRef.current) clearInterval(heartbeatRef.current);
       return;
     }
@@ -77,7 +81,10 @@ function AppLayout() {
     heartbeatRef.current = setInterval(updateOnline, 30000);
 
     return () => {
-      channelRef.current?.unsubscribe();
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
       if (heartbeatRef.current) clearInterval(heartbeatRef.current);
     };
   }, [user?.id]);
