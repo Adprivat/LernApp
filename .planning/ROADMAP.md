@@ -68,7 +68,7 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Create errorHandler.ts utility (getErrorMessage, isSupabaseError, handleSupabaseError)
+- [x] 04-01-PLAN.md — Create errorHandler.ts utility (getErrorMessage, isSupabaseError, handleSupabaseError)
 - [ ] 04-02-PLAN.md — Fix stores: authStore.ts + gameStore.ts (.single() checks + typed errors)
 - [ ] 04-03-PLAN.md — Fix ChallengePage + TournamentPage (catch blocks + alert() replacement)
 - [ ] 04-04-PLAN.md — Fix GroupPage + LobbyPage + GameChat (.single() checks + alert() replacement)
@@ -81,4 +81,4 @@ Plans:
 | 1. Race Condition Fix | 1/2 | In Progress|  |
 | 2. Subscription Leak Fix | 2/3 | In Progress|  |
 | 3. Auth Security Fix | 1/2 | In Progress|  |
-| 4. Error Handling Hardening | 0/5 | Not started | - |
+| 4. Error Handling Hardening | 1/5 | In Progress|  |

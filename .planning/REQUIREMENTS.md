@@ -14,8 +14,8 @@
 ### Error Handling
 
 - [ ] **ERR-01**: Alle `.single()` Supabase-Queries prüfen auf Fehler und fehlende Daten
-- [ ] **ERR-02**: `catch (err: any)` durch typisierte Error-Handler-Utility ersetzt
-- [ ] **ERR-03**: Nutzerfreundliche Fehlermeldungen bei DB-Fehlern (kein stilles Scheitern)
+- [x] **ERR-02**: `catch (err: any)` durch typisierte Error-Handler-Utility ersetzt
+- [x] **ERR-03**: Nutzerfreundliche Fehlermeldungen bei DB-Fehlern (kein stilles Scheitern)
 
 ## v2 Requirements
 
@@ -47,8 +47,8 @@
 | BUG-02 | Phase 2 | Complete |
 | BUG-03 | Phase 3 | Complete |
 | ERR-01 | Phase 4 | Pending |
-| ERR-02 | Phase 4 | Pending |
-| ERR-03 | Phase 4 | Pending |
+| ERR-02 | Phase 4 | Complete |
+| ERR-03 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 6 total
