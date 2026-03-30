@@ -1,93 +1,68 @@
 # Roadmap: LernApp Stabilisierung
 
-**Milestone:** v1.1 — Bugfix & Stabilisierung
-**Goal:** Alle bekannten Bugs und kritischer Tech Debt behoben. App ist stabil, sicher und wartbar.
+## Overview
+
+Bugfix- und Stabilisierungs-Milestone für die LernApp. Vier Phasen schließen bekannte Race Conditions, Memory Leaks und Sicherheitslücken, bevor neue Features gebaut werden.
 
 ## Phases
 
-### Phase 1 — Race Condition Fix (Challenge)
+- [ ] **Phase 1: Race Condition Fix** - Atomare Challenge-Annahme verhindert doppelte Game Sessions
+- [ ] **Phase 2: Subscription Leak Fix** - Real-time Kanäle werden zuverlässig aufgeräumt bei Navigation
+- [ ] **Phase 3: Auth Security Fix** - Username-Enumeration-Lücke in der Auth-Schicht geschlossen
+- [ ] **Phase 4: Error Handling Hardening** - Einheitliches typisiertes Error Handling ersetzt fragile Muster
 
-**Goal:** Verhindere doppelte Game Sessions wenn zwei Spieler gleichzeitig eine offene Challenge annehmen.
+## Phase Details
 
-**Requirements:** BUG-01
+### Phase 1: Race Condition Fix
+**Goal**: Verhindere doppelte Game Sessions wenn zwei Spieler gleichzeitig eine offene Challenge annehmen
+**Depends on**: Nothing (first phase)
+**Requirements**: BUG-01
+**Success Criteria** (what must be TRUE):
+  1. Zwei simultane Challenge-Annahmen führen zu genau einer Game Session
+  2. Zweiter Spieler erhält verständliche Fehlermeldung
+  3. Keine doppelten Einträge in game_sessions Tabelle möglich
+**Plans:** 2 plans
 
-**Scope:**
-- Atomare Datenbankoperation für Challenge-Annahme (Check + Update in einer Transaktion)
-- RPC-Funktion oder Constraint auf `challenges` Tabelle zur Absicherung
-- `ChallengePage.tsx` `joinOpenChallenge()` absichern
-- `TournamentPage.tsx` `startTournament()` absichern
+Plans:
+- [ ] 01-01-PLAN.md — SQL RPC functions (accept_open_challenge, accept_targeted_challenge, start_tournament)
+- [ ] 01-02-PLAN.md — Client-side integration (ChallengePage + TournamentPage updated to use RPCs)
 
-**Success Criteria:**
-- Zwei simultane Challenge-Annahmen führen zu genau einer Game Session
-- Zweiter Spieler erhält verständliche Fehlermeldung
+### Phase 2: Subscription Leak Fix
+**Goal**: Real-time Supabase-Kanäle werden zuverlässig aufgeräumt bei Navigation
+**Depends on**: Phase 1
+**Requirements**: BUG-02
+**Success Criteria** (what must be TRUE):
+  1. Kein Anstieg offener Channels bei schneller Navigation
+  2. Konsistentes Cleanup-Pattern in allen betroffenen Pages (GamePage, ChallengePage, TournamentPage, LobbyPage)
+  3. Keine Memory-Warnungen im Browser nach längerem Spielen
+**Plans**: TBD
 
----
+### Phase 3: Auth Security Fix
+**Goal**: Username-Enumeration-Angriffe durch vorhersehbares Email-Pattern unterbinden
+**Depends on**: Phase 2
+**Requirements**: BUG-03
+**Success Criteria** (what must be TRUE):
+  1. Generierte Emails sind nicht vorhersehbar aus dem Username ableitbar
+  2. Bestehende Nutzer können sich weiterhin einloggen
+  3. Login und Register funktionieren korrekt mit neuem Email-Schema
+**Plans**: TBD
 
-### Phase 2 — Subscription Leak Fix
+### Phase 4: Error Handling Hardening
+**Goal**: Einheitliches typisiertes Error Handling ersetzt fragile catch (err: any) und .single() ohne Checks
+**Depends on**: Phase 3
+**Requirements**: ERR-01, ERR-02, ERR-03
+**Success Criteria** (what must be TRUE):
+  1. Kein catch (err: any) mehr im Codebase
+  2. Alle .single() Calls prüfen auf error vor Datenzugriff
+  3. Error Handler Utility src/lib/errorHandler.ts existiert und wird genutzt
+  4. Nutzerfreundliche Fehlermeldungen statt alert() oder stilles Scheitern
+**Plans**: TBD
 
-**Goal:** Real-time Supabase-Kanäle werden zuverlässig aufgeräumt bei Navigation.
+## Progress
 
-**Requirements:** BUG-02
-
-**Scope:**
-- `GamePage.tsx` — Cleanup-Pattern vereinheitlichen
-- `ChallengePage.tsx` — Channel-Cleanup absichern
-- `TournamentPage.tsx` — Channel-Cleanup absichern
-- `LobbyPage.tsx` — Channel-Cleanup absichern
-- Konsistentes Ref-Cleanup-Pattern in allen betroffenen Pages
-
-**Success Criteria:**
-- Kein Anstieg offener Channels bei schneller Navigation (DevTools Network tab)
-- Keine Memory-Warnungen im Browser
-
----
-
-### Phase 3 — Auth Security Fix
-
-**Goal:** Username-Enumeration-Angriffe durch vorhersehbares Email-Pattern unterbinden.
-
-**Requirements:** BUG-03
-
-**Scope:**
-- `src/lib/supabase.ts` `usernameToEmail()` — zufällige Komponente in generierte Email einbauen (UUID oder Hash)
-- `src/stores/authStore.ts` — Login/Register-Flow anpassen
-- Rate-Limiting Hinweis in README / Supabase Dashboard (nicht im Code implementierbar client-seitig)
-
-**Success Criteria:**
-- Generierte Emails sind nicht vorhersehbar aus dem Username ableitbar
-- Bestehende Nutzer können sich weiterhin einloggen (Migration berücksichtigt)
-
----
-
-### Phase 4 — Error Handling Hardening
-
-**Goal:** Einheitliches, typisiertes Error Handling ersetzt fragile `as any` und `catch (err: any)` Muster.
-
-**Requirements:** ERR-01, ERR-02, ERR-03
-
-**Scope:**
-- `src/lib/errorHandler.ts` — Error-Utility erstellen (normalizes Supabase + JS errors)
-- Alle `.single()` Queries mit Error-Check absichern (20+ Stellen)
-- Alle `catch (err: any)` durch `catch (err: unknown)` + Utility ersetzen (8+ Stellen)
-- Nutzerfreundliche Fehlermeldungen statt `alert()` / stilles Scheitern
-
-**Success Criteria:**
-- Kein `catch (err: any)` mehr im Codebase
-- Alle `.single()` Calls prüfen auf `error` vor Datenzugriff
-- TypeScript meldet keine `any`-Warnungen in Error-Handling-Code
-
----
-
-## Timeline
-
-| Phase | Focus | Requirements |
-|-------|-------|--------------|
-| 1 | Race Condition (Challenge) | BUG-01 |
-| 2 | Subscription Leaks | BUG-02 |
-| 3 | Auth Security | BUG-03 |
-| 4 | Error Handling | ERR-01, ERR-02, ERR-03 |
-
-**Total:** 4 Phasen → Milestone v1.1
-
----
-*Roadmap created: 2026-03-30*
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Race Condition Fix | 0/2 | Planned | - |
+| 2. Subscription Leak Fix | 0/TBD | Not started | - |
+| 3. Auth Security Fix | 0/TBD | Not started | - |
+| 4. Error Handling Hardening | 0/TBD | Not started | - |
