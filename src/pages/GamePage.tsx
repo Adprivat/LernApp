@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
 import { useGameStore } from '@/stores/gameStore';
 import { QuestionCard } from '@/components/game/QuestionCard';
@@ -17,7 +18,7 @@ export function GamePage() {
     answers, gameOver, loadSession, submitAnswer, nextQuestion, endGame, reset
   } = useGameStore();
   const [localPlayers, setLocalPlayers] = useState(players);
-  const channelRef = useRef<any>(null);
+  const channelRef = useRef<RealtimeChannel | null>(null);
 
   useEffect(() => {
     if (sessionId) loadSession(sessionId);
@@ -45,7 +46,12 @@ export function GamePage() {
       })
       .subscribe();
 
-    return () => { channelRef.current?.unsubscribe(); };
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+    };
   }, [sessionId]);
 
   const handleAnswer = async (index: number, timeTaken: number) => {
