@@ -25,7 +25,7 @@ Bugfix- und Stabilisierungs-Milestone für die LernApp. Vier Phasen schließen b
 
 Plans:
 - [x] 01-01-PLAN.md — SQL RPC functions (accept_open_challenge, accept_targeted_challenge, start_tournament)
-- [ ] 01-02-PLAN.md — Client-side integration (ChallengePage + TournamentPage updated to use RPCs)
+- [x] 01-02-PLAN.md — Client-side integration (ChallengePage + TournamentPage updated to use RPCs)
 
 ### Phase 2: Subscription Leak Fix
 **Goal**: Real-time Supabase-Kanäle werden zuverlässig aufgeräumt bei Navigation

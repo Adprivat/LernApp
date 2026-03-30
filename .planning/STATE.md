@@ -3,13 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-03-30T11:05:50.954Z"
+stopped_at: Completed 01-race-condition-fix/01-02-PLAN.md (plan 02 of 02)
+last_updated: "2026-03-30T11:10:55.692Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 0
+  completed_plans: 2
+  percent: 50
 ---
 
 # Project State
@@ -53,14 +54,17 @@ Progress: [█████░░░░░] 50%
 - [01-race-condition-fix/01] Check error.hint (not error.code/message) to discriminate application-level race condition errors
 - [01-race-condition-fix/01] Do NOT insert game_players inside challenge RPCs — defer to gameStore.joinSession() for minimal scope
 - [01-race-condition-fix/01] DO insert game_players inside start_tournament — participants pre-registered, atomicity required
+- [Phase 01-race-condition-fix]: Use supabase.rpc() single-call pattern for all racy multi-step client flows — eliminates race conditions at the client layer
+- [Phase 01-race-condition-fix]: Discriminate RPC errors by error.hint (not error.code or error.message) — stable machine-readable key per PostgREST conventions
 
 ## Performance Metrics
 
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
 | 01-race-condition-fix | 01 | 2min | 2 | 1 |
+| Phase 01-race-condition-fix P02 | 2min | 2 tasks | 2 files |
 
 ## Session
 
-- **Last session:** 2026-03-30T11:04:47Z
-- **Stopped at:** Completed 01-race-condition-fix/01-01-PLAN.md (plan 01 of 02)
+- **Last session:** 2026-03-30T11:10:55.687Z
+- **Stopped at:** Completed 01-race-condition-fix/01-02-PLAN.md (plan 02 of 02)
