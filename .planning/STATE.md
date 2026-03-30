@@ -2,28 +2,28 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 01-race-condition-fix/01-02-PLAN.md (plan 02 of 02)
-last_updated: "2026-03-30T11:28:57.576Z"
+status: executing
+stopped_at: Completed 02-subscription-leak-fix/02-02-PLAN.md (plan 02 of 02)
+last_updated: "2026-03-30T17:22:05.651Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 5
+  completed_plans: 4
   percent: 50
 ---
 
 # Project State
 
 **Last updated:** 2026-03-30T11:04:47Z
-**Status:** Ready to plan
+**Status:** Executing Phase 02
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Nutzer können jederzeit stabil und sicher gegeneinander spielen — ohne Race Conditions, Memory Leaks oder Sicherheitslücken.
-**Current focus:** Phase 01 — Race Condition Fix
+**Current focus:** Phase 02 — Subscription Leak Fix
 
 ## Current Phase
 
@@ -56,6 +56,9 @@ Progress: [█████░░░░░] 50%
 - [01-race-condition-fix/01] DO insert game_players inside start_tournament — participants pre-registered, atomicity required
 - [Phase 01-race-condition-fix]: Use supabase.rpc() single-call pattern for all racy multi-step client flows — eliminates race conditions at the client layer
 - [Phase 01-race-condition-fix]: Discriminate RPC errors by error.hint (not error.code or error.message) — stable machine-readable key per PostgREST conventions
+- [Phase 02-subscription-leak-fix]: Use useRef instead of local const for channel storage — prevents orphaned channels in Supabase registry on React StrictMode double-mount
+- [Phase 02-subscription-leak-fix]: Use supabase.removeChannel + null ref in BOTH cleanup paths (early-exit and useEffect return) to fully deregister notification channel from Supabase client registry
+- [Phase 02-subscription-leak-fix]: Auth listener subscription.unsubscribe() (onAuthStateChange) is distinct from realtime channel cleanup and must not be changed
 
 ## Performance Metrics
 
@@ -63,8 +66,10 @@ Progress: [█████░░░░░] 50%
 |-------|------|----------|-------|-------|
 | 01-race-condition-fix | 01 | 2min | 2 | 1 |
 | Phase 01-race-condition-fix P02 | 2min | 2 tasks | 2 files |
+| Phase 02-subscription-leak-fix P02 | 5min | 2 tasks | 2 files |
+| Phase 02-subscription-leak-fix P03 | 5min | 1 tasks | 1 files |
 
 ## Session
 
-- **Last session:** 2026-03-30T11:10:55.687Z
-- **Stopped at:** Completed 01-race-condition-fix/01-02-PLAN.md (plan 02 of 02)
+- **Last session:** 2026-03-30T17:22:00.339Z
+- **Stopped at:** Completed 02-subscription-leak-fix/02-02-PLAN.md (plan 02 of 02)

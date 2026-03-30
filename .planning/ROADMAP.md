@@ -39,8 +39,8 @@ Plans:
 
 Plans:
 - [ ] 02-01-PLAN.md — Game pages fix (GamePage.tsx + LobbyPage.tsx) — already have useRef, replace unsubscribe with removeChannel
-- [ ] 02-02-PLAN.md — Feature pages fix (ChallengePage.tsx + TournamentPage.tsx) — add useRef + replace unsubscribe with removeChannel
-- [ ] 02-03-PLAN.md — App.tsx global channel fix — two cleanup paths upgraded to removeChannel
+- [x] 02-02-PLAN.md — Feature pages fix (ChallengePage.tsx + TournamentPage.tsx) — add useRef + replace unsubscribe with removeChannel
+- [x] 02-03-PLAN.md — App.tsx global channel fix — two cleanup paths upgraded to removeChannel
 
 ### Phase 3: Auth Security Fix
 **Goal**: Username-Enumeration-Angriffe durch vorhersehbares Email-Pattern unterbinden
@@ -68,6 +68,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Race Condition Fix | 1/2 | In Progress|  |
-| 2. Subscription Leak Fix | 0/3 | Not started | - |
+| 2. Subscription Leak Fix | 2/3 | In Progress|  |
 | 3. Auth Security Fix | 0/TBD | Not started | - |
 | 4. Error Handling Hardening | 0/TBD | Not started | - |
