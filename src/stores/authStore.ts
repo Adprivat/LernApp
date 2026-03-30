@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { supabase, usernameToEmail } from '@/lib/supabase';
+import { supabase, usernameToHashedEmail, usernameToEmail } from '@/lib/supabase';
 import type { Profile } from '@/types';
 
 interface AuthState {
@@ -42,7 +42,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
       if (existing) throw new Error('Benutzername bereits vergeben');
 
-      const email = usernameToEmail(username);
+      const email = await usernameToHashedEmail(username);
       const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) throw error;
       if (!data.user) throw new Error('Registrierung fehlgeschlagen');
