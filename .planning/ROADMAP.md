@@ -54,7 +54,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — HMAC-SHA256 usernameToHashedEmail() in supabase.ts + VITE_EMAIL_SALT env var
-- [ ] 03-02-PLAN.md — authStore.ts: hashed email in register(), two-phase login with lazy migration
+- [x] 03-02-PLAN.md — authStore.ts: hashed email in register(), two-phase login with lazy migration
 
 ### Phase 4: Error Handling Hardening
 **Goal**: Einheitliches typisiertes Error Handling ersetzt fragile catch (err: any) und .single() ohne Checks

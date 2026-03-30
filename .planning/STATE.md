@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-auth-security-fix/03-01-PLAN.md
-last_updated: "2026-03-30T21:11:52.775Z"
+stopped_at: Completed 03-auth-security-fix/03-02-PLAN.md
+last_updated: "2026-03-30T21:15:10.032Z"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 6
   percent: 50
 ---
 
@@ -61,6 +61,8 @@ Progress: [█████░░░░░] 50%
 - [Phase 02-subscription-leak-fix]: Auth listener subscription.unsubscribe() (onAuthStateChange) is distinct from realtime channel cleanup and must not be changed
 - [Phase 03-auth-security-fix]: HMAC-SHA256 chosen for email derivation — zero extra DB reads, no schema changes, bundle-visible salt accepted as tradeoff consistent with VITE_SUPABASE_ANON_KEY precedent
 - [Phase 03-auth-security-fix]: usernameToEmail kept exported for Plan 02 lazy migration fallback (two-phase login: hashed first, legacy fallback + updateUser migration)
+- [Phase 03-auth-security-fix]: Two-phase login implemented: hashed email first, legacy usernameToEmail fallback with fire-and-forget updateUser() migration on success
+- [Phase 03-auth-security-fix]: register() uses await usernameToHashedEmail() — new accounts created with HMAC-SHA256 derived email, not predictable username@lernapp.local
 
 ## Performance Metrics
 
@@ -71,8 +73,9 @@ Progress: [█████░░░░░] 50%
 | Phase 02-subscription-leak-fix P02 | 5min | 2 tasks | 2 files |
 | Phase 02-subscription-leak-fix P03 | 5min | 1 tasks | 1 files |
 | Phase 03-auth-security-fix P01 | 4min | 2 tasks | 2 files |
+| Phase 03-auth-security-fix P02 | 5min | 2 tasks | 1 files |
 
 ## Session
 
-- **Last session:** 2026-03-30T21:11:52.769Z
-- **Stopped at:** Completed 03-auth-security-fix/03-01-PLAN.md
+- **Last session:** 2026-03-30T21:15:10.025Z
+- **Stopped at:** Completed 03-auth-security-fix/03-02-PLAN.md
