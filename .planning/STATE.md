@@ -2,28 +2,28 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 02-subscription-leak-fix/02-03-PLAN.md (plan 03 of 03)
-last_updated: "2026-03-30T17:25:36.555Z"
+status: executing
+stopped_at: Completed 03-auth-security-fix/03-01-PLAN.md
+last_updated: "2026-03-30T21:11:52.775Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 4
+  total_plans: 7
+  completed_plans: 5
   percent: 50
 ---
 
 # Project State
 
 **Last updated:** 2026-03-30T11:04:47Z
-**Status:** Ready to plan
+**Status:** Executing Phase 03
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Nutzer können jederzeit stabil und sicher gegeneinander spielen — ohne Race Conditions, Memory Leaks oder Sicherheitslücken.
-**Current focus:** Phase 02 — Subscription Leak Fix
+**Current focus:** Phase 03 — Auth Security Fix
 
 ## Current Phase
 
@@ -59,6 +59,8 @@ Progress: [█████░░░░░] 50%
 - [Phase 02-subscription-leak-fix]: Use useRef instead of local const for channel storage — prevents orphaned channels in Supabase registry on React StrictMode double-mount
 - [Phase 02-subscription-leak-fix]: Use supabase.removeChannel + null ref in BOTH cleanup paths (early-exit and useEffect return) to fully deregister notification channel from Supabase client registry
 - [Phase 02-subscription-leak-fix]: Auth listener subscription.unsubscribe() (onAuthStateChange) is distinct from realtime channel cleanup and must not be changed
+- [Phase 03-auth-security-fix]: HMAC-SHA256 chosen for email derivation — zero extra DB reads, no schema changes, bundle-visible salt accepted as tradeoff consistent with VITE_SUPABASE_ANON_KEY precedent
+- [Phase 03-auth-security-fix]: usernameToEmail kept exported for Plan 02 lazy migration fallback (two-phase login: hashed first, legacy fallback + updateUser migration)
 
 ## Performance Metrics
 
@@ -68,8 +70,9 @@ Progress: [█████░░░░░] 50%
 | Phase 01-race-condition-fix P02 | 2min | 2 tasks | 2 files |
 | Phase 02-subscription-leak-fix P02 | 5min | 2 tasks | 2 files |
 | Phase 02-subscription-leak-fix P03 | 5min | 1 tasks | 1 files |
+| Phase 03-auth-security-fix P01 | 4min | 2 tasks | 2 files |
 
 ## Session
 
-- **Last session:** 2026-03-30T17:22:17.592Z
-- **Stopped at:** Completed 02-subscription-leak-fix/02-03-PLAN.md (plan 03 of 03)
+- **Last session:** 2026-03-30T21:11:52.769Z
+- **Stopped at:** Completed 03-auth-security-fix/03-01-PLAN.md

@@ -9,7 +9,7 @@
 
 - [x] **BUG-01**: Race Condition bei Challenge-Annahme verhindert doppelte Game Sessions
 - [x] **BUG-02**: Real-time Subscription Leaks bei Navigation zwischen Seiten behoben
-- [ ] **BUG-03**: Username-Enumeration-Lücke in der Auth-Schicht geschlossen
+- [x] **BUG-03**: Username-Enumeration-Lücke in der Auth-Schicht geschlossen
 
 ### Error Handling
 
@@ -45,7 +45,7 @@
 |-------------|-------|--------|
 | BUG-01 | Phase 1 | Complete |
 | BUG-02 | Phase 2 | Complete |
-| BUG-03 | Phase 3 | Pending |
+| BUG-03 | Phase 3 | Complete |
 | ERR-01 | Phase 4 | Pending |
 | ERR-02 | Phase 4 | Pending |
 | ERR-03 | Phase 4 | Pending |

@@ -53,7 +53,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — HMAC-SHA256 usernameToHashedEmail() in supabase.ts + VITE_EMAIL_SALT env var
+- [x] 03-01-PLAN.md — HMAC-SHA256 usernameToHashedEmail() in supabase.ts + VITE_EMAIL_SALT env var
 - [ ] 03-02-PLAN.md — authStore.ts: hashed email in register(), two-phase login with lazy migration
 
 ### Phase 4: Error Handling Hardening
@@ -73,5 +73,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Race Condition Fix | 1/2 | In Progress|  |
 | 2. Subscription Leak Fix | 2/3 | In Progress|  |
-| 3. Auth Security Fix | 0/2 | Planned | - |
+| 3. Auth Security Fix | 1/2 | In Progress|  |
 | 4. Error Handling Hardening | 0/TBD | Not started | - |
