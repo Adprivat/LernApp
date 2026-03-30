@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Crown, Users, Play, Check, Copy, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +19,7 @@ export function LobbyPage() {
   const [players, setPlayers] = useState<GamePlayer[]>([]);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const channelRef = useRef<any>(null);
+  const channelRef = useRef<RealtimeChannel | null>(null);
 
   const fetchData = async () => {
     if (!sessionId) return;
@@ -86,7 +87,12 @@ export function LobbyPage() {
       })
       .subscribe();
 
-    return () => { channelRef.current?.unsubscribe(); };
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+    };
   }, [sessionId, user]);
 
   const toggleReady = async () => {
