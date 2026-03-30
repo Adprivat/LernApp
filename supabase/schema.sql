@@ -549,6 +549,72 @@ END;
 $$;
 
 -- ============================================================
+-- FUNCTION: start_tournament
+-- ============================================================
+CREATE OR REPLACE FUNCTION public.start_tournament(
+  p_tournament_id uuid,
+  p_starter_id    uuid
+)
+RETURNS jsonb
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  v_tournament  public.tournaments%ROWTYPE;
+  v_session_id  uuid;
+  v_participant record;
+BEGIN
+  -- Security: caller must be the starter
+  IF p_starter_id IS DISTINCT FROM auth.uid() THEN
+    RAISE EXCEPTION 'unauthorized'
+      USING HINT = 'unauthorized';
+  END IF;
+
+  -- Atomic claim: must still be in 'registering' state
+  UPDATE public.tournaments
+  SET    status        = 'active',
+         started_at    = now(),
+         current_round = 1
+  WHERE  id     = p_tournament_id
+    AND  status  = 'registering'
+  RETURNING * INTO v_tournament;
+
+  -- 0 rows updated = tournament already started or does not exist
+  IF v_tournament.id IS NULL THEN
+    RAISE EXCEPTION 'tournament_already_started'
+      USING DETAIL = 'Dieses Turnier wurde bereits gestartet.',
+            HINT   = 'already_started';
+  END IF;
+
+  -- Create game session for this tournament round (same transaction)
+  INSERT INTO public.game_sessions (
+    mode, status, category, question_count,
+    time_per_question, current_question_index, host_id, tournament_id
+  ) VALUES (
+    'tournament', 'active',
+    v_tournament.category, v_tournament.question_count,
+    20, 0, p_starter_id, v_tournament.id
+  )
+  RETURNING id INTO v_session_id;
+
+  -- Insert game_players for all pre-registered tournament participants
+  FOR v_participant IN
+    SELECT user_id FROM public.tournament_participants
+    WHERE  tournament_id = p_tournament_id
+  LOOP
+    INSERT INTO public.game_players (
+      session_id, user_id, score, correct_answers,
+      wrong_answers, is_ready, is_finished
+    ) VALUES (
+      v_session_id, v_participant.user_id, 0, 0, 0, true, false
+    );
+  END LOOP;
+
+  RETURN jsonb_build_object('session_id', v_session_id);
+END;
+$$;
+
+-- ============================================================
 -- SEED: ACHIEVEMENTS
 -- ============================================================
 insert into public.achievements (key, name, description, icon, category, requirement_value) values
