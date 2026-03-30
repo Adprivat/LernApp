@@ -21,9 +21,32 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   login: async (username: string, password: string) => {
     set({ loading: true });
     try {
-      const email = usernameToEmail(username);
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw error;
+      const hashedEmail = await usernameToHashedEmail(username);
+
+      // Phase 1: Try hashed email (fast path for new users and already-migrated users)
+      let { error } = await supabase.auth.signInWithPassword({
+        email: hashedEmail,
+        password,
+      });
+
+      if (error) {
+        // Phase 2: Fallback to legacy email for un-migrated users
+        const legacyEmail = usernameToEmail(username);
+        const { error: legacyError } = await supabase.auth.signInWithPassword({
+          email: legacyEmail,
+          password,
+        });
+
+        if (legacyError) throw legacyError;
+
+        // Legacy login succeeded — silently migrate email to hashed format.
+        // Non-blocking: fetchProfile reads from profiles table, not auth.users,
+        // so there is no race condition. If migration fails, user retries next login.
+        supabase.auth.updateUser({ email: hashedEmail }).catch(() => {
+          // Silent fail — migration will retry on next login
+        });
+      }
+
       await get().fetchProfile();
     } finally {
       set({ loading: false });
