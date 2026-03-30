@@ -119,9 +119,11 @@ export function ChallengePage() {
   const respondToChallenge = async (challenge: Challenge, accept: boolean) => {
     if (!user) return;
     setLoading(true);
+    setError('');
 
     try {
       if (!accept) {
+        // Decline path — unchanged, no race condition risk
         await supabase.from('challenges').update({ status: 'declined' }).eq('id', challenge.id);
         await supabase.from('notifications').insert({
           user_id: challenge.challenger_id,
@@ -131,42 +133,33 @@ export function ChallengePage() {
           is_read: false,
         });
       } else {
-        // Create game session
-        const { data: session } = await supabase
-          .from('game_sessions')
-          .insert({
-            mode: 'challenge',
-            status: 'waiting',
-            category: challenge.category,
-            question_count: challenge.question_count,
-            time_per_question: 20,
-            current_question_index: 0,
-            host_id: challenge.challenger_id,
-          })
-          .select()
-          .single();
-
-        if (!session) throw new Error('Spiel konnte nicht erstellt werden');
-
-        await supabase.from('challenges').update({
-          status: 'accepted',
-          session_id: session.id,
-        }).eq('id', challenge.id);
-
-        await supabase.from('notifications').insert({
-          user_id: challenge.challenger_id,
-          type: 'challenge_accepted',
-          title: 'Herausforderung angenommen!',
-          message: `${user.username} hat deine Herausforderung angenommen!`,
-          data: { session_id: session.id },
-          is_read: false,
+        // Accept path — atomic RPC replaces 3 separate calls
+        const { data, error } = await supabase.rpc('accept_targeted_challenge', {
+          p_challenge_id: challenge.id,
+          p_acceptor_id: user.id,
         });
 
-        navigate(`/game/${session.id}`);
+        if (error) {
+          if (error.hint === 'already_accepted') {
+            setError('Diese Herausforderung ist nicht mehr verfuegbar.');
+            fetchChallenges();
+            return;
+          }
+          if (error.hint === 'unauthorized') {
+            setError('Nicht autorisiert.');
+            return;
+          }
+          throw error;
+        }
+
+        if (data?.session_id) {
+          navigate(`/game/${data.session_id}`);
+          return;
+        }
       }
       fetchChallenges();
     } catch (err: any) {
-      alert(err.message);
+      setError(err.message || 'Fehler bei der Antwort auf die Herausforderung');
     } finally {
       setLoading(false);
     }
@@ -174,38 +167,33 @@ export function ChallengePage() {
 
   const joinOpenChallenge = async (challenge: Challenge) => {
     if (!user) return;
-    const { data: session } = await supabase
-      .from('game_sessions')
-      .insert({
-        mode: 'challenge',
-        status: 'waiting',
-        category: challenge.category,
-        question_count: challenge.question_count,
-        time_per_question: 20,
-        current_question_index: 0,
-        host_id: challenge.challenger_id,
-      })
-      .select()
-      .single();
+    setLoading(true);
+    setError('');
 
-    if (!session) return;
-
-    await supabase.from('challenges').update({
-      status: 'accepted',
-      challenged_id: user.id,
-      session_id: session.id,
-    }).eq('id', challenge.id);
-
-    await supabase.from('notifications').insert({
-      user_id: challenge.challenger_id,
-      type: 'challenge_accepted',
-      title: 'Jemand hat deine offene Herausforderung angenommen!',
-      message: `${user.username} spielt gegen dich!`,
-      data: { session_id: session.id },
-      is_read: false,
+    const { data, error } = await supabase.rpc('accept_open_challenge', {
+      p_challenge_id: challenge.id,
+      p_joiner_id: user.id,
     });
 
-    navigate(`/game/${session.id}`);
+    setLoading(false);
+
+    if (error) {
+      if (error.hint === 'already_accepted') {
+        setError('Zu spaet! Diese Herausforderung wurde bereits von jemand anderem angenommen.');
+        fetchChallenges();
+        return;
+      }
+      if (error.hint === 'unauthorized') {
+        setError('Nicht autorisiert.');
+        return;
+      }
+      setError(error.message || 'Fehler beim Beitreten der Herausforderung');
+      return;
+    }
+
+    if (data?.session_id) {
+      navigate(`/game/${data.session_id}`);
+    }
   };
 
   const myReceived = challenges.filter(c => c.challenged_id === user?.id && c.status === 'pending');
