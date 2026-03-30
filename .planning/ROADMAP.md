@@ -21,10 +21,10 @@ Bugfix- und Stabilisierungs-Milestone für die LernApp. Vier Phasen schließen b
   1. Zwei simultane Challenge-Annahmen führen zu genau einer Game Session
   2. Zweiter Spieler erhält verständliche Fehlermeldung
   3. Keine doppelten Einträge in game_sessions Tabelle möglich
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
-- [ ] 01-01-PLAN.md — SQL RPC functions (accept_open_challenge, accept_targeted_challenge, start_tournament)
+- [x] 01-01-PLAN.md — SQL RPC functions (accept_open_challenge, accept_targeted_challenge, start_tournament)
 - [ ] 01-02-PLAN.md — Client-side integration (ChallengePage + TournamentPage updated to use RPCs)
 
 ### Phase 2: Subscription Leak Fix
@@ -62,7 +62,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Race Condition Fix | 0/2 | Planned | - |
+| 1. Race Condition Fix | 1/2 | In Progress|  |
 | 2. Subscription Leak Fix | 0/TBD | Not started | - |
 | 3. Auth Security Fix | 0/TBD | Not started | - |
 | 4. Error Handling Hardening | 0/TBD | Not started | - |
