@@ -50,7 +50,11 @@ Plans:
   1. Generierte Emails sind nicht vorhersehbar aus dem Username ableitbar
   2. Bestehende Nutzer können sich weiterhin einloggen
   3. Login und Register funktionieren korrekt mit neuem Email-Schema
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — HMAC-SHA256 usernameToHashedEmail() in supabase.ts + VITE_EMAIL_SALT env var
+- [ ] 03-02-PLAN.md — authStore.ts: hashed email in register(), two-phase login with lazy migration
 
 ### Phase 4: Error Handling Hardening
 **Goal**: Einheitliches typisiertes Error Handling ersetzt fragile catch (err: any) und .single() ohne Checks
@@ -69,5 +73,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Race Condition Fix | 1/2 | In Progress|  |
 | 2. Subscription Leak Fix | 2/3 | In Progress|  |
-| 3. Auth Security Fix | 0/TBD | Not started | - |
+| 3. Auth Security Fix | 0/2 | Planned | - |
 | 4. Error Handling Hardening | 0/TBD | Not started | - |
