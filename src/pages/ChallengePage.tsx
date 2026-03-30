@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Zap, Users, Plus, Clock, Check, X, Play, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -26,6 +27,7 @@ export function ChallengePage() {
   const [questionCount, setQuestionCount] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState('');
+  const channelRef = useRef<RealtimeChannel | null>(null);
 
   const fetchChallenges = async () => {
     if (!user) return;
@@ -51,14 +53,19 @@ export function ChallengePage() {
   useEffect(() => {
     fetchChallenges();
 
-    const channel = supabase
+    channelRef.current = supabase
       .channel('challenges_page')
       .on('postgres_changes', {
         event: '*', schema: 'public', table: 'challenges',
       }, () => fetchChallenges())
       .subscribe();
 
-    return () => { channel.unsubscribe(); };
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+    };
   }, [user]);
 
   const createChallenge = async () => {

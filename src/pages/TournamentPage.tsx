@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Trophy, Users, Clock, Play, Plus, RefreshCw, Crown } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -22,6 +23,7 @@ export function TournamentPage() {
   const [maxPlayers, setMaxPlayers] = useState(8);
   const [questionCount, setQuestionCount] = useState(10);
   const [loading, setLoading] = useState(false);
+  const channelRef = useRef<RealtimeChannel | null>(null);
 
   const fetchTournaments = async () => {
     const { data } = await supabase
@@ -34,11 +36,16 @@ export function TournamentPage() {
 
   useEffect(() => {
     fetchTournaments();
-    const channel = supabase
+    channelRef.current = supabase
       .channel('tournaments_page')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'tournaments' }, fetchTournaments)
       .subscribe();
-    return () => { channel.unsubscribe(); };
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+        channelRef.current = null;
+      }
+    };
   }, []);
 
   const createTournament = async () => {
