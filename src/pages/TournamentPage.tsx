@@ -90,48 +90,38 @@ export function TournamentPage() {
     else alert('Bereits angemeldet');
   };
 
-  const startTournament = async (tournament: any) => {
+  const startTournament = async (tournament: Tournament & { participants: TournamentParticipant[] }) => {
     if (!user || tournament.status !== 'registering') return;
     if (tournament.participants.length < 2) {
-      alert('Mindestens 2 Spieler benötigt');
+      alert('Mindestens 2 Spieler benoetigt');
       return;
     }
 
-    const { data: session } = await supabase
-      .from('game_sessions')
-      .insert({
-        mode: 'tournament',
-        status: 'active',
-        category: tournament.category,
-        question_count: tournament.question_count,
-        time_per_question: 20,
-        current_question_index: 0,
-        host_id: user.id,
-        tournament_id: tournament.id,
-      })
-      .select()
-      .single();
+    setLoading(true);
 
-    if (session) {
-      await supabase.from('tournaments').update({
-        status: 'active',
-        started_at: new Date().toISOString(),
-        current_round: 1,
-      }).eq('id', tournament.id);
+    const { data, error } = await supabase.rpc('start_tournament', {
+      p_tournament_id: tournament.id,
+      p_starter_id: user.id,
+    });
 
-      for (const p of tournament.participants) {
-        await supabase.from('game_players').insert({
-          session_id: session.id,
-          user_id: p.user_id,
-          score: 0,
-          correct_answers: 0,
-          wrong_answers: 0,
-          is_ready: true,
-          is_finished: false,
-        });
+    setLoading(false);
+
+    if (error) {
+      if (error.hint === 'already_started') {
+        alert('Dieses Turnier wurde bereits von jemand anderem gestartet.');
+        fetchTournaments();
+        return;
       }
+      if (error.hint === 'unauthorized') {
+        alert('Nicht autorisiert.');
+        return;
+      }
+      alert(error.message || 'Fehler beim Starten des Turniers');
+      return;
+    }
 
-      navigate(`/game/${session.id}`);
+    if (data?.session_id) {
+      navigate(`/game/${data.session_id}`);
     }
   };
 
