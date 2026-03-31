@@ -56,13 +56,35 @@ function PasswordChangeSection() {
 }
 
 export function ProfilePage() {
-  const { user } = useAuthStore();
+  const { user, fetchProfile } = useAuthStore();
   const [achievements, setAchievements] = useState<UserAchievement[]>([]);
   const [recentGames, setRecentGames] = useState<any[]>([]);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState('');
   const [avatarHover, setAvatarHover] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    setAvatarUploading(true);
+    setAvatarError('');
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(user.id, file, { upsert: true, contentType: file.type });
+      if (uploadError) throw uploadError;
+      const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(user.id);
+      const { error: updateError } = await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
+      if (updateError) throw updateError;
+      await fetchProfile();
+    } catch (err) {
+      setAvatarError(getErrorMessage(err));
+    } finally {
+      setAvatarUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -104,7 +126,21 @@ export function ProfilePage() {
       {/* Profile header */}
       <Card className="mb-6">
         <div className="flex items-center gap-6">
-          <Avatar username={user.username} size="xl" isOnline />
+          <div
+            className="relative cursor-pointer flex-shrink-0"
+            onMouseEnter={() => setAvatarHover(true)}
+            onMouseLeave={() => setAvatarHover(false)}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Avatar username={user.username} size="xl" isOnline avatarUrl={user.avatar_url} />
+            <div className={`absolute inset-0 rounded-full bg-black/50 flex items-center justify-center transition-opacity duration-200 ${avatarHover || avatarUploading ? 'opacity-100' : 'opacity-0'}`}>
+              {avatarUploading
+                ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                : <Camera size={18} className="text-white" />
+              }
+            </div>
+            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} />
+          </div>
           <div className="flex-1">
             <div className="flex items-center gap-3">
               <h1 className="text-2xl font-black text-white">{user.username}</h1>
@@ -125,6 +161,7 @@ export function ProfilePage() {
             </div>
           </div>
         </div>
+        {avatarError && <p className="text-sm text-red-400 mt-2">{avatarError}</p>}
       </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

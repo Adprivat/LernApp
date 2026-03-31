@@ -17,6 +17,7 @@ import { ProfilePage } from '@/pages/ProfilePage';
 import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { AdminPage } from '@/pages/AdminPage';
 import { GuidePage } from '@/pages/GuidePage';
+import { FriendsPage } from '@/pages/FriendsPage';
 import { BeamsBackground } from '@/components/ui/BeamsBackground';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
@@ -255,6 +256,7 @@ function AppLayout() {
           <Route path="/leaderboard" element={<RequireAuth><LeaderboardPage /></RequireAuth>} />
           <Route path="/admin" element={<RequireAuth><AdminPage /></RequireAuth>} />
           <Route path="/guide" element={<RequireAuth><GuidePage /></RequireAuth>} />
+          <Route path="/friends" element={<RequireAuth><FriendsPage /></RequireAuth>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

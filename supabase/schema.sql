@@ -641,3 +641,49 @@ insert into public.achievements (key, name, description, icon, category, require
   ('streak_5', 'Heißer Lauf', '5 Siege in Folge', '🚀', 'streak', 5),
   ('streak_10', 'Unaufhaltsam', '10 Siege in Folge', '💥', 'streak', 10)
 on conflict (key) do nothing;
+
+-- ============================================================
+-- FRIENDSHIPS
+-- ============================================================
+create table if not exists public.friendships (
+  id uuid default uuid_generate_v4() primary key,
+  user_id uuid references public.profiles(id) on delete cascade not null,
+  friend_id uuid references public.profiles(id) on delete cascade not null,
+  status text not null default 'pending' check (status in ('pending', 'accepted', 'declined')),
+  created_at timestamptz default now(),
+  unique(user_id, friend_id)
+);
+
+alter table public.friendships enable row level security;
+
+create policy "Users can view own friendships"
+  on public.friendships for select using (user_id = auth.uid() or friend_id = auth.uid());
+
+create policy "Users can send friend requests"
+  on public.friendships for insert with check (user_id = auth.uid());
+
+create policy "Users can respond to requests"
+  on public.friendships for update using (friend_id = auth.uid() or user_id = auth.uid());
+
+create policy "Users can remove friendships"
+  on public.friendships for delete using (user_id = auth.uid() or friend_id = auth.uid());
+
+-- ============================================================
+-- STORAGE: Avatar bucket
+-- ============================================================
+-- Also create the 'avatars' bucket manually in:
+-- Supabase Dashboard → Storage → New bucket → name: avatars, Public: ON
+insert into storage.buckets (id, name, public) values ('avatars', 'avatars', true) on conflict do nothing;
+
+create policy "Avatars publicly readable"
+  on storage.objects for select using (bucket_id = 'avatars');
+
+create policy "Users can upload own avatar"
+  on storage.objects for insert with check (
+    bucket_id = 'avatars' and auth.uid()::text = name
+  );
+
+create policy "Users can update own avatar"
+  on storage.objects for update using (
+    bucket_id = 'avatars' and auth.uid()::text = name
+  );

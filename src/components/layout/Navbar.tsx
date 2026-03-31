@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, BookOpen, Home, LogOut, Menu, Trophy, Users, X, ShieldCheck, User, Zap } from 'lucide-react';
+import { Bell, BookOpen, Home, LogOut, Menu, Trophy, Users, X, ShieldCheck, User, Zap, UserPlus } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { useNotificationStore } from '@/stores/notificationStore';
 import { Avatar } from '@/components/ui/Avatar';
@@ -13,6 +13,7 @@ const navItems = [
   { path: '/challenge', icon: Zap, label: 'Herausforderung' },
   { path: '/groups', icon: Users, label: 'Gruppen' },
   { path: '/tournament', icon: Trophy, label: 'Turnier' },
+  { path: '/friends', icon: UserPlus, label: 'Freunde' },
 ];
 
 export function Navbar() {
