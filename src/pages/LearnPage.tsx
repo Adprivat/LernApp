@@ -8,6 +8,7 @@ import { GameResultScreen } from '@/components/game/GameResultScreen';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useAuthStore } from '@/stores/authStore';
+import { getErrorMessage } from '@/lib/errorHandler';
 
 type PageState = 'setup' | 'playing' | 'finished';
 
@@ -19,6 +20,7 @@ export function LearnPage() {
   const [pageState, setPageState] = useState<PageState>('setup');
   const [category, setCategory] = useState(initialCategory);
   const [questionCount, setQuestionCount] = useState(initialCount);
+  const [error, setError] = useState('');
   const { user } = useAuthStore();
   const {
     session, questions, currentQuestion, currentQuestionIndex,
@@ -27,11 +29,12 @@ export function LearnPage() {
   const navigate = useNavigate();
 
   const handleStart = async () => {
+    setError('');
     try {
       await createSoloSession(category, questionCount);
       setPageState('playing');
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     }
   };
 
@@ -147,6 +150,12 @@ export function LearnPage() {
             20 Sekunden pro Frage
           </p>
         </Card>
+
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400">
+            {error}
+          </div>
+        )}
 
         <Button
           variant="primary"

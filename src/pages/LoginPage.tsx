@@ -4,6 +4,7 @@ import { BookOpen, User, Lock, LogIn, UserPlus } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { getErrorMessage } from '@/lib/errorHandler';
 
 export function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -45,8 +46,8 @@ export function LoginPage() {
         await register(username.trim(), password);
       }
       navigate('/');
-    } catch (err: any) {
-      const msg = err?.message || 'Fehler aufgetreten';
+    } catch (err: unknown) {
+      const msg = getErrorMessage(err);
       if (msg.includes('Invalid login credentials')) {
         setError('Falscher Benutzername oder Passwort');
       } else if (msg.includes('already registered')) {
