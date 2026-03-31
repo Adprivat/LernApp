@@ -70,8 +70,8 @@ Plans:
 Plans:
 - [x] 04-01-PLAN.md — Create errorHandler.ts utility (getErrorMessage, isSupabaseError, handleSupabaseError)
 - [x] 04-02-PLAN.md — Fix stores: authStore.ts + gameStore.ts (.single() checks + typed errors)
-- [ ] 04-03-PLAN.md — Fix ChallengePage + TournamentPage (catch blocks + alert() replacement)
-- [ ] 04-04-PLAN.md — Fix GroupPage + LobbyPage + GameChat (.single() checks + alert() replacement)
+- [x] 04-03-PLAN.md — Fix ChallengePage + TournamentPage (catch blocks + alert() replacement)
+- [x] 04-04-PLAN.md — Fix GroupPage + LobbyPage + GameChat (.single() checks + alert() replacement)
 - [x] 04-05-PLAN.md — Fix LearnPage + LoginPage + AdminPage (remaining catch blocks + error logging)
 
 ## Progress
