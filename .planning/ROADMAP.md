@@ -38,7 +38,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Game pages fix (GamePage.tsx + LobbyPage.tsx) — already have useRef, replace unsubscribe with removeChannel
+- [x] 02-01-PLAN.md — Game pages fix (GamePage.tsx + LobbyPage.tsx) — already have useRef, replace unsubscribe with removeChannel
 - [x] 02-02-PLAN.md — Feature pages fix (ChallengePage.tsx + TournamentPage.tsx) — add useRef + replace unsubscribe with removeChannel
 - [x] 02-03-PLAN.md — App.tsx global channel fix — two cleanup paths upgraded to removeChannel
 

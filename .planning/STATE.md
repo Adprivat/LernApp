@@ -3,27 +3,27 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-error-handling-hardening/04-01-PLAN.md
-last_updated: "2026-03-30T21:30:17.842Z"
+stopped_at: Completed 02-subscription-leak-fix/02-01-PLAN.md
+last_updated: "2026-03-31T06:20:07.161Z"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 12
-  completed_plans: 7
+  completed_plans: 8
   percent: 50
 ---
 
 # Project State
 
 **Last updated:** 2026-03-30T11:04:47Z
-**Status:** Executing Phase 04
+**Status:** Executing Phase 02
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Nutzer können jederzeit stabil und sicher gegeneinander spielen — ohne Race Conditions, Memory Leaks oder Sicherheitslücken.
-**Current focus:** Phase 04 — Error Handling Hardening
+**Current focus:** Phase 02 — subscription-leak-fix
 
 ## Current Phase
 
@@ -65,6 +65,7 @@ Progress: [█████░░░░░] 50%
 - [Phase 03-auth-security-fix]: register() uses await usernameToHashedEmail() — new accounts created with HMAC-SHA256 derived email, not predictable username@lernapp.local
 - [Phase 04-error-handling-hardening]: hint-based discrimination used first in handleSupabaseError — aligns with Phase 01 decision to discriminate by error.hint over code/message
 - [Phase 04-error-handling-hardening]: isSupabaseError requires only message+code as strings — hint/details may be null in non-RPC errors
+- [Phase 02-subscription-leak-fix]: supabase.removeChannel() + null ref is the canonical channel cleanup pattern — prevents orphaned channel accumulation in the Supabase client registry on repeated navigation
 
 ## Performance Metrics
 
@@ -77,8 +78,9 @@ Progress: [█████░░░░░] 50%
 | Phase 03-auth-security-fix P01 | 4min | 2 tasks | 2 files |
 | Phase 03-auth-security-fix P02 | 5min | 2 tasks | 1 files |
 | Phase 04-error-handling-hardening P01 | 1min | 1 tasks | 1 files |
+| Phase 02-subscription-leak-fix P01 | 2min | 2 tasks | 2 files |
 
 ## Session
 
-- **Last session:** 2026-03-30T21:30:17.837Z
-- **Stopped at:** Completed 04-error-handling-hardening/04-01-PLAN.md
+- **Last session:** 2026-03-31T06:20:07.157Z
+- **Stopped at:** Completed 02-subscription-leak-fix/02-01-PLAN.md
