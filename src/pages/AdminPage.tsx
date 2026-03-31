@@ -201,7 +201,7 @@ export function AdminPage() {
       )}
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         {[
           { label: 'Benutzer gesamt', value: stats.totalUsers, icon: Users, color: 'text-blue-400' },
           { label: 'Aktuell online', value: stats.onlineUsers, icon: BarChart3, color: 'text-emerald-400' },
@@ -216,7 +216,7 @@ export function AdminPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-nexus-bg/60 border border-nexus-border rounded-xl mb-6">
+      <div className="flex gap-1 p-1 bg-nexus-bg/60 border border-nexus-border rounded-xl mb-6 overflow-x-auto">
         {tabs.map(tab => (
           <button
             key={tab.id}
@@ -240,12 +240,12 @@ export function AdminPage() {
       {/* Users tab */}
       {activeTab === 'users' && (
         <Card padding="none">
-          <div className="flex items-center justify-between p-5 border-b border-nexus-border">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-5 border-b border-nexus-border">
             <h2 className="font-bold text-white flex items-center gap-2">
               <Users size={18} /> Benutzerverwaltung ({filtered.length})
             </h2>
-            <div className="flex gap-3">
-              <div className="w-64">
+            <div className="flex gap-3 w-full sm:w-auto">
+              <div className="flex-1 sm:w-64 sm:flex-none">
                 <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Benutzer suchen..." icon={<Search size={14} />} />
               </div>
               <Button size="sm" variant="ghost" onClick={() => { fetchUsers(); fetchStats(); }}>

@@ -86,8 +86,8 @@ export function QuestionCard({
 
         {/* Circular timer */}
         {hasTimer ? (
-        <div className="relative w-24 h-24">
-          <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+        <div className="relative w-16 h-16 sm:w-24 sm:h-24">
+          <svg className="w-16 h-16 sm:w-24 sm:h-24 -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r={radius} fill="none" stroke="#091328" strokeWidth="8" />
             <circle
               cx="50" cy="50" r={radius}
@@ -100,17 +100,17 @@ export function QuestionCard({
               className="transition-all duration-1000"
             />
           </svg>
-          <div className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isLowTime ? 'text-nexus-danger' : 'text-white'}`}>
+          <div className={`absolute inset-0 flex items-center justify-center text-lg sm:text-2xl font-bold ${isLowTime ? 'text-nexus-danger' : 'text-white'}`}>
             {localTime}
           </div>
         </div>
         ) : (
-        <div className="relative w-24 h-24">
-          <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+        <div className="relative w-16 h-16 sm:w-24 sm:h-24">
+          <svg className="w-16 h-16 sm:w-24 sm:h-24 -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r={radius} fill="none" stroke="#091328" strokeWidth="8" />
             <circle cx="50" cy="50" r={radius} fill="none" stroke="#2E5BFF" strokeWidth="8" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={0} opacity="0.3" />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-nexus-accent">
+          <div className="absolute inset-0 flex items-center justify-center text-lg sm:text-2xl font-bold text-nexus-accent">
             ∞
           </div>
         </div>
@@ -141,8 +141,8 @@ export function QuestionCard({
       </div>
 
       {/* Question */}
-      <div className="bg-nexus-surface/60 backdrop-blur-sm rounded-lg p-6 border border-nexus-border">
-        <p className="text-xl font-semibold text-white leading-relaxed break-words overflow-hidden">{question.question}</p>
+      <div className="bg-nexus-surface/60 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-nexus-border">
+        <p className="text-lg sm:text-xl font-semibold text-white leading-relaxed break-words overflow-hidden">{question.question}</p>
       </div>
 
       {/* Answers */}

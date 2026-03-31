@@ -115,7 +115,7 @@ export function LeaderboardPage() {
       <div className="flex items-center gap-3 mb-6">
         <Crown size={32} className="text-yellow-400" />
         <div>
-          <h1 className="text-3xl font-black text-white">Bestenliste</h1>
+          <h1 className="text-2xl sm:text-3xl font-black text-white">Bestenliste</h1>
           {tab === 'global' && myRank > 0 && <p className="text-nexus-muted text-sm">Dein Rang: #{myRank}</p>}
           {tab === 'tournament' && myTournamentRank > 0 && <p className="text-nexus-muted text-sm">Dein Turnier-Rang: #{myTournamentRank}</p>}
         </div>
@@ -162,13 +162,13 @@ export function LeaderboardPage() {
           </div>
 
           {players.length >= 3 && (
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
               {[1, 0, 2].map(idx => {
                 const player = players[idx];
                 const podiumOrder = idx === 0 ? 1 : idx === 1 ? 0 : 2;
                 return (
-                  <div key={player.id} className={`flex flex-col items-center justify-end p-4 rounded-lg border ${podiumColors[podiumOrder]} ${podiumHeights[podiumOrder]} ${player.id === user?.id ? 'ring-2 ring-nexus-primary' : ''}`}>
-                    <div className="text-2xl mb-1">{medals[podiumOrder]}</div>
+                  <div key={player.id} className={`flex flex-col items-center justify-end p-2 sm:p-4 rounded-lg border ${podiumColors[podiumOrder]} ${podiumHeights[podiumOrder]} ${player.id === user?.id ? 'ring-2 ring-nexus-primary' : ''}`}>
+                    <div className="text-xl sm:text-2xl mb-1">{medals[podiumOrder]}</div>
                     <Avatar username={player.username} size="sm" isOnline={player.is_online} avatarUrl={player.avatar_url} />
                     <p className="text-xs font-bold text-white mt-1 truncate max-w-full">{player.username}</p>
                     <p className="text-xs text-nexus-muted">{getValue(player)}</p>

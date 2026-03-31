@@ -116,16 +116,16 @@ export function GamePage() {
     <div className="max-w-5xl mx-auto px-4 py-8">
       <button
         onClick={() => setShowQuit(true)}
-        className="fixed top-20 right-4 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-400/30 text-sm transition-colors"
+        className="fixed top-20 right-4 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-nexus-surface/80 border border-nexus-border text-nexus-muted hover:text-red-400 hover:border-red-400/30 text-sm transition-colors"
       >
         <X size={14} /> Abbrechen
       </button>
 
       {showQuit && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-sm w-full mx-4">
+          <div className="bg-nexus-surface border border-nexus-border rounded-2xl p-6 max-w-sm w-full mx-4">
             <h3 className="font-bold text-white text-lg mb-2">Spiel abbrechen?</h3>
-            <p className="text-slate-400 text-sm mb-5">Deine aktuellen Punkte gehen verloren.</p>
+            <p className="text-nexus-muted text-sm mb-5">Deine aktuellen Punkte gehen verloren.</p>
             <div className="flex gap-3">
               <Button variant="ghost" fullWidth onClick={() => setShowQuit(false)}>Weiterspielen</Button>
               <Button variant="danger" fullWidth onClick={quitGame}>Abbrechen</Button>

@@ -86,7 +86,7 @@ export function HomePage() {
 
       {/* Welcome */}
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-white">
+        <h1 className="text-2xl sm:text-3xl font-black text-white">
           Willkommen, <span className="text-nexus-accent">{user.username}</span>! 👋
         </h1>
         <p className="text-nexus-muted mt-1">

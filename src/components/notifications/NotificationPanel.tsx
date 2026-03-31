@@ -82,7 +82,7 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
   return (
     <div className="fixed inset-0 z-50" onClick={onClose}>
       <div
-        className="absolute top-16 right-4 w-96 max-h-[80vh] flex flex-col bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg shadow-2xl shadow-nexus-primary/10 overflow-hidden"
+        className="absolute top-16 right-2 left-2 sm:left-auto sm:right-4 sm:w-96 max-h-[80vh] flex flex-col bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg shadow-2xl shadow-nexus-primary/10 overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-nexus-border">

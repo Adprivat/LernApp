@@ -33,17 +33,17 @@ function PasswordChangeSection() {
   };
 
   return (
-    <div className="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden">
+    <div className="bg-nexus-surface/50 border border-nexus-border rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-slate-700/30 transition-colors"
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-nexus-surface/30 transition-colors"
       >
-        <Lock size={18} className="text-slate-400" />
+        <Lock size={18} className="text-nexus-muted" />
         <span className="font-semibold text-white flex-1">Passwort ändern</span>
-        {open ? <ChevronDown size={16} className="text-slate-400" /> : <ChevronRight size={16} className="text-slate-400" />}
+        {open ? <ChevronDown size={16} className="text-nexus-muted" /> : <ChevronRight size={16} className="text-nexus-muted" />}
       </button>
       {open && (
-        <div className="px-5 pb-5 border-t border-slate-700/50 pt-4 flex flex-col gap-3">
+        <div className="px-5 pb-5 border-t border-nexus-border/50 pt-4 flex flex-col gap-3">
           <Input label="Neues Passwort" type="password" value={next} onChange={e => setNext(e.target.value)} />
           <Input label="Passwort bestätigen" type="password" value={confirm} onChange={e => setConfirm(e.target.value)} />
           {err && <p className="text-sm text-red-400">{err}</p>}
@@ -125,7 +125,7 @@ export function ProfilePage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Profile header */}
       <Card className="mb-6">
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <div
             className="relative cursor-pointer flex-shrink-0"
             onMouseEnter={() => setAvatarHover(true)}
@@ -142,7 +142,7 @@ export function ProfilePage() {
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} />
           </div>
           <div className="flex-1">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center sm:justify-start gap-3">
               <h1 className="text-2xl font-black text-white">{user.username}</h1>
               {user.is_admin && (
                 <Badge variant="warning">Admin</Badge>
@@ -151,7 +151,7 @@ export function ProfilePage() {
             <p className="text-nexus-muted text-sm mt-1">
               Mitglied seit {new Date(user.created_at).toLocaleDateString('de-DE')}
             </p>
-            <div className="flex items-center gap-4 mt-3">
+            <div className="flex items-center justify-center sm:justify-start gap-4 mt-3">
               <span className="text-sm text-nexus-text">
                 <span className="font-bold text-white">{achievements.length}</span> Errungenschaften
               </span>
@@ -225,9 +225,9 @@ export function ProfilePage() {
             <BookOpen size={20} className="text-indigo-400 flex-shrink-0" />
             <div>
               <p className="font-semibold text-white text-sm">Spielanleitung</p>
-              <p className="text-xs text-slate-400">Spielmodi, Punkte & Tipps</p>
+              <p className="text-xs text-nexus-muted">Spielmodi, Punkte & Tipps</p>
             </div>
-            <span className="ml-auto text-slate-400 text-xs">→</span>
+            <span className="ml-auto text-nexus-muted text-xs">→</span>
           </Link>
 
           {/* Password change */}

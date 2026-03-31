@@ -116,8 +116,8 @@ export function FriendsPage() {
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-black text-white flex items-center gap-3">
-            <Users className="text-blue-400" size={32} />
+          <h1 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+            <Users className="text-blue-400 flex-shrink-0" size={28} />
             Freunde
           </h1>
           <p className="text-nexus-muted mt-1">Lade Freunde zu Spielen ein</p>
