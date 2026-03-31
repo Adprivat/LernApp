@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { supabase, usernameToHashedEmail, usernameToEmail } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/errorHandler';
 import type { Profile } from '@/types';
 
 interface AuthState {
@@ -106,11 +107,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       return;
     }
 
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single();
+
+    if (profileError && profileError.code !== 'PGRST116') {
+      console.error('fetchProfile error:', getErrorMessage(profileError));
+    }
 
     if (profile) {
       // Mark online
@@ -125,12 +130,17 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const { user } = get();
     if (!user) return;
 
-    const { data } = await supabase
+    const { data, error: updateError } = await supabase
       .from('profiles')
       .update(updates)
       .eq('id', user.id)
       .select()
       .single();
+
+    if (updateError) {
+      console.error('updateProfile error:', getErrorMessage(updateError));
+      return;
+    }
 
     if (data) set({ user: data as Profile });
   },
