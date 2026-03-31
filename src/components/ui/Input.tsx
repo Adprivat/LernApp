@@ -12,27 +12,27 @@ export function Input({ label, error, icon, fullWidth, className, ...props }: In
   return (
     <div className={clsx('flex flex-col gap-1.5', fullWidth && 'w-full')}>
       {label && (
-        <label className="text-sm font-medium text-slate-300">{label}</label>
+        <label className="text-sm font-medium text-nexus-muted">{label}</label>
       )}
       <div className="relative">
         {icon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-nexus-muted">
             {icon}
           </div>
         )}
         <input
           {...props}
           className={clsx(
-            'bg-slate-700/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400',
-            'focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20',
-            'transition-all duration-200 w-full',
+            'bg-nexus-bg border border-nexus-border rounded-lg px-4 py-3 text-white placeholder-nexus-muted',
+            'focus:outline-none focus:border-nexus-primary focus:ring-2 focus:ring-nexus-primary/20 focus:shadow-[0_0_10px_rgba(46,91,255,0.15)]',
+            'transition-all duration-300 ease-in-out w-full',
             icon && 'pl-10',
-            error && 'border-red-500 focus:border-red-500 focus:ring-red-500/20',
+            error && 'border-nexus-danger focus:border-nexus-danger focus:ring-nexus-danger/20',
             className
           )}
         />
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-nexus-danger">{error}</p>}
     </div>
   );
 }

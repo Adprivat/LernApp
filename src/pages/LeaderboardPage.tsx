@@ -53,21 +53,21 @@ export function LeaderboardPage() {
         <div>
           <h1 className="text-3xl font-black text-white">Bestenliste</h1>
           {myRank > 0 && (
-            <p className="text-slate-400 text-sm">Dein Rang: #{myRank}</p>
+            <p className="text-nexus-muted text-sm">Dein Rang: #{myRank}</p>
           )}
         </div>
       </div>
 
       {/* Sort tabs */}
-      <div className="flex bg-slate-800 border border-slate-700 rounded-xl p-1 gap-1 mb-6">
+      <div className="flex bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-xl p-1 gap-1 mb-6">
         {sortOptions.map(({ key, label, icon }) => (
           <button
             key={key}
             onClick={() => setSortBy(key)}
-            className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
               sortBy === key
-                ? 'bg-indigo-600 text-white'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-nexus-surface/90 text-white border border-[#2E5BFF]/30 shadow-[0_0_15px_rgba(46,91,255,0.1)]'
+                : 'text-nexus-muted hover:text-white hover:bg-nexus-surface/80 border border-transparent'
             }`}
           >
             {icon}
@@ -94,14 +94,14 @@ export function LeaderboardPage() {
             return (
               <div
                 key={player.id}
-                className={`flex flex-col items-center justify-end p-4 rounded-2xl border ${colors[podiumOrder]} ${heights[podiumOrder]} ${
-                  player.id === user?.id ? 'ring-2 ring-indigo-500' : ''
+                className={`flex flex-col items-center justify-end p-4 rounded-lg border ${colors[podiumOrder]} ${heights[podiumOrder]} ${
+                  player.id === user?.id ? 'ring-2 ring-nexus-primary' : ''
                 }`}
               >
                 <div className="text-2xl mb-1">{medals[podiumOrder]}</div>
                 <Avatar username={player.username} size="sm" isOnline={player.is_online} />
                 <p className="text-xs font-bold text-white mt-1 truncate max-w-full">{player.username}</p>
-                <p className="text-xs text-slate-400">{getValue(player)}</p>
+                <p className="text-xs text-nexus-muted">{getValue(player)}</p>
               </div>
             );
           })}
@@ -112,14 +112,14 @@ export function LeaderboardPage() {
       <Card padding="none">
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-nexus-primary border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           players.map((player, idx) => (
             <div
               key={player.id}
-              className={`flex items-center gap-4 px-5 py-4 border-b border-slate-700/50 last:border-0 transition-colors ${
-                player.id === user?.id ? 'bg-indigo-600/5' : 'hover:bg-slate-700/20'
+              className={`flex items-center gap-4 px-5 py-4 border-b border-nexus-border last:border-0 transition-all duration-300 ${
+                player.id === user?.id ? 'bg-nexus-primary/5' : 'hover:bg-nexus-surface/50'
               }`}
             >
               <span className={`text-sm font-black w-8 text-center flex-shrink-0 ${
@@ -139,12 +139,12 @@ export function LeaderboardPage() {
                   {player.id === user?.id && <Badge variant="info" size="sm">Du</Badge>}
                   {player.is_admin && <Badge variant="warning" size="sm">Admin</Badge>}
                 </div>
-                <span className="text-xs text-slate-400">{player.games_played} Spiele gespielt</span>
+                <span className="text-xs text-nexus-muted">{player.games_played} Spiele gespielt</span>
               </div>
 
               <div className="text-right flex-shrink-0">
                 <div className="font-bold text-white">{getValue(player)}</div>
-                <div className="text-xs text-slate-400">{player.games_won} Siege</div>
+                <div className="text-xs text-nexus-muted">{player.games_won} Siege</div>
               </div>
             </div>
           ))

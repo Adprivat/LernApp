@@ -205,7 +205,9 @@ export function ChallengePage() {
   };
 
   const cancelChallenge = async (challengeId: string) => {
-    await supabase.from('challenges').update({ status: 'cancelled' }).eq('id', challengeId);
+    setError('');
+    const { error } = await supabase.from('challenges').update({ status: 'cancelled' }).eq('id', challengeId);
+    if (error) { setError(getErrorMessage(error)); return; }
     fetchChallenges();
   };
 

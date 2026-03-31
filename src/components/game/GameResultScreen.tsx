@@ -36,7 +36,7 @@ export function GameResultScreen({
           {mode === 'solo' ? 'Ergebnis' : isWinner ? 'Gewonnen!' : 'Spiel beendet'}
         </h1>
         {players.length > 1 && (
-          <p className="text-slate-400">
+          <p className="text-nexus-muted">
             {isWinner ? 'Glückwunsch, du hast gewonnen!' : `Du bist auf Platz ${myRank}`}
           </p>
         )}
@@ -44,23 +44,23 @@ export function GameResultScreen({
 
       {/* My stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 text-center">
-          <div className="text-3xl font-black text-indigo-400">{myPlayer?.score.toLocaleString() || 0}</div>
-          <div className="text-xs text-slate-400 mt-1 flex items-center justify-center gap-1">
+        <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-4 text-center">
+          <div className="text-3xl font-black text-nexus-accent">{myPlayer?.score.toLocaleString() || 0}</div>
+          <div className="text-xs text-nexus-muted mt-1 flex items-center justify-center gap-1">
             <Star size={10} />
             Punkte
           </div>
         </div>
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 text-center">
+        <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-4 text-center">
           <div className="text-3xl font-black text-emerald-400">{accuracy}%</div>
-          <div className="text-xs text-slate-400 mt-1 flex items-center justify-center gap-1">
+          <div className="text-xs text-nexus-muted mt-1 flex items-center justify-center gap-1">
             <Target size={10} />
             Genauigkeit
           </div>
         </div>
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 text-center">
+        <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-4 text-center">
           <div className="text-3xl font-black text-amber-400">{correct}/{total}</div>
-          <div className="text-xs text-slate-400 mt-1 flex items-center justify-center gap-1">
+          <div className="text-xs text-nexus-muted mt-1 flex items-center justify-center gap-1">
             <Zap size={10} />
             Richtig
           </div>
@@ -68,7 +68,7 @@ export function GameResultScreen({
       </div>
 
       {/* Answers review */}
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+      <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-5">
         <h3 className="font-bold text-white mb-4">Antworten im Überblick</h3>
         <div className="flex flex-col gap-2">
           {questions.map((q, idx) => {
@@ -76,23 +76,23 @@ export function GameResultScreen({
             const correct = given === q.correct_index;
             const skipped = given === undefined;
             return (
-              <div key={idx} className={`flex items-start gap-3 p-3 rounded-xl ${
-                correct ? 'bg-emerald-500/10' : skipped ? 'bg-slate-700/50' : 'bg-red-500/10'
+              <div key={idx} className={`flex items-start gap-3 p-3 rounded-lg ${
+                correct ? 'bg-emerald-500/10' : skipped ? 'bg-nexus-bg/50' : 'bg-red-500/10'
               }`}>
                 <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                  correct ? 'bg-emerald-500 text-white' : skipped ? 'bg-slate-600 text-slate-400' : 'bg-red-500 text-white'
+                  correct ? 'bg-emerald-500 text-white' : skipped ? 'bg-nexus-surface text-nexus-muted' : 'bg-red-500 text-white'
                 }`}>
                   {correct ? '✓' : skipped ? '–' : '✗'}
                 </span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-white font-medium leading-snug">{q.question}</p>
                   {!correct && !skipped && (
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-nexus-muted mt-1">
                       Richtig: <span className="text-emerald-400">{q.answers[q.correct_index]}</span>
                     </p>
                   )}
                   {skipped && (
-                    <p className="text-xs text-slate-500 mt-1">Nicht beantwortet</p>
+                    <p className="text-xs text-nexus-muted mt-1">Nicht beantwortet</p>
                   )}
                 </div>
               </div>

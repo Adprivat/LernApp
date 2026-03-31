@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Crown, Users, Play, Check, Copy, ArrowLeft } from 'lucide-react';
+import { Crown, Users, Play, Check, Copy, ArrowLeft, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
@@ -91,6 +91,8 @@ export function LobbyPage() {
       }, (payload) => {
         if (payload.new.status === 'active') {
           navigate(`/game/${sessionId}`);
+        } else if (payload.new.status === 'cancelled') {
+          navigate('/groups');
         }
         setSession(payload.new as GameSession);
       })
@@ -128,7 +130,15 @@ export function LobbyPage() {
         .eq('session_id', sessionId)
         .eq('user_id', user.id);
     }
-    navigate(-1);
+    navigate('/groups');
+  };
+
+  const cancelLobby = async () => {
+    if (!sessionId) return;
+    await supabase.from('game_sessions')
+      .update({ status: 'cancelled' })
+      .eq('id', sessionId);
+    navigate('/groups');
   };
 
   const copyCode = () => {
@@ -157,13 +167,25 @@ export function LobbyPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <button
-        onClick={leaveLobby}
-        className="flex items-center gap-2 text-nexus-muted hover:text-white mb-6 transition-all duration-300 px-3 py-1.5 rounded-lg hover:bg-nexus-surface/60 border border-transparent hover:border-nexus-border cursor-pointer"
-      >
-        <ArrowLeft size={18} />
-        Lobby verlassen
-      </button>
+      <div className="flex items-center gap-3 mb-6">
+        {isHost ? (
+          <button
+            onClick={cancelLobby}
+            className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-all duration-300 px-3 py-1.5 rounded-lg hover:bg-red-400/10 border border-transparent hover:border-red-400/30 cursor-pointer"
+          >
+            <X size={18} />
+            Lobby abbrechen
+          </button>
+        ) : (
+          <button
+            onClick={leaveLobby}
+            className="flex items-center gap-2 text-nexus-muted hover:text-white transition-all duration-300 px-3 py-1.5 rounded-lg hover:bg-nexus-surface/60 border border-transparent hover:border-nexus-border cursor-pointer"
+          >
+            <ArrowLeft size={18} />
+            Lobby verlassen
+          </button>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main area */}

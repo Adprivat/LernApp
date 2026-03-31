@@ -13,12 +13,12 @@ export function Badge({ children, variant = 'default', size = 'md', className }:
     <span className={clsx(
       'inline-flex items-center font-semibold rounded-full',
       {
-        'bg-slate-700 text-slate-300': variant === 'default',
-        'bg-emerald-500/20 text-emerald-400': variant === 'success',
-        'bg-amber-500/20 text-amber-400': variant === 'warning',
-        'bg-red-500/20 text-red-400': variant === 'danger',
-        'bg-blue-500/20 text-blue-400': variant === 'info',
-        'bg-purple-500/20 text-purple-400': variant === 'purple',
+        'bg-nexus-surface text-nexus-muted border border-nexus-border': variant === 'default',
+        'bg-nexus-success/15 text-nexus-success': variant === 'success',
+        'bg-amber-500/15 text-amber-400': variant === 'warning',
+        'bg-nexus-danger/15 text-nexus-danger': variant === 'danger',
+        'bg-nexus-primary/15 text-nexus-accent': variant === 'info',
+        'bg-purple-500/15 text-purple-400': variant === 'purple',
       },
       {
         'px-2 py-0.5 text-xs': size === 'sm',

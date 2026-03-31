@@ -21,16 +21,16 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-nexus-bg/80 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className={`relative bg-slate-800 border border-slate-700 rounded-2xl w-full ${sizeMap[size]} shadow-2xl`}>
+      <div className={`relative bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg w-full ${sizeMap[size]} shadow-2xl shadow-nexus-primary/10`}>
         {title && (
-          <div className="flex items-center justify-between p-6 border-b border-slate-700">
+          <div className="flex items-center justify-between p-6 border-b border-nexus-border">
             <h2 className="text-lg font-bold text-white">{title}</h2>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-slate-700"
+              className="text-nexus-muted hover:text-white transition-all duration-300 p-1 rounded-lg hover:bg-nexus-bg"
             >
               <X size={20} />
             </button>

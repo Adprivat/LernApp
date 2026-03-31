@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Users, Plus, Play, Copy, Check, Crown, RefreshCw } from 'lucide-react';
+import { Users, Plus, Play, Copy, Check, Crown, RefreshCw, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -102,6 +102,16 @@ export function GroupPage() {
     if (joinCode.trim()) navigate(`/lobby/${joinCode.trim()}`);
   };
 
+  const cancelLobby = async (sessionId: string) => {
+    setError('');
+    const { error } = await supabase
+      .from('game_sessions')
+      .update({ status: 'cancelled' })
+      .eq('id', sessionId);
+    if (error) { setError(getErrorMessage(error)); return; }
+    fetchLobbies();
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
@@ -110,12 +120,16 @@ export function GroupPage() {
             <Users className="text-emerald-400" size={32} />
             Gruppenspiele
           </h1>
-          <p className="text-slate-400 mt-1">2 bis 4 Teams gegeneinander</p>
+          <p className="text-nexus-muted mt-1">2 bis 4 Teams gegeneinander</p>
         </div>
-        <Button onClick={() => setShowCreate(true)} variant="success">
-          <Plus size={18} />
-          Lobby erstellen
-        </Button>
+        <button
+          onClick={() => setShowCreate(true)}
+          className="group relative overflow-hidden inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-bold text-sm text-white cursor-pointer transition-all duration-300 active:scale-[0.97] bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#00C853]/40 hover:shadow-[0_0_20px_rgba(0,200,83,0.12)] hover:scale-[1.02]"
+        >
+          <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#00C853,transparent)]" />
+          <span className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[#00C853] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+          <span className="relative z-10 inline-flex items-center gap-2"><Plus size={18} /> Lobby erstellen</span>
+        </button>
       </div>
 
       {/* Join by code */}
@@ -136,7 +150,7 @@ export function GroupPage() {
       </Card>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400 mb-6">
+        <div className="bg-nexus-danger/10 border border-nexus-danger/30 rounded-lg px-4 py-3 text-sm text-nexus-danger mb-6">
           {error}
         </div>
       )}
@@ -145,16 +159,16 @@ export function GroupPage() {
       <div>
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-bold text-white flex items-center gap-2">
-            <Users size={16} className="text-slate-400" />
+            <Users size={16} className="text-nexus-muted" />
             Offene Lobbys
           </h2>
-          <button onClick={fetchLobbies} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={fetchLobbies} className="p-1.5 rounded-lg text-nexus-muted hover:text-white hover:bg-nexus-surface/60 transition-all duration-300 cursor-pointer">
             <RefreshCw size={16} />
           </button>
         </div>
 
         {lobbies.length === 0 ? (
-          <Card className="text-center py-12 text-slate-400">
+          <Card className="text-center py-12 text-nexus-muted">
             <Users size={40} className="mx-auto mb-3 opacity-30" />
             <p>Keine offenen Lobbys</p>
             <p className="text-sm mt-1">Erstelle eine neue Lobby!</p>
@@ -177,7 +191,7 @@ export function GroupPage() {
                         </span>
                         {isHost && <Crown size={12} className="text-yellow-400" />}
                       </div>
-                      <p className="text-xs text-slate-400">{lobby.category} · {lobby.question_count} Fragen</p>
+                      <p className="text-xs text-nexus-muted">{lobby.category} · {lobby.question_count} Fragen</p>
                     </div>
                     <Badge variant={isFull ? 'danger' : 'success'} size="sm">
                       {players.length}/{maxPlayers}
@@ -187,7 +201,7 @@ export function GroupPage() {
                   {/* Players */}
                   <div className="flex -space-x-2 mb-3">
                     {players.slice(0, 6).map((p: any) => (
-                      <Avatar key={p.id} username={p.profile?.username || '?'} size="sm" className="ring-2 ring-slate-800" />
+                      <Avatar key={p.id} username={p.profile?.username || '?'} size="sm" className="ring-2 ring-nexus-bg" />
                     ))}
                   </div>
 
@@ -210,6 +224,15 @@ export function GroupPage() {
                       <Play size={14} />
                       {isHost ? 'Zur Lobby' : isFull ? 'Voll' : 'Beitreten'}
                     </Button>
+                    {isHost && (
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => cancelLobby(lobby.id)}
+                      >
+                        <X size={14} />
+                      </Button>
+                    )}
                   </div>
                 </Card>
               );
@@ -222,49 +245,74 @@ export function GroupPage() {
       <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="Lobby erstellen">
         <div className="flex flex-col gap-4">
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Spielergröße</label>
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Spielergröße</label>
             <div className="grid grid-cols-3 gap-2">
               {[{ size: 2, label: '2v2', desc: '4 Spieler' }, { size: 3, label: '3v3', desc: '6 Spieler' }, { size: 4, label: '4v4', desc: '8 Spieler' }].map(({ size, label, desc }) => (
                 <button
                   key={size}
                   onClick={() => setTeamSize(size)}
-                  className={`py-3 rounded-xl transition-all ${
-                    teamSize === size ? 'bg-emerald-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`relative overflow-hidden py-3 rounded-xl transition-all duration-300 cursor-pointer group backdrop-blur-sm ${
+                    teamSize === size
+                      ? 'bg-nexus-surface/90 text-white border border-[#00C853]/40 shadow-[0_0_20px_rgba(0,200,83,0.15)] scale-[1.03]'
+                      : 'bg-nexus-surface/50 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/70 hover:border-[#00C853]/20 hover:scale-[1.02]'
                   }`}
                 >
-                  <div className="font-bold">{label}</div>
-                  <div className="text-xs opacity-70">{desc}</div>
+                  <span className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#00C853,transparent)] ${
+                    teamSize === size ? 'opacity-80' : 'opacity-0 group-hover:opacity-30'
+                  }`} />
+                  {teamSize === size && (
+                    <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#00C853] opacity-[0.1] blur-2xl" />
+                  )}
+                  <div className="relative z-10 font-bold">{label}</div>
+                  <div className="relative z-10 text-xs opacity-70">{desc}</div>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Kategorie</label>
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Kategorie</label>
             <CategorySelector selected={category} onChange={setCategory} />
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Anzahl Fragen</label>
-            <div className="grid grid-cols-4 gap-2">
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Anzahl Fragen</label>
+            <div className="grid grid-cols-4 gap-3">
               {[5, 10, 15, 20].map(n => (
                 <button
                   key={n}
                   onClick={() => setQuestionCount(n)}
-                  className={`py-2 rounded-xl font-bold transition-all ${
-                    questionCount === n ? 'bg-emerald-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`relative overflow-hidden py-4 rounded-xl font-bold text-lg transition-all duration-300 cursor-pointer group backdrop-blur-sm ${
+                    questionCount === n
+                      ? 'bg-nexus-surface/90 text-white border border-[#00C853]/40 shadow-[0_0_20px_rgba(0,200,83,0.15)] scale-[1.03]'
+                      : 'bg-nexus-surface/50 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/70 hover:border-[#00C853]/20 hover:scale-[1.02]'
                   }`}
                 >
-                  {n}
+                  {/* Top accent line */}
+                  <span className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#00C853,transparent)] ${
+                    questionCount === n ? 'opacity-80' : 'opacity-0 group-hover:opacity-30'
+                  }`} />
+                  {questionCount === n && (
+                    <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#00C853] opacity-[0.1] blur-2xl" />
+                  )}
+                  <span className="relative z-10">{n}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <Button variant="success" fullWidth onClick={createLobby} loading={loading}>
-            <Plus size={18} />
-            Lobby erstellen
-          </Button>
+          <button
+            onClick={createLobby}
+            disabled={loading}
+            className="group relative w-full overflow-hidden rounded-2xl py-4 px-8 font-bold text-lg text-white tracking-wide cursor-pointer transition-all duration-300 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#00C853]/40 hover:shadow-[0_0_30px_rgba(0,200,83,0.15)] hover:scale-[1.02]"
+          >
+            <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#00C853,transparent)]" />
+            <span className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-[#00C853] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+            <span className="relative z-10 inline-flex items-center justify-center gap-2">
+              <Plus size={18} />
+              {loading ? 'Wird erstellt...' : 'Lobby erstellen'}
+            </span>
+          </button>
         </div>
       </Modal>
     </div>

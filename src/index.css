@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-nexus-bg: #060E20;
+  --color-nexus-surface: #091328;
+  --color-nexus-primary: #2E5BFF;
+  --color-nexus-accent: #97A9FF;
+  --color-nexus-success: #00C853;
+  --color-nexus-danger: #FF3D00;
+  --color-nexus-border: rgba(151, 169, 255, 0.12);
+  --color-nexus-glow: rgba(151, 169, 255, 0.3);
+  --color-nexus-text: #E2E8F0;
+  --color-nexus-muted: #7A8BA8;
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -7,10 +21,12 @@
 
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: #0f172a;
-    color: #f1f5f9;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    background-color: var(--color-nexus-bg);
+    color: var(--color-nexus-text);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   #root {
@@ -28,6 +44,13 @@
 @keyframes timer-countdown {
   from { stroke-dashoffset: 0; }
   to { stroke-dashoffset: 283; }
+}
+
+@keyframes beams-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-30px, -40px) scale(1.05); }
+  66% { transform: translate(20px, 30px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
 @keyframes fadeInUp {

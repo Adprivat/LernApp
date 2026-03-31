@@ -17,15 +17,15 @@ export function CategorySelector({ selected, onChange }: CategorySelectorProps) 
           key={key}
           onClick={() => onChange(key)}
           className={clsx(
-            'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer',
+            'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer',
             selected === key
-              ? 'border-indigo-500 bg-indigo-600/20 text-white'
-              : 'border-slate-600 bg-slate-700/40 text-slate-300 hover:border-slate-500 hover:bg-slate-700'
+              ? 'border-nexus-primary bg-nexus-primary/20 text-white shadow-[0_0_15px_rgba(46,91,255,0.2)] scale-[1.02]'
+              : 'border-nexus-border bg-nexus-surface/40 text-nexus-text hover:border-nexus-accent/30 hover:bg-nexus-surface hover:shadow-[0_0_10px_rgba(151,169,255,0.05)]'
           )}
         >
           <span className="text-3xl">{cat.icon}</span>
           <span className="text-sm font-semibold text-center leading-tight">{cat.name}</span>
-          <span className="text-xs text-slate-400">{cat.questions.length} Fragen</span>
+          <span className="text-xs text-nexus-muted">{cat.questions.length} Fragen</span>
         </button>
       ))}
     </div>

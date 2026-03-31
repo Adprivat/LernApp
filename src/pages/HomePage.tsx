@@ -15,8 +15,8 @@ const modes = [
     emoji: '📚',
     title: 'Selbst lernen',
     desc: 'Übe in deinem eigenen Tempo',
-    color: 'from-indigo-600 to-indigo-800',
-    border: 'border-indigo-500/30',
+    accent: '#2E5BFF',
+    iconColor: 'text-[#5A88FF]',
   },
   {
     path: '/challenge',
@@ -24,8 +24,8 @@ const modes = [
     emoji: '⚔️',
     title: 'Herausforderung',
     desc: '1v1 – fordere jeden heraus',
-    color: 'from-amber-600 to-amber-800',
-    border: 'border-amber-500/30',
+    accent: '#FF6B35',
+    iconColor: 'text-[#FF8F60]',
   },
   {
     path: '/groups',
@@ -33,8 +33,8 @@ const modes = [
     emoji: '👥',
     title: 'Gruppen',
     desc: '2-4 Spieler im Team',
-    color: 'from-emerald-600 to-emerald-800',
-    border: 'border-emerald-500/30',
+    accent: '#00C853',
+    iconColor: 'text-[#00E676]',
   },
   {
     path: '/tournament',
@@ -42,8 +42,8 @@ const modes = [
     emoji: '🏆',
     title: 'Turnier',
     desc: 'Kämpfe um den Titel',
-    color: 'from-purple-600 to-purple-800',
-    border: 'border-purple-500/30',
+    accent: '#B24BFF',
+    iconColor: 'text-[#C97AFF]',
   },
 ];
 
@@ -78,12 +78,12 @@ export function HomePage() {
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="text-3xl font-black text-white">
-          Willkommen, <span className="text-indigo-400">{user.username}</span>! 👋
+          Willkommen, <span className="text-nexus-accent">{user.username}</span>! 👋
         </h1>
-        <p className="text-slate-400 mt-1">
+        <p className="text-nexus-muted mt-1">
           {onlinePlayers > 0 && (
-            <span className="inline-flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 text-nexus-success">
+              <span className="w-2 h-2 bg-nexus-success rounded-full animate-pulse" />
               {onlinePlayers} Spieler online
             </span>
           )}
@@ -106,10 +106,10 @@ export function HomePage() {
                 { label: 'Siege', value: user.games_won, icon: Trophy, color: 'text-emerald-400' },
                 { label: 'Streak', value: `${user.current_streak}🔥`, icon: TrendingUp, color: 'text-orange-400' },
               ].map(({ label, value, icon: Icon, color }) => (
-                <div key={label} className="bg-slate-700/40 rounded-xl p-3 text-center">
+                <div key={label} className="bg-nexus-bg/60 border border-nexus-border rounded-lg p-3 text-center">
                   <Icon size={16} className={`${color} mx-auto mb-1`} />
                   <div className="text-xl font-black text-white">{value}</div>
-                  <div className="text-xs text-slate-400">{label}</div>
+                  <div className="text-xs text-nexus-muted">{label}</div>
                 </div>
               ))}
             </div>
@@ -118,16 +118,54 @@ export function HomePage() {
           {/* Game modes */}
           <div>
             <h2 className="font-bold text-white mb-4 flex items-center gap-2">
-              <BookOpen size={18} className="text-indigo-400" />
+              <BookOpen size={18} className="text-nexus-accent" />
               Spielmodi
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {modes.map(({ path, emoji, title, desc, color, border }) => (
+              {modes.map(({ path, emoji, title, desc, accent, icon: Icon, iconColor }) => (
                 <Link key={path} to={path}>
-                  <div className={`bg-gradient-to-br ${color} border ${border} rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-200 cursor-pointer`}>
-                    <div className="text-4xl mb-3">{emoji}</div>
-                    <h3 className="font-bold text-white text-lg">{title}</h3>
-                    <p className="text-white/60 text-sm mt-1">{desc}</p>
+                  <div
+                    className="relative overflow-hidden bg-nexus-surface/70 border border-nexus-border rounded-xl p-6 hover:scale-[1.03] transition-all duration-300 cursor-pointer group hover:border-opacity-40 backdrop-blur-sm"
+                    style={{
+                      boxShadow: `0 0 0 0 ${accent}00`,
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${accent}20, 0 0 60px ${accent}10`;
+                      (e.currentTarget as HTMLElement).style.borderColor = `${accent}40`;
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 0 ${accent}00`;
+                      (e.currentTarget as HTMLElement).style.borderColor = '';
+                    }}
+                  >
+                    {/* Top accent line */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+                    />
+                    {/* Background radial glow */}
+                    <div
+                      className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl"
+                      style={{ background: accent }}
+                    />
+
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div
+                          className="relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 bg-nexus-surface/80 backdrop-blur-sm overflow-hidden"
+                          style={{ border: `1px solid ${accent}30`, boxShadow: `0 0 12px ${accent}15` }}
+                        >
+                          {/* Icon top accent line */}
+                          <div className="absolute top-0 left-0 right-0 h-px opacity-70" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
+                          {/* Icon corner glow */}
+                          <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full opacity-[0.15] blur-xl" style={{ background: accent }} />
+                          <Icon size={20} className={`${iconColor} relative z-10`} style={{ filter: `drop-shadow(0 0 4px ${accent}40)` }} />
+                        </div>
+                        <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{emoji}</span>
+                      </div>
+                      <h3 className="font-bold text-white text-lg">{title}</h3>
+                      <p className="text-nexus-muted text-sm mt-1 group-hover:text-nexus-text/70 transition-colors duration-300">{desc}</p>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -145,8 +183,8 @@ export function HomePage() {
             </h2>
             <div className="flex flex-col gap-2">
               {leaderboard.map((player, idx) => (
-                <div key={player.id} className={`flex items-center gap-3 p-2.5 rounded-xl ${
-                  player.id === user.id ? 'bg-indigo-600/10 border border-indigo-500/30' : ''
+                <div key={player.id} className={`flex items-center gap-3 p-2.5 rounded-lg ${
+                  player.id === user.id ? 'bg-nexus-primary/10 border border-nexus-primary/30' : ''
                 }`}>
                   <span className={`text-sm font-black w-5 text-center ${
                     idx === 0 ? 'text-yellow-400' :
@@ -160,26 +198,15 @@ export function HomePage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white truncate">
                       {player.username}
-                      {player.id === user.id && <span className="text-xs text-indigo-400 ml-1">(Du)</span>}
+                      {player.id === user.id && <span className="text-xs text-nexus-accent ml-1">(Du)</span>}
                     </p>
-                    <p className="text-xs text-slate-400">{player.total_score.toLocaleString()} Pkt.</p>
+                    <p className="text-xs text-nexus-muted">{player.total_score.toLocaleString()} Pkt.</p>
                   </div>
                 </div>
               ))}
             </div>
-            <Link to="/leaderboard" className="block mt-3 text-center text-sm text-indigo-400 hover:text-indigo-300 transition-colors">
+            <Link to="/leaderboard" className="block mt-3 text-center text-sm text-nexus-accent hover:text-white transition-all duration-300">
               Vollständige Bestenliste →
-            </Link>
-          </Card>
-
-          {/* Quick play */}
-          <Card className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border-indigo-500/30">
-            <h2 className="font-bold text-white mb-2">Schnellspiel</h2>
-            <p className="text-slate-400 text-sm mb-4">Starte sofort mit 10 Fragen aus Allgemeinwissen</p>
-            <Link to="/learn?category=general&count=10">
-              <button className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-bold transition-colors">
-                Jetzt spielen ▶
-              </button>
             </Link>
           </Card>
         </div>

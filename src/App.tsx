@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
@@ -16,6 +16,8 @@ import { TournamentPage } from '@/pages/TournamentPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { AdminPage } from '@/pages/AdminPage';
+import { GuidePage } from '@/pages/GuidePage';
+import { BeamsBackground } from '@/components/ui/BeamsBackground';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, initialized } = useAuthStore();
@@ -30,9 +32,28 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function playNotificationSound() {
+  try {
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(660, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch {
+    // AudioContext blocked (e.g. no user interaction yet) — fail silently
+  }
+}
+
 function AppLayout() {
   const { user, fetchProfile } = useAuthStore();
   const { addNotification } = useNotificationStore();
+  const navigate = useNavigate();
   const channelRef = useRef<RealtimeChannel | null>(null);
   const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -66,7 +87,13 @@ function AppLayout() {
         table: 'notifications',
         filter: `user_id=eq.${user.id}`,
       }, (payload) => {
-        addNotification(payload.new as any);
+        const notif = payload.new as any;
+        addNotification(notif);
+        playNotificationSound();
+        // Auto-navigate challenger when their challenge is accepted
+        if (notif.type === 'challenge_accepted' && notif.data?.session_id) {
+          navigate(`/game/${notif.data.session_id}`);
+        }
       })
       .subscribe();
 
@@ -90,7 +117,8 @@ function AppLayout() {
   }, [user?.id]);
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
+    <BeamsBackground intensity="subtle">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
         <Routes>
@@ -105,10 +133,12 @@ function AppLayout() {
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
           <Route path="/leaderboard" element={<RequireAuth><LeaderboardPage /></RequireAuth>} />
           <Route path="/admin" element={<RequireAuth><AdminPage /></RequireAuth>} />
+          <Route path="/guide" element={<RequireAuth><GuidePage /></RequireAuth>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </div>
+    </BeamsBackground>
   );
 }
 

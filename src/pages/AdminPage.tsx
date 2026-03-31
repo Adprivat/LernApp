@@ -105,7 +105,7 @@ export function AdminPage() {
         <ShieldCheck size={32} className="text-amber-400" />
         <div>
           <h1 className="text-3xl font-black text-white">Admin-Panel</h1>
-          <p className="text-slate-400 text-sm">Benutzer- und Systemverwaltung</p>
+          <p className="text-nexus-muted text-sm">Benutzer- und Systemverwaltung</p>
         </div>
       </div>
 
@@ -119,14 +119,14 @@ export function AdminPage() {
           <Card key={label} className="text-center">
             <Icon size={24} className={`${color} mx-auto mb-2`} />
             <div className="text-3xl font-black text-white">{value}</div>
-            <div className="text-sm text-slate-400">{label}</div>
+            <div className="text-sm text-nexus-muted">{label}</div>
           </Card>
         ))}
       </div>
 
       {/* User management */}
       <Card padding="none">
-        <div className="flex items-center justify-between p-5 border-b border-slate-700">
+        <div className="flex items-center justify-between p-5 border-b border-nexus-border">
           <h2 className="font-bold text-white flex items-center gap-2">
             <Users size={18} />
             Benutzerverwaltung ({filtered.length})
@@ -154,18 +154,18 @@ export function AdminPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-700">
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Benutzer</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
-                  <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Punkte</th>
-                  <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Spiele</th>
-                  <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Registriert</th>
-                  <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Aktionen</th>
+                <tr className="border-b border-nexus-border">
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Benutzer</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Status</th>
+                  <th className="text-right px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Punkte</th>
+                  <th className="text-right px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Spiele</th>
+                  <th className="text-right px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Registriert</th>
+                  <th className="text-right px-5 py-3 text-xs font-semibold text-nexus-muted uppercase tracking-wider">Aktionen</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map(profile => (
-                  <tr key={profile.id} className="border-b border-slate-700/50 hover:bg-slate-700/20 transition-colors">
+                    <tr key={profile.id} className="border-b border-nexus-border hover:bg-nexus-surface/30 transition-all duration-300">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar username={profile.username} size="sm" isOnline={profile.is_online} />
@@ -193,11 +193,11 @@ export function AdminPage() {
                       <span className="text-white font-semibold">{profile.total_score.toLocaleString()}</span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <span className="text-slate-300">{profile.games_played}</span>
-                      <span className="text-slate-500 text-xs ml-1">({profile.games_won}W)</span>
+                      <span className="text-nexus-text">{profile.games_played}</span>
+                      <span className="text-nexus-muted text-xs ml-1">({profile.games_won}W)</span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <span className="text-slate-400 text-sm">
+                      <span className="text-nexus-muted text-sm">
                         {new Date(profile.created_at).toLocaleDateString('de-DE')}
                       </span>
                     </td>
@@ -206,10 +206,10 @@ export function AdminPage() {
                         <button
                           onClick={() => toggleAdmin(profile)}
                           disabled={profile.id === user?.id}
-                          className={`p-1.5 rounded-lg transition-colors ${
+                          className={`p-2 rounded-xl transition-all duration-300 cursor-pointer ${
                             profile.is_admin
-                              ? 'text-amber-400 bg-amber-400/10 hover:bg-amber-400/20'
-                              : 'text-slate-400 hover:text-amber-400 hover:bg-amber-400/10'
+                              ? 'text-amber-400 bg-amber-400/10 hover:bg-amber-400/20 shadow-[0_0_10px_rgba(255,179,0,0.1)]'
+                              : 'text-nexus-muted hover:text-amber-400 hover:bg-amber-400/10'
                           } disabled:opacity-30 disabled:cursor-not-allowed`}
                           title={profile.is_admin ? 'Admin entfernen' : 'Zum Admin machen'}
                         >
@@ -218,7 +218,7 @@ export function AdminPage() {
                         <button
                           onClick={() => resetScore(profile)}
                           disabled={profile.id === user?.id}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-400/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="p-2 rounded-xl text-nexus-muted hover:text-blue-400 hover:bg-blue-400/10 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                           title="Punkte zurücksetzen"
                         >
                           <RefreshCw size={14} />
@@ -226,7 +226,7 @@ export function AdminPage() {
                         <button
                           onClick={() => deleteUser(profile)}
                           disabled={profile.id === user?.id}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="p-2 rounded-xl text-nexus-muted hover:text-nexus-danger hover:bg-nexus-danger/10 hover:shadow-[0_0_10px_rgba(255,61,0,0.1)] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                           title="Benutzer löschen"
                         >
                           <Trash2 size={14} />

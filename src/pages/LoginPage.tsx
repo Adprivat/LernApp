@@ -59,33 +59,39 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl shadow-2xl shadow-indigo-600/40 mb-4">
-            <BookOpen size={32} className="text-white" />
+          <div className="relative inline-flex items-center justify-center w-16 h-16 bg-nexus-surface/80 backdrop-blur-sm rounded-2xl mb-4 border border-[#2E5BFF]/25 shadow-[0_0_24px_rgba(46,91,255,0.2)] overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,#2E5BFF,transparent)]" />
+            <div className="absolute -top-5 -right-5 w-12 h-12 rounded-full bg-[#2E5BFF] opacity-[0.15] blur-xl" />
+            <BookOpen size={30} className="text-nexus-accent relative z-10 drop-shadow-[0_0_8px_rgba(151,169,255,0.4)]" />
           </div>
           <h1 className="text-3xl font-black text-white">LernApp</h1>
-          <p className="text-slate-400 mt-2">Die kompetitive Lernplattform</p>
+          <p className="text-nexus-muted mt-2">Die kompetitive Lernplattform</p>
         </div>
 
         {/* Card */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-8">
+        <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg shadow-2xl shadow-nexus-primary/5 p-8">
           {/* Tabs */}
-          <div className="flex bg-slate-700/50 rounded-xl p-1 mb-6">
+          <div className="flex bg-nexus-bg/60 rounded-xl p-1 mb-6 border border-nexus-border">
             <button
               onClick={() => { setIsLogin(true); setError(''); }}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                isLogin ? 'bg-white text-slate-900 shadow' : 'text-slate-400 hover:text-white'
+              className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
+                isLogin
+                  ? 'bg-nexus-surface/90 text-white border border-[#2E5BFF]/30 shadow-[0_0_15px_rgba(46,91,255,0.1)]'
+                  : 'text-nexus-muted hover:text-white border border-transparent'
               }`}
             >
               Anmelden
             </button>
             <button
               onClick={() => { setIsLogin(false); setError(''); }}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                !isLogin ? 'bg-white text-slate-900 shadow' : 'text-slate-400 hover:text-white'
+              className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
+                !isLogin
+                  ? 'bg-nexus-surface/90 text-white border border-[#2E5BFF]/30 shadow-[0_0_15px_rgba(46,91,255,0.1)]'
+                  : 'text-nexus-muted hover:text-white border border-transparent'
               }`}
             >
               Registrieren
@@ -124,7 +130,7 @@ export function LoginPage() {
             )}
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400">
+              <div className="bg-nexus-danger/10 border border-nexus-danger/30 rounded-lg px-4 py-3 text-sm text-nexus-danger">
                 {error}
               </div>
             )}
@@ -146,7 +152,7 @@ export function LoginPage() {
           </form>
 
           {!isLogin && (
-            <p className="text-center text-xs text-slate-500 mt-4">
+            <p className="text-center text-xs text-nexus-muted mt-4">
               Kein E-Mail erforderlich — nur Benutzername & Passwort
             </p>
           )}
@@ -159,9 +165,9 @@ export function LoginPage() {
             { icon: '🏆', label: 'Turniere' },
             { icon: '📊', label: 'Ranglisten' },
           ].map(({ icon, label }) => (
-            <div key={label} className="text-center p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+            <div key={label} className="text-center p-3 bg-nexus-surface/50 rounded-lg border border-nexus-border">
               <div className="text-2xl mb-1">{icon}</div>
-              <div className="text-xs text-slate-400">{label}</div>
+              <div className="text-xs text-nexus-muted">{label}</div>
             </div>
           ))}
         </div>

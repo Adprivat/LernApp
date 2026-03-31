@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Trophy, Users, Clock, Play, Plus, RefreshCw, Crown } from 'lucide-react';
+import { Trophy, Users, Clock, Play, Plus, RefreshCw, Crown, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -41,6 +41,7 @@ export function TournamentPage() {
     channelRef.current = supabase
       .channel('tournaments_page')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'tournaments' }, fetchTournaments)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'tournament_participants' }, fetchTournaments)
       .subscribe();
     return () => {
       if (channelRef.current) {
@@ -80,6 +81,26 @@ export function TournamentPage() {
         current_round: 0,
         total_score: 0,
       });
+
+      // Notify all other users about the new tournament
+      const { data: allProfiles } = await supabase
+        .from('profiles')
+        .select('id')
+        .neq('id', user.id);
+
+      if (allProfiles && allProfiles.length > 0) {
+        await supabase.from('notifications').insert(
+          allProfiles.map(p => ({
+            user_id: p.id,
+            type: 'tournament_created',
+            title: 'Neues Turnier!',
+            message: `${user.username} hat ein Turnier erstellt: "${t.name}"`,
+            data: { tournament_id: t.id },
+            is_read: false,
+          }))
+        );
+      }
+
       setShowCreate(false);
       setName('');
       fetchTournaments();
@@ -102,6 +123,29 @@ export function TournamentPage() {
     });
     if (!joinError) fetchTournaments();
     else setError('Bereits angemeldet');
+  };
+
+  const leaveTournament = async (tournamentId: string) => {
+    if (!user) return;
+    setError('');
+    const { error } = await supabase
+      .from('tournament_participants')
+      .delete()
+      .eq('tournament_id', tournamentId)
+      .eq('user_id', user.id);
+    if (error) { setError(getErrorMessage(error)); return; }
+    fetchTournaments();
+  };
+
+  const cancelTournament = async (tournamentId: string) => {
+    if (!user) return;
+    setError('');
+    const { error } = await supabase
+      .from('tournaments')
+      .update({ status: 'cancelled' })
+      .eq('id', tournamentId);
+    if (error) { setError(getErrorMessage(error)); return; }
+    fetchTournaments();
   };
 
   const startTournament = async (tournament: Tournament & { participants: TournamentParticipant[] }) => {
@@ -223,7 +267,7 @@ export function TournamentPage() {
                   {isFull && <Badge variant="warning" size="sm">Voll</Badge>}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap">
                   {t.status === 'registering' && (
                     <>
                       {!isRegistered && !isFull && (
@@ -232,13 +276,22 @@ export function TournamentPage() {
                           Anmelden
                         </Button>
                       )}
-                      {isRegistered && (
-                        <Badge variant="success" size="sm">Angemeldet ✓</Badge>
+                      {isRegistered && !isCreator && (
+                        <Button size="sm" variant="danger" onClick={() => leaveTournament(t.id)}>
+                          <X size={14} />
+                          Verlassen
+                        </Button>
                       )}
                       {isCreator && t.participants.length >= 2 && (
                         <Button size="sm" variant="success" onClick={() => startTournament(t)}>
                           <Play size={14} />
                           Turnier starten
+                        </Button>
+                      )}
+                      {isCreator && (
+                        <Button size="sm" variant="danger" onClick={() => cancelTournament(t.id)}>
+                          <X size={14} />
+                          Abbrechen
                         </Button>
                       )}
                     </>

@@ -256,10 +256,22 @@ export const useGameStore = create<GameState>((set, get) => ({
       return;
     }
 
-    await supabase
+    // Transition session active→finished; only succeeds for the first caller
+    const { data: didTransition } = await supabase
       .from('game_sessions')
       .update({ status: 'finished', finished_at: new Date().toISOString() })
-      .eq('id', session.id);
+      .eq('id', session.id)
+      .eq('status', 'active')
+      .select('id')
+      .maybeSingle();
+
+    // If already finished by another player, still mark it finished (idempotent)
+    if (!didTransition) {
+      await supabase
+        .from('game_sessions')
+        .update({ status: 'finished' })
+        .eq('id', session.id);
+    }
 
     await supabase
       .from('game_players')
@@ -287,6 +299,32 @@ export const useGameStore = create<GameState>((set, get) => ({
         p_won: false, // don't double count the win
         p_correct: 0,
       });
+    }
+
+    // Tournament end: first finisher sends winner notification to all participants
+    if (session.mode === 'tournament' && didTransition) {
+      const { data: allPlayers } = await supabase
+        .from('game_players')
+        .select('user_id, score, profile:profiles(username)')
+        .eq('session_id', session.id);
+
+      if (allPlayers && allPlayers.length > 0) {
+        const winner = allPlayers.reduce((a: any, b: any) => a.score > b.score ? a : b);
+        const winnerName = (winner as any).profile?.username || 'Unbekannt';
+
+        await supabase.from('notifications').insert(
+          allPlayers.map((p: any) => ({
+            user_id: p.user_id,
+            type: 'tournament_end',
+            title: 'Turnier beendet!',
+            message: p.user_id === winner.user_id
+              ? 'Du hast das Turnier gewonnen! 🏆'
+              : `${winnerName} hat das Turnier gewonnen! 🏆`,
+            data: { session_id: session.id, winner_id: winner.user_id },
+            is_read: false,
+          }))
+        );
+      }
     }
 
     // Refresh profile so stats on HomePage/ProfilePage are up to date

@@ -46,7 +46,7 @@ create policy "Admins can delete profiles"
 create table if not exists public.game_sessions (
   id uuid default uuid_generate_v4() primary key,
   mode text not null check (mode in ('solo', 'challenge', 'group', 'tournament')),
-  status text not null default 'waiting' check (status in ('waiting', 'starting', 'active', 'finished')),
+  status text not null default 'waiting' check (status in ('waiting', 'starting', 'active', 'finished', 'cancelled')),
   category text not null,
   question_count integer not null default 10,
   time_per_question integer not null default 20,
@@ -102,6 +102,9 @@ create policy "Authenticated users can join games"
 create policy "Players can update own record"
   on public.game_players for update using (user_id = auth.uid());
 
+create policy "Players can delete own record"
+  on public.game_players for delete using (user_id = auth.uid());
+
 -- ============================================================
 -- GAME ANSWERS
 -- ============================================================
@@ -134,7 +137,7 @@ create table if not exists public.challenges (
   challenger_id uuid references public.profiles(id) on delete cascade not null,
   challenged_id uuid references public.profiles(id) on delete cascade,
   session_id uuid references public.game_sessions(id) on delete set null,
-  status text not null default 'pending' check (status in ('pending', 'accepted', 'declined', 'expired', 'completed')),
+  status text not null default 'pending' check (status in ('pending', 'accepted', 'declined', 'expired', 'completed', 'cancelled')),
   category text not null,
   question_count integer not null default 10,
   is_open boolean not null default false,
@@ -166,7 +169,7 @@ create policy "Challenged user or challenger can update"
 create table if not exists public.tournaments (
   id uuid default uuid_generate_v4() primary key,
   name text not null,
-  status text not null default 'registering' check (status in ('registering', 'active', 'finished')),
+  status text not null default 'registering' check (status in ('registering', 'active', 'finished', 'cancelled')),
   max_players integer not null default 8,
   category text not null,
   question_count integer not null default 10,
@@ -211,6 +214,9 @@ create policy "Users can register for tournaments"
 
 create policy "Users can update own participation"
   on public.tournament_participants for update using (user_id = auth.uid());
+
+create policy "Users can delete own participation"
+  on public.tournament_participants for delete using (user_id = auth.uid());
 
 -- ============================================================
 -- ACHIEVEMENTS
@@ -274,7 +280,7 @@ create policy "Authenticated users can send messages"
 create table if not exists public.notifications (
   id uuid default uuid_generate_v4() primary key,
   user_id uuid references public.profiles(id) on delete cascade not null,
-  type text not null check (type in ('challenge_received', 'challenge_accepted', 'challenge_declined', 'tournament_start', 'achievement_earned', 'game_invite')),
+  type text not null check (type in ('challenge_received', 'challenge_accepted', 'challenge_declined', 'tournament_start', 'tournament_created', 'tournament_end', 'achievement_earned', 'game_invite')),
   title text not null,
   message text not null,
   data jsonb,

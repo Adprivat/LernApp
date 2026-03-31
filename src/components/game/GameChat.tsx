@@ -79,24 +79,24 @@ export function GameChat({ sessionId }: GameChatProps) {
   };
 
   return (
-    <div className="flex flex-col bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden h-full">
+    <div className="flex flex-col bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg overflow-hidden h-full">
       {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-4 py-3 border-b border-slate-700 hover:bg-slate-700/30 transition-colors"
+        className="flex items-center justify-between px-4 py-3 border-b border-nexus-border hover:bg-nexus-bg/30 transition-all duration-300"
       >
         <div className="flex items-center gap-2 text-sm font-semibold text-white">
-          <MessageCircle size={16} className="text-indigo-400" />
+          <MessageCircle size={16} className="text-nexus-accent" />
           Chat
           {messages.length > 0 && (
-            <span className="bg-slate-600 text-slate-300 text-xs px-1.5 py-0.5 rounded-full">
+            <span className="bg-nexus-bg text-nexus-muted text-xs px-1.5 py-0.5 rounded-full">
               {messages.length}
             </span>
           )}
         </div>
         <ChevronDown
           size={16}
-          className={`text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`text-nexus-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -105,7 +105,7 @@ export function GameChat({ sessionId }: GameChatProps) {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 min-h-[200px] max-h-[300px]">
             {messages.length === 0 ? (
-              <div className="text-center text-slate-500 text-sm py-8">
+              <div className="text-center text-nexus-muted text-sm py-8">
                 Noch keine Nachrichten
               </div>
             ) : (
@@ -117,12 +117,12 @@ export function GameChat({ sessionId }: GameChatProps) {
                   <Avatar username={msg.profile?.username || '?'} size="sm" />
                   <div className={`max-w-[75%] ${msg.user_id === user?.id ? 'items-end' : 'items-start'} flex flex-col gap-0.5`}>
                     {msg.user_id !== user?.id && (
-                      <span className="text-xs text-slate-400 px-1">{msg.profile?.username}</span>
+                      <span className="text-xs text-nexus-muted px-1">{msg.profile?.username}</span>
                     )}
                     <div className={`px-3 py-2 rounded-2xl text-sm leading-snug ${
                       msg.user_id === user?.id
-                        ? 'bg-indigo-600 text-white rounded-br-sm'
-                        : 'bg-slate-700 text-white rounded-bl-sm'
+                        ? 'bg-nexus-primary text-white rounded-br-sm'
+                        : 'bg-nexus-bg text-white rounded-bl-sm'
                     }`}>
                       {msg.content}
                     </div>
@@ -134,19 +134,19 @@ export function GameChat({ sessionId }: GameChatProps) {
           </div>
 
           {/* Input */}
-          <div className="flex gap-2 p-3 border-t border-slate-700">
+          <div className="flex gap-2 p-3 border-t border-nexus-border">
             <input
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
               placeholder="Nachricht..."
               maxLength={200}
-              className="flex-1 bg-slate-700/50 border border-slate-600 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              className="flex-1 bg-nexus-bg border border-nexus-border rounded-lg px-3 py-2 text-sm text-white placeholder-nexus-muted focus:outline-none focus:border-nexus-primary transition-all duration-300"
             />
             <button
               onClick={sendMessage}
               disabled={!input.trim()}
-              className="p-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 rounded-xl transition-colors"
+              className="p-2 bg-nexus-primary hover:bg-nexus-primary/85 disabled:opacity-40 rounded-lg transition-all duration-300"
             >
               <Send size={16} className="text-white" />
             </button>

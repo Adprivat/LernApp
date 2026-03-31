@@ -26,12 +26,12 @@ export function Scoreboard({ players, currentUserId }: ScoreboardProps) {
         return (
           <div
             key={player.id}
-            className={`flex items-center gap-4 p-4 rounded-xl border transition-all ${
+            className={`flex items-center gap-4 p-4 rounded-lg border transition-all duration-300 ${
               isMe
-                ? 'bg-indigo-600/10 border-indigo-500/40 ring-1 ring-indigo-500/20'
+                ? 'bg-nexus-primary/10 border-nexus-primary/40 ring-1 ring-nexus-primary/20'
                 : idx < 3
                 ? rankBg[idx]
-                : 'bg-slate-800/50 border-slate-700'
+                : 'bg-nexus-surface/50 border-nexus-border'
             }`}
           >
             {/* Rank */}
@@ -49,12 +49,12 @@ export function Scoreboard({ players, currentUserId }: ScoreboardProps) {
             {/* Name + stats */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className={`font-bold truncate ${isMe ? 'text-indigo-300' : 'text-white'}`}>
+                <span className={`font-bold truncate ${isMe ? 'text-nexus-accent' : 'text-white'}`}>
                   {player.profile?.username || 'Unbekannt'}
                 </span>
-                {isMe && <span className="text-xs text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded-full">Du</span>}
+                {isMe && <span className="text-xs text-nexus-accent bg-nexus-accent/10 px-1.5 py-0.5 rounded-full">Du</span>}
               </div>
-              <div className="flex items-center gap-3 mt-1 text-xs text-slate-400">
+              <div className="flex items-center gap-3 mt-1 text-xs text-nexus-muted">
                 <span className="flex items-center gap-1">
                   <Target size={10} />
                   {accuracy}% Treffer
@@ -68,10 +68,10 @@ export function Scoreboard({ players, currentUserId }: ScoreboardProps) {
 
             {/* Score */}
             <div className="text-right">
-              <div className={`text-xl font-black ${idx === 0 ? 'text-yellow-400' : isMe ? 'text-indigo-400' : 'text-white'}`}>
+              <div className={`text-xl font-black ${idx === 0 ? 'text-yellow-400' : isMe ? 'text-nexus-accent' : 'text-white'}`}>
                 {player.score.toLocaleString()}
               </div>
-              <div className="text-xs text-slate-400">Punkte</div>
+              <div className="text-xs text-nexus-muted">Punkte</div>
             </div>
           </div>
         );

@@ -32,15 +32,19 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-700/50">
+      <nav className="sticky top-0 z-40 bg-nexus-bg/95 backdrop-blur border-b border-nexus-border">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 font-bold text-xl text-white">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <BookOpen size={18} />
+            <Link to="/" className="flex items-center gap-2.5 font-bold text-xl text-white group">
+              <div className="relative w-9 h-9 rounded-xl bg-nexus-surface/70 backdrop-blur-sm border border-nexus-primary/25 flex items-center justify-center overflow-hidden shadow-[0_0_16px_rgba(46,91,255,0.2)] group-hover:shadow-[0_0_24px_rgba(46,91,255,0.35)] group-hover:border-nexus-primary/50 transition-all duration-500">
+                {/* Top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,#2E5BFF,transparent)]" />
+                {/* Corner glow */}
+                <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-nexus-primary opacity-[0.15] blur-xl group-hover:opacity-[0.25] transition-opacity duration-500" />
+                <BookOpen size={17} className="text-nexus-accent relative z-10 drop-shadow-[0_0_6px_rgba(151,169,255,0.4)]" />
               </div>
-              LernApp
+              <span className="bg-gradient-to-r from-white via-white to-nexus-accent bg-clip-text text-transparent tracking-tight">LernApp</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -49,10 +53,10 @@ export function Navbar() {
                 <Link
                   key={path}
                   to={path}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     location.pathname === path
-                      ? 'bg-indigo-600 text-white'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                      ? 'bg-nexus-primary/15 text-nexus-accent shadow-[0_0_10px_rgba(151,169,255,0.1)]'
+                      : 'text-nexus-muted hover:text-white hover:bg-nexus-surface'
                   }`}
                 >
                   <Icon size={16} />
@@ -79,7 +83,7 @@ export function Navbar() {
               {/* Notifications */}
               <button
                 onClick={() => setNotifOpen(!notifOpen)}
-                className="relative p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                className="relative p-2 text-nexus-muted hover:text-white hover:bg-nexus-surface/60 rounded-xl transition-all duration-300 border border-transparent hover:border-nexus-border cursor-pointer"
               >
                 <Bell size={20} />
                 {unreadCount > 0 && (
@@ -92,7 +96,7 @@ export function Navbar() {
               {/* Profile */}
               <Link
                 to="/profile"
-                className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-slate-700 transition-colors"
+                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-nexus-surface/60 border border-transparent hover:border-nexus-border transition-all duration-300"
               >
                 <Avatar username={user.username} size="sm" isOnline />
                 <span className="hidden sm:block text-sm font-medium text-white">{user.username}</span>
@@ -101,7 +105,7 @@ export function Navbar() {
               {/* Logout */}
               <button
                 onClick={handleLogout}
-                className="hidden md:flex p-2 text-slate-400 hover:text-red-400 hover:bg-red-900/20 rounded-lg transition-colors"
+                className="hidden md:flex p-2 text-nexus-muted hover:text-nexus-danger hover:bg-nexus-danger/10 rounded-xl transition-all duration-300 border border-transparent hover:border-nexus-danger/20 cursor-pointer"
                 title="Abmelden"
               >
                 <LogOut size={18} />
@@ -110,7 +114,7 @@ export function Navbar() {
               {/* Mobile menu toggle */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg"
+                className="md:hidden p-2 text-nexus-muted hover:text-white hover:bg-nexus-surface/60 rounded-xl border border-transparent hover:border-nexus-border cursor-pointer"
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -120,16 +124,16 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-slate-700 bg-slate-900 px-4 py-3 flex flex-col gap-1">
+          <div className="md:hidden border-t border-nexus-border bg-nexus-bg px-4 py-3 flex flex-col gap-1">
             {navItems.map(({ path, icon: Icon, label }) => (
               <Link
                 key={path}
                 to={path}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   location.pathname === path
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                    ? 'bg-nexus-primary/15 text-nexus-accent'
+                    : 'text-nexus-muted hover:text-white hover:bg-nexus-surface'
                 }`}
               >
                 <Icon size={18} />
@@ -148,7 +152,7 @@ export function Navbar() {
             )}
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-red-900/20 text-left mt-2 border-t border-slate-700 pt-3"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-bold text-nexus-danger hover:bg-nexus-danger/10 text-left mt-2 border-t border-nexus-border pt-3 cursor-pointer transition-all duration-300"
             >
               <LogOut size={18} />
               Abmelden
