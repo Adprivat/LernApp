@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ShieldCheck, Users, Trash2, Crown, Ban, Search, RefreshCw, BarChart3 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
+import { getErrorMessage } from '@/lib/errorHandler';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Avatar } from '@/components/ui/Avatar';
@@ -42,40 +43,53 @@ export function AdminPage() {
   };
 
   const fetchStats = async () => {
-    const [{ count: totalUsers }, { count: onlineUsers }, { count: totalGames }] = await Promise.all([
-      supabase.from('profiles').select('id', { count: 'exact', head: true }),
-      supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('is_online', true),
-      supabase.from('game_sessions').select('id', { count: 'exact', head: true }),
-    ]);
-    setStats({
-      totalUsers: totalUsers || 0,
-      onlineUsers: onlineUsers || 0,
-      totalGames: totalGames || 0,
-    });
+    try {
+      const [{ count: totalUsers }, { count: onlineUsers }, { count: totalGames }] = await Promise.all([
+        supabase.from('profiles').select('id', { count: 'exact', head: true }),
+        supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('is_online', true),
+        supabase.from('game_sessions').select('id', { count: 'exact', head: true }),
+      ]);
+      setStats({
+        totalUsers: totalUsers || 0,
+        onlineUsers: onlineUsers || 0,
+        totalGames: totalGames || 0,
+      });
+    } catch (err: unknown) {
+      console.error('fetchStats failed:', getErrorMessage(err));
+    }
   };
 
   const toggleAdmin = async (profile: Profile) => {
     if (profile.id === user?.id) return;
-    await supabase
+    const { error } = await supabase
       .from('profiles')
       .update({ is_admin: !profile.is_admin })
       .eq('id', profile.id);
+    if (error) {
+      console.error('toggleAdmin failed:', error.message);
+    }
     fetchUsers();
   };
 
   const deleteUser = async (profile: Profile) => {
     if (profile.id === user?.id) return;
     if (!confirm(`Benutzer "${profile.username}" wirklich löschen?`)) return;
-    await supabase.from('profiles').delete().eq('id', profile.id);
+    const { error } = await supabase.from('profiles').delete().eq('id', profile.id);
+    if (error) {
+      console.error('deleteUser failed:', error.message);
+    }
     fetchUsers();
   };
 
   const resetScore = async (profile: Profile) => {
     if (!confirm(`Punkte von "${profile.username}" wirklich zurücksetzen?`)) return;
-    await supabase
+    const { error } = await supabase
       .from('profiles')
       .update({ total_score: 0, games_played: 0, games_won: 0, current_streak: 0, best_streak: 0 })
       .eq('id', profile.id);
+    if (error) {
+      console.error('resetScore failed:', error.message);
+    }
     fetchUsers();
   };
 
