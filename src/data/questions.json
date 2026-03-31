@@ -2849,6 +2849,290 @@
           "tags": [
             "wirtschaft"
           ]
+        },
+        {
+          "question": "Welches der folgenden Ziele gehört nicht zu den klassischen Schutzzielen?",
+          "answers": [
+            "Verfügbarkeit",
+            "Integrität",
+            "Skalierbarkeit",
+            "Vertraulichkeit"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
+        },
+        {
+          "question": "Ein Server enthält Kundendaten mit personenbezogenen Informationen. Die Vertraulichkeit ist am ehesten:",
+          "answers": [
+            "normal",
+            "hoch",
+            "sehr hoch",
+            "irrelevant"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit",
+            "datenschutz"
+          ]
+        },
+        {
+          "question": "Welches Element gehört nicht zum SMART-Prinzip?",
+          "answers": [
+            "Spezifisch",
+            "Messbar",
+            "Modular",
+            "Terminiert"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Was unterscheidet ein Projekt von einer Routinetätigkeit?",
+          "answers": [
+            "Es ist standardisiert",
+            "Es ist einmalig",
+            "Es läuft unbegrenzt",
+            "Es hat keine Zielvorgabe"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Der PSP (Projektstrukturplan) dient:",
+          "answers": [
+            "der Kostenberechnung",
+            "der hierarchischen Zerlegung des Projekts",
+            "der Lizenzverwaltung",
+            "der Netzwerkanalyse"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Was bedeutet 1000BASE-T?",
+          "answers": [
+            "1000 MByte über Glasfaser",
+            "1 Gbit/s über Twisted Pair",
+            "1000 Bit über Koaxialkabel",
+            "1 Gbit/s WLAN"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "1000 Mbit/s entsprechen theoretisch:",
+          "answers": [
+            "1000 MByte/s",
+            "800 MByte/s",
+            "125 MByte/s",
+            "1 MByte/s"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "VLAN dient hauptsächlich:",
+          "answers": [
+            "der physischen Netztrennung",
+            "der logischen Netztrennung",
+            "der Erhöhung der CPU-Leistung",
+            "der Verschlüsselung von Daten"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "ARP wird verwendet für:",
+          "answers": [
+            "Namensauflösung",
+            "IP-Adressvergabe",
+            "Zuordnung von IP zu MAC",
+            "Routing zwischen VLANs"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Die richtige Reihenfolge bei DHCP (DORA) lautet:",
+          "answers": [
+            "Discover – Offer – Request – Acknowledge",
+            "Offer – Discover – Request – Acknowledge",
+            "Detail – Online – Repeat – Answer",
+            "Request – Offer – Discover – Acknowledge"
+          ],
+          "correct_index": 0,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Adresse ist eine private IP-Adresse?",
+          "answers": [
+            "8.8.8.8",
+            "172.20.5.1",
+            "1.1.1.1",
+            "145.12.4.8"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Eine MAC-Adresse hat:",
+          "answers": [
+            "32 Bit",
+            "8 Byte",
+            "48 Bit",
+            "128 Bit"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Ein Thin Client zeichnet sich aus durch:",
+          "answers": [
+            "hohe lokale Rechenleistung",
+            "zentrale Serververarbeitung",
+            "eigenes Betriebssystem mit Serverrolle",
+            "hohe Wartungskosten"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "CAL steht für:",
+          "answers": [
+            "Central Application License",
+            "Client Access License",
+            "Core Access Level",
+            "Certified Application Layer"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
+        },
+        {
+          "question": "Welcher Prozess gehört zu ITIL?",
+          "answers": [
+            "Incident Management",
+            "VLAN-Tagging",
+            "RAID-Konfiguration",
+            "BIOS-Update"
+          ],
+          "correct_index": 0,
+          "difficulty": "easy",
+          "tags": [
+            "qualitaetsmanagement",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Ein SLA definiert typischerweise:",
+          "answers": [
+            "Hardwarekomponenten",
+            "Quellcode",
+            "Leistungswerte und Reaktionszeiten",
+            "Programmiersprachen"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Ein Mikrocontroller enthält typischerweise:",
+          "answers": [
+            "nur eine Festplatte",
+            "CPU, Speicher und I/O integriert",
+            "ein vollständiges Desktop-Betriebssystem",
+            "mehrere Grafikkarten"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welcher Befehl zeigt den Inhalt eines Verzeichnisses an?",
+          "answers": [
+            "cd",
+            "ls",
+            "rm",
+            "mv"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Das Wasserfallmodell ist:",
+          "answers": [
+            "iterativ",
+            "rein zufällig",
+            "linear mit festen Phasen",
+            "ausschließlich agil"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Welches UML-Diagramm stellt Klassen und deren Beziehungen dar?",
+          "answers": [
+            "Klassenbeziehungsdiagramm",
+            "Klassenanalysediagramm",
+            "Klassendiagramm",
+            "Klassenspezifikantogramm"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         }
       ]
     }
