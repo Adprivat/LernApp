@@ -20,6 +20,7 @@ export interface Question {
   answers: string[];
   correct_index: number;
   difficulty: 'easy' | 'medium' | 'hard';
+  tags?: string[];
 }
 
 export interface GameSession {

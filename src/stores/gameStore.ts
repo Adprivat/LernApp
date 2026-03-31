@@ -26,13 +26,28 @@ interface GameState {
 }
 
 function shuffleQuestions(category: string, count: number): Question[] {
-  const catData = (questionsData as any).categories[category];
-  if (!catData) return [];
-  const qs = catData.questions.map((q: any, i: number) => ({
-    id: `${category}_${i}`,
-    category,
-    ...q,
-  }));
+  const data = questionsData as any;
+  const catData = data.categories[category];
+
+  let qs: Question[];
+  if (catData) {
+    // Direct category match (e.g. "exam_prep") → all questions
+    qs = catData.questions.map((q: any, i: number) => ({
+      id: `${category}_${i}`,
+      category,
+      ...q,
+    }));
+  } else {
+    // Subject/tag filter → collect matching questions across all categories
+    const all = Object.entries(data.categories).flatMap(([catKey, cat]: [string, any]) =>
+      cat.questions
+        .map((q: any, i: number) => ({ ...q, id: `${catKey}_${i}`, category: catKey }))
+        .filter((q: any) => q.tags?.includes(category))
+    );
+    qs = all;
+  }
+
+  if (qs.length === 0) return [];
   const shuffled = [...qs].sort(() => Math.random() - 0.5);
   if (count === 0) return shuffled; // endless mode
   return shuffled.slice(0, Math.min(count, shuffled.length));

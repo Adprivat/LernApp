@@ -14,7 +14,10 @@
             "100 Stunden"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Welche Rolle spielt der Projektantrag laut den IHK-Hinweisen häufig im Kontakt mit dem Prüfungsausschuss?",
@@ -25,7 +28,11 @@
             "Er ist der unwichtigste Teil der gesamten Abschlussprüfung."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht",
+            "projektmanagement"
+          ]
         },
         {
           "question": "Auf ungefähr wie vielen Seiten sollte eine Projektdokumentation in der Regel angemessen dargestellt werden?",
@@ -36,7 +43,10 @@
             "30 Seiten"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Wie sollte die veranschlagte Projektzeit bei der Dokumentation grob prozentual auf die Durchführung (inkl. Fehlersuche etc.) verteilt sein?",
@@ -47,7 +57,10 @@
             "60 %"
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Wie lange sollten die Präsentation und das anschließende Fachgespräch idealerweise jeweils dauern?",
@@ -58,7 +71,10 @@
             "Präsentation 30 Minuten, Fachgespräch 15 Minuten"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Wie viel Zeit ist für die schriftliche Prüfung im Bereich 'Wirtschafts- und Sozialkunde' vorgesehen?",
@@ -69,7 +85,10 @@
             "120 Minuten"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wie oft kann eine nicht bestandene IHK-Abschlussprüfung laut Verordnung wiederholt werden?",
@@ -80,7 +99,10 @@
             "Sie kann nicht wiederholt werden"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Bei welcher Punktzahl gilt eine Prüfungsleistung laut offiziellem IHK-Notenschlüssel noch als 'ausreichend'?",
@@ -91,7 +113,10 @@
             "unter 81 - 67 Punkte"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wie definiert die DSGVO den Begriff 'Profiling'?",
@@ -102,7 +127,11 @@
             "Das Sperren von IP-Adressen bei unbefugten Zugriffsversuchen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was versteht man unter 'Pseudonymisierung' gemäß Art. 4 DSGVO?",
@@ -113,7 +142,11 @@
             "Die Veröffentlichung von Daten unter einer Creative-Commons-Lizenz."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wer gilt als 'Verantwortlicher' im Sinne des Datenschutzes?",
@@ -124,7 +157,10 @@
             "Jede Person, die im Internet personenbezogene Daten liest."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Was definiert den Begriff 'Auftragsverarbeiter'?",
@@ -135,7 +171,10 @@
             "Eine Behörde, die einen Untersuchungsauftrag gegen eine Firma leitet."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welcher Begriff beschreibt 'jeden mit oder ohne Hilfe automatisierter Verfahren ausgeführten Vorgang' wie das Erheben, Speichern oder Löschen von Daten?",
@@ -146,7 +185,10 @@
             "Archivierung"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welches Schutzziel stellt sicher, dass Systeme für berechtigte Nutzer funktionsfähig und die Daten jederzeit abrufbar sind?",
@@ -157,7 +199,10 @@
             "Authentizität"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Was versteht man unter dem Begriff 'Authentisierung'?",
@@ -168,7 +213,10 @@
             "Das Verschlüsseln einer Festplatte."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Was ist ein 'ISMS' laut der Norm ISO/IEC 27001?",
@@ -179,7 +227,10 @@
             "Ein Standard für die Programmierung sicherer Webseiten."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Welche Organisationsform ist dadurch gekennzeichnet, dass Mitarbeiter sowohl einer Fachabteilung als auch einer Projektleitung unterstellt sind?",
@@ -190,7 +241,10 @@
             "Hierarchische Struktur"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Begriff beschreibt im Projektmanagement wesentliche Ereignisse oder Etappenziele, die den Fortschritt markieren?",
@@ -201,7 +255,11 @@
             "Backlogs"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement",
+            "scrum_agile"
+          ]
         },
         {
           "question": "Was ist laut DIN 69901 ein 'Projektmanagementsystem'?",
@@ -212,7 +270,10 @@
             "Ein Verfahren zur Auswahl der günstigsten Lieferanten."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Was wird im QM-Kontext unter einem 'Audit' verstanden?",
@@ -223,7 +284,10 @@
             "Die automatische Korrektur von Programmierfehlern."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welches Prinzip steht im Zentrum des 'EFQM-Modells'?",
@@ -234,7 +298,10 @@
             "Die Orientierung am günstigsten Preis auf dem Weltmarkt."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welcher Begriff beschreibt im Qualitätsmanagement den 'prozessorientierten Ansatz'?",
@@ -245,7 +312,10 @@
             "Dass die Führungsebene alle Entscheidungen allein trifft."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welche Reihenfolge stellt den korrekten zeitlichen Ablauf eines Projektes dar?",
@@ -256,7 +326,10 @@
             "Projektauftrag/Projektdefinition, Projektdurchführung, Projektplanung, Projektabschluss"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Welche der folgenden Aussagen zu Softwareentwicklungsmodellen ist korrekt?",
@@ -267,7 +340,11 @@
             "Agile Vorgehensweisen verzichten vollständig auf Planung."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "scrum_agile",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wofür stehen die Abkürzungen im PDCA-Zyklus nach DIN EN ISO 9001?",
@@ -278,7 +355,11 @@
             "Process, Do, Check, Analyze"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement",
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welche drei Faktoren bilden das sogenannte 'magische Dreieck' des Projektmanagements, die sich gegenseitig beeinflussen?",
@@ -289,7 +370,10 @@
             "Umfang, Ressourcen, Machbarkeit"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
         },
         {
           "question": "Welche Teamgröße wird für ein Scrum-Team empfohlen, da zu große Teams gegen die Scrum-Philosophie verstoßen würden?",
@@ -300,7 +384,10 @@
             "Mehr als 50 Personen"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Wie lange sollte ein sogenannter 'Sprint' (Entwicklungszyklus) in Scrum üblicherweise dauern?",
@@ -311,7 +398,10 @@
             "Mindestens ein halbes Jahr"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Wer nimmt am 'Daily Scrum' teil und wie lange dauert dieses Treffen in der Regel?",
@@ -322,7 +412,10 @@
             "Das Scrum-Team und externe Stakeholder für eine Stunde."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Wie hoch ist die angestrebte und tolerierte Fehlerrate bei der Qualitätsmanagement-Methode Six Sigma (ausgedrückt in DPMO - defects per million opportunities)?",
@@ -333,7 +426,10 @@
             "1000 DPMO"
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Was versteht man unter testgetriebener Softwareentwicklung (Test-Driven Development, TDD)?",
@@ -344,7 +440,10 @@
             "Ein separates Test-Team schreibt alle Tests unabhängig von den Entwicklern."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Worin besteht der wesentliche Unterschied zwischen Black-Box- und White-Box-Tests?",
@@ -355,7 +454,10 @@
             "Es gibt keinen Unterschied, es sind nur zwei Begriffe für denselben Testansatz."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wofür steht die Abkürzung DSGVO, die maßgeblich den europäischen Datenschutz regelt?",
@@ -366,7 +468,10 @@
             "Daten-Sicherheits- und Gewährleistungsordnung"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welches Recht gehört laut DSGVO ausdrücklich zu den Rechten betroffener Personen?",
@@ -377,7 +482,10 @@
             "Recht auf finanzielle Vergütung für Datennutzung"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welcher Grundsatz zur Verarbeitung personenbezogener Daten ist in Artikel 5 der DSGVO gesetzlich verankert?",
@@ -388,7 +496,10 @@
             "Gewinnmaximierung durch Datenhandel"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Was bedeutet 'Pseudonymisierung' im Sinne der DSGVO?",
@@ -399,7 +510,10 @@
             "Das öffentliche Teilen von Daten unter einem falschen Namen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welche der folgenden Methoden ist ein typisches Szenario für Identitätsdiebstahl?",
@@ -410,7 +524,10 @@
             "Denial of Service (DoS)"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Wie unterscheiden sich die Konzepte Authentifizierung und Autorisierung voneinander?",
@@ -421,7 +538,10 @@
             "Es gibt in der Praxis keinen Unterschied, beides ist derselbe Prozess."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Welche drei Schutzziele werden bei der Analyse des Schutzbedarfes von IT-Systemen in der Regel bewertet?",
@@ -432,7 +552,10 @@
             "Redundanz, Modularität, Komplexität"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Was zeichnet das Bedrohungsszenario 'Ransomware' aus?",
@@ -443,7 +566,11 @@
             "Es platziert unerwünschte Werbeanzeigen im Browser des Nutzers."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was ist das primäre Ziel eines Penetrationstests?",
@@ -454,7 +581,11 @@
             "Die Ladegeschwindigkeit von Webseiten unter extremen Bedingungen zu testen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was ist ein wesentliches Merkmal der sogenannten 'Industrie 4.0'?",
@@ -465,7 +596,10 @@
             "Die strikte physische Trennung von IT-Systemen und Produktionsmaschinen."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Welches Protokoll wird häufig für die Datenübertragung im Internet der Dinge (IoT) eingesetzt, da es wenig Overhead und eine skalierbare Struktur bietet?",
@@ -476,7 +610,11 @@
             "SMTP"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Welches Merkmal ist typisch für die Datenspeicherung in einer Blockchain?",
@@ -487,7 +625,10 @@
             "Eine Blockchain verzichtet aus Geschwindigkeitsgründen vollständig auf Verschlüsselung."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Was bewirkt eine Hashfunktion in der Informatik?",
@@ -498,7 +639,11 @@
             "Sie übersetzt den geschriebenen Quellcode in ausführbare Maschinensprache."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was ist das primäre Ziel beim Einsatz redundanter IT-Systeme (z. B. durch Server-Cluster oder Backup-Stromversorgung)?",
@@ -509,7 +654,10 @@
             "Die automatische Aktualisierung von Virenscannern."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was unterscheidet ein Hardware-RAID-System von einem Software-RAID-System?",
@@ -520,7 +668,10 @@
             "Es gibt keinen technischen Unterschied, es sind lediglich zwei Marketingbegriffe."
           ],
           "correct_index": 2,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was ist ein wesentlicher Unterschied zwischen einem SAN (Storage Area Network) und einem NAS (Network Attached Storage)?",
@@ -531,7 +682,11 @@
             "Ein NAS kann im Gegensatz zum SAN nicht an ein normales Ethernet-Netzwerk angeschlossen werden."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "netzwerktechnik",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher USV-Typ (Unterbrechungsfreie Stromversorgung) schützt sensible Systeme am besten, da es hier keine Umschaltzeiten gibt und die Ausgangsspannung komplett von der USV erzeugt wird?",
@@ -542,7 +697,10 @@
             "Online-USV (VFI)"
           ],
           "correct_index": 3,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Wofür steht die Abkürzung 'API' im Bereich der Anwendungsentwicklung?",
@@ -553,7 +711,10 @@
             "Application Process Internet"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Was ist ein typisches Beispiel für eine 'nicht-funktionale Anforderung' an eine neue Software?",
@@ -564,7 +725,10 @@
             "Ein Administrator muss über eine Oberfläche Passwörter der Nutzer zurücksetzen können."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Worin besteht ein zentraler Unterschied zwischen einer relationalen Datenbank und einer klassischen NoSQL-Datenbank?",
@@ -575,7 +739,10 @@
             "Relationale Datenbanken basieren auf Tabellen und festen Beziehungen, NoSQL-Datenbanken (z.B. dokumentenorientiert) kommen in der Regel ohne starres SQL-Tabellenschema aus."
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Was unterscheidet die Versionsverwaltung 'Git' grundlegend von 'Subversion' (SVN)?",
@@ -586,7 +753,10 @@
             "Git benötigt permanent eine aktive Internetverbindung, um Code schreiben zu können, SVN hingegen nicht."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welches Merkmal beschreibt die 'Deklarative Programmierung' am besten?",
@@ -597,7 +767,10 @@
             "Es wird gänzlich auf Variablen verzichtet und nur mit hardwarenahem Maschinencode gearbeitet."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welcher der folgenden SQL-Befehle gehört in die Kategorie der DDL (Data Definition Language)?",
@@ -608,7 +781,10 @@
             "INSERT"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welches Entwurfsmuster (Design Pattern) dient dazu, sicherzustellen, dass von einer bestimmten Klasse genau ein einziges Objekt instanziiert wird, das global zur Verfügung steht?",
@@ -619,7 +795,11 @@
             "Factory-Muster"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wofür steht die Abkürzung DMZ im Bereich der Netzwerksicherheit?",
@@ -630,7 +810,11 @@
             "Decentralized Management Zone"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Welche Verschlüsselungsart nutzt das SSL/TLS-Protokoll in der Regel für die sichere Datenübertragung bei webbasierten Anwendungen?",
@@ -641,7 +825,10 @@
             "Überhaupt keine Verschlüsselung, es nutzt nur Hashwerte"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Welches Protokoll wird bei Voice over IP (VoIP) typischerweise für den eigentlichen Echtzeit-Transport der Audio-Datenpakete eingesetzt?",
@@ -652,7 +839,10 @@
             "SMTP (Simple Mail Transfer Protocol)"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Welchen wesentlichen Zweck hat der Einsatz eines sogenannten 'VLAN-Tags' in einem Netzwerk?",
@@ -663,7 +853,10 @@
             "Es blockiert Viren und Malware am Switch-Port."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Wofür wird das SAML-Protokoll (Security Assertion Markup Language) im Web-Umfeld häufig verwendet?",
@@ -674,7 +867,11 @@
             "Zur automatischen Fehlerkorrektur bei mangelhaften WLAN-Verbindungen."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "In welchem Support-Level werden in der Regel die höchsten Eskalationsstufen, die komplexesten Probleme und der Kontakt zu IT-Spezialisten der Hersteller gebündelt?",
@@ -685,7 +882,10 @@
             "Fourth-Level-Support"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Vertragsart liegt bei der Bereitstellung von 'Software as a Service' (SaaS) über das Internet rechtlich in den meisten Fällen zugrunde?",
@@ -696,7 +896,11 @@
             "Dienstvertrag"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie hoch ist das gesetzlich vorgeschriebene Mindestkapital (Stammkapital) bei der Gründung einer GmbH (Gesellschaft mit beschränkter Haftung)?",
@@ -707,7 +911,11 @@
             "Ein Mindestkapital ist gesetzlich nicht erforderlich."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie viele Werktage Erholungsurlaub stehen einem/einer Auszubildenden unter 17 laut Jugendarbeitsschutzgesetz mindestens zu, wenn er/sie zu Beginn des Kalenderjahres noch nicht 17 Jahre alt ist?",
@@ -718,7 +926,11 @@
             "Mindestens 30 Werktage"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche drei Dimensionen der Nachhaltigkeit sollten bei der Unternehmensausrichtung gleichwertig berücksichtigt werden, da sie sich gegenseitig beeinflussen?",
@@ -729,7 +941,11 @@
             "Einkauf, Lagerhaltung, Transport"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "datenanalyse",
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was kennzeichnet die sogenannte 'Induktive Datenanalyse'?",
@@ -740,7 +956,10 @@
             "Sie befasst sich ausschließlich mit der Archivierung von Rohdaten in einem Data Warehouse."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenanalyse"
+          ]
         },
         {
           "question": "Wofür steht das Phasenmodell 'CRISP-DM', das als Methodik bei Data-Mining-Projekten eingesetzt wird?",
@@ -751,7 +970,10 @@
             "Creative Routine for Intelligent Software Programming Data Mining"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenanalyse"
+          ]
         },
         {
           "question": "Was beschreibt der Begriff 'Entropie' im Kontext der Informationstheorie und Datenanalyse?",
@@ -762,7 +984,13 @@
             "Ein Maß für den mittleren Informationsgehalt einer Nachrichtenquelle."
           ],
           "correct_index": 3,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "datenanalyse",
+            "it_sicherheit",
+            "netzwerktechnik",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Worin besteht der wesentliche Unterschied zwischen 'Clustering' und 'Klassifikation' beim maschinellen Lernen?",
@@ -773,7 +1001,11 @@
             "Es gibt keinen technischen Unterschied, es handelt sich lediglich um synonyme Begriffe."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenanalyse",
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welche Aussage beschreibt das Pareto-Prinzip (im Kontext der Prozessanalyse) am zutreffendsten?",
@@ -784,7 +1016,11 @@
             "Eine 100%ige Qualität ist nur durch eine 100%ige manuelle Prüfung aller Einzelschritte erreichbar."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "qualitaetsmanagement",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Was ist der Hauptzweck eines Ishikawa-Diagramms (auch Fischgrätendiagramm genannt)?",
@@ -795,7 +1031,12 @@
             "Die Berechnung von Hardwarekosten für neue IT-Systeme."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "projektmanagement",
+            "qualitaetsmanagement",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wofür steht die Abkürzung FMEA in der Qualitäts- und Fehleranalyse?",
@@ -806,7 +1047,10 @@
             "Failure Mode and Effects Analysis (Fehlermöglichkeits- und -einflussanalyse)"
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Wie wird die sogenannte Risiko-Prioritätszahl (RPZ) im Rahmen einer FMEA zur Bewertung von Fehlern berechnet?",
@@ -817,7 +1061,10 @@
             "Auftretenswahrscheinlichkeit / Entdeckungswahrscheinlichkeit"
           ],
           "correct_index": 2,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
         },
         {
           "question": "Welcher wesentliche Unterschied besteht beim V-Modell im Vergleich zum klassischen Wasserfallmodell?",
@@ -828,7 +1075,10 @@
             "Es wurde ausschließlich für die Hardwareentwicklung konzipiert."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Welche der folgenden Rollen gehört laut Scrum NICHT zum eigentlichen Scrum-Team, sondern vertritt externe Interessen?",
@@ -839,7 +1089,10 @@
             "Die Stakeholder"
           ],
           "correct_index": 3,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Welchem Zweck dient das Observer-Entwurfsmuster (Beobachter-Muster) in der objektorientierten Softwareentwicklung?",
@@ -850,7 +1103,10 @@
             "Es übersetzt den Quellcode in ausführbare Maschinensprache."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welches Nutzungsmodell im Cloud-Computing stellt Anwendern eine komplette, lauffähige Softwareanwendung über das Internet zur Verfügung (Software on demand)?",
@@ -861,7 +1117,10 @@
             "Network as a Service (NaaS)"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welche Beziehung in einem UML-Use-Case-Diagramm wird verwendet, um auszudrücken, dass ein Anwendungsfall unter bestimmten Bedingungen (optional) durch einen anderen erweitert wird?",
@@ -872,7 +1131,10 @@
             "Generalisierung"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wie wird eine n:m-Beziehung zwischen zwei Entitäten in einem relationalen Datenbankmodell in der Regel physisch umgesetzt?",
@@ -883,7 +1145,10 @@
             "Es wird eine zusätzliche Tabelle erzeugt, welche die Primärschlüssel der beiden anderen Tabellen als Fremdschlüssel aufnimmt."
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welches der folgenden Verfahren ist ein konkretes Beispiel für eine asymmetrische Verschlüsselung (die Nutzung von einem Public und einem Private Key)?",
@@ -894,7 +1159,10 @@
             "MD5-Hashfunktion"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit"
+          ]
         },
         {
           "question": "Welche Netzwerktopologie liegt vor, wenn alle Endgeräte (z. B. PCs) einzeln an einen zentralen Knotenpunkt (wie einen Switch) angeschlossen sind?",
@@ -905,7 +1173,10 @@
             "Vermaschte Topologie"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Welches Protokoll wird bei Voice over IP (VoIP) eingesetzt, um die digitalisierten Sprachdatenpakete verbindungslos (auf Basis von UDP) über das Netzwerk zu transportieren?",
@@ -916,7 +1187,10 @@
             "SMTP"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
         },
         {
           "question": "Was ist das 'Product Backlog' als Scrum-Artefakt?",
@@ -927,7 +1201,10 @@
             "Ein Fehlerbericht, der vom Scrum Master an die Stakeholder übergeben wird."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Wie wird das 'Sprint Backlog' in Scrum definiert?",
@@ -938,7 +1215,10 @@
             "Es ist das tägliche Besprechungsprotokoll des Entwicklerteams."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "scrum_agile"
+          ]
         },
         {
           "question": "Was versteht man unter dem 'Produktinkrement' als Scrum-Artefakt?",
@@ -949,7 +1229,11 @@
             "Die vertragliche Vereinbarung (SLA) zwischen dem Kunden und dem Scrum Team."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "projektmanagement",
+            "scrum_agile"
+          ]
         },
         {
           "question": "Was besagt der in Artikel 5 der DSGVO verankerte Grundsatz der 'Datenminimierung'?",
@@ -960,7 +1244,10 @@
             "Die Speicherkapazität der Unternehmensserver muss zur Kostensenkung so klein wie möglich gehalten werden."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Ein Entwicklungsleiter befürchtet, dass die geplante Speicherung von Kundendaten in direkter Verbindung mit Projekten gegen die Datenminimierung verstößt. Wie ist diese Situation zu beurteilen?",
@@ -971,7 +1258,10 @@
             "Das Vorgehen ist rechtlich problematisch, da Kundendaten und Projektdaten nach der DSGVO immer auf physisch komplett getrennten Servern liegen müssen."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "datenschutz"
+          ]
         },
         {
           "question": "Welche Haftung gilt für den Inhaber eines Einzelunternehmens gegenüber Außenstehenden?",
@@ -982,7 +1272,10 @@
             "Solidarisch mit den Angestellten."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie erfolgt die Gewinnverteilung bei einer GbR (Gesellschaft bürgerlichen Rechts), sofern vertraglich nichts anderes bestimmt wurde?",
@@ -993,7 +1286,10 @@
             "4 % auf die Einlage, der Rest nach Köpfen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Merkmal ist ein typischer Nachteil einer OHG (Offenen Handelsgesellschaft)?",
@@ -1004,7 +1300,10 @@
             "Es ist nur eine Person als Gründer möglich."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wer ist in einer Kommanditgesellschaft (KG) zur Geschäftsführung berechtigt?",
@@ -1015,7 +1314,10 @@
             "Ein externer, notariell bestellter Vorstand."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie hoch muss das gezeichnete Kapital (Grundkapital) bei der Gründung einer Aktiengesellschaft (AG) mindestens sein?",
@@ -1026,7 +1328,10 @@
             "100.000,00 €"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Vorteil ergibt sich bei der Wahl einer GmbH gegenüber einer OHG?",
@@ -1037,7 +1342,10 @@
             "Die Gewinnverteilung erfolgt immer nach Köpfen."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Organe sind bei einer Aktiengesellschaft (AG) zwingend vorgeschrieben?",
@@ -1048,7 +1356,10 @@
             "Einziger Gesellschafter und Prokurist."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Auf welcher gesetzlichen Grundlage basiert die Kommanditgesellschaft (KG)?",
@@ -1059,7 +1370,10 @@
             "§ 705 ff. BGB"
           ],
           "correct_index": 2,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Namenszusatz ist für ein Einzelunternehmen zwingend erforderlich, wenn es im Handelsregister eingetragen ist?",
@@ -1070,7 +1384,10 @@
             "OHG"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie viel des Stammkapitals muss bei einer GmbH-Gründung sofort eingezahlt werden?",
@@ -1081,7 +1398,10 @@
             "Es ist keine Soforteinzahlung nötig."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wann müssen die wesentlichen Inhalte des Berufsausbildungsvertrages spätestens niedergeschrieben und von den Beteiligten unterzeichnet werden?",
@@ -1092,7 +1412,10 @@
             "Erst nach bestandener Probezeit."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche gesetzliche Unter- und Obergrenze gilt für die Probezeit in einem Berufsausbildungsverhältnis?",
@@ -1103,7 +1426,10 @@
             "Es gibt keine gesetzliche Untergrenze, nur eine Obergrenze von 4 Monaten."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wer hat dem Auszubildenden die für die Ausbildung und die Zwischen- und Abschlussprüfungen erforderlichen Ausbildungsmittel kostenlos zur Verfügung zu stellen?",
@@ -1114,7 +1440,10 @@
             "Der Auszubildende muss diese selbst finanzieren."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Pflicht verbietet es dem Auszubildenden, ohne Einwilligung des Ausbildenden Geschäfte im Geschäftszweig des Betriebs für eigene Rechnung zu tätigen?",
@@ -1125,7 +1454,10 @@
             "Sorgfaltspflicht."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Mit welcher Frist kann ein Auszubildender kündigen, wenn er die Berufsausbildung aufgeben oder sich für eine andere Berufstätigkeit ausbilden lassen will?",
@@ -1136,7 +1468,10 @@
             "Nur zum Ende des jeweiligen Ausbildungsjahres."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was passiert rechtlich, wenn ein Auszubildender nach bestandener Abschlussprüfung im Betrieb weiterbeschäftigt wird, ohne dass eine ausdrückliche Vereinbarung getroffen wurde?",
@@ -1147,7 +1482,10 @@
             "Der Auszubildende arbeitet ohne Rechtsgrundlage und hat keinen Lohnanspruch."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welcher Reihenfolge gelten die Regelungen im Arbeitsrecht primär, wenn es sich um 'nachgiebiges Recht' handelt?",
@@ -1158,7 +1496,10 @@
             "Nur die Arbeitsgesetzgebung des Staates ist maßgebend."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was besagt das 'Günstigkeitsprinzip' bei abweichenden Regelungen im nachgiebigen Recht?",
@@ -1169,7 +1510,10 @@
             "Abweichungen sind grundsätzlich verboten."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Ab welcher Anzahl von ständigen Arbeitnehmern wird in einem Unternehmen ein Wirtschaftsausschuss gebildet?",
@@ -1180,7 +1524,10 @@
             "Mehr als 100 Arbeitnehmer."
           ],
           "correct_index": 3,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welchen Angelegenheiten hat der Betriebsrat ein echtes Mitbestimmungsrecht, bei dem Maßnahmen erst mit seiner Zustimmung wirksam werden?",
@@ -1191,7 +1538,10 @@
             "Nur bei der Information über neue Investitionen."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wie setzt sich die Einigungsstelle zur Beilegung von Meinungsverschiedenheiten zwischen Betriebsrat und Arbeitgeber zusammen?",
@@ -1202,7 +1552,10 @@
             "Nur aus Vertretern der IHK."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was ist das Hauptmerkmal der objektorientierten Programmierung (OOP) laut der Definition im Test?",
@@ -1213,7 +1566,10 @@
             "Ein Verfahren, bei dem Funktionen keine Parameter übergeben werden dürfen."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Was versteht man unter dem Prinzip der 'Kapselung' in der OOP?",
@@ -1224,7 +1580,11 @@
             "Die automatische Verschlüsselung von Datenbankinhalten."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit",
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welche Aussage über die Sichtbarkeit von Methoden ist korrekt?",
@@ -1235,7 +1595,10 @@
             "Methoden dürfen innerhalb einer Klasse nicht von anderen Methoden aufgerufen werden."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wann wird ein Konstruktor innerhalb einer Klasse aufgerufen?",
@@ -1246,7 +1609,10 @@
             "Sobald eine abstrakte Klasse in ein Interface umgewandelt wird."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wie verhalten sich 'public'-Attribute innerhalb der Klasse, in der sie definiert wurden?",
@@ -1257,7 +1623,10 @@
             "Sie müssen zwingend im Header der Klasse gesperrt werden."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Wie können statische Methoden in einem Programm angesprochen werden?",
@@ -1268,7 +1637,10 @@
             "Überhaupt nicht, da sie nur als Platzhalter für spätere Methoden dienen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welche Aussage zur Vererbung und zu Interfaces trifft zu?",
@@ -1279,7 +1651,10 @@
             "Aus einer Klasse kann grundsätzlich immer nur ein einziges Objekt instanziiert werden."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Warum ist der OOP-Ansatz besonders beim Entwickeln großer Anwendungen wichtig?",
@@ -1290,7 +1665,10 @@
             "Weil dadurch keine Datentypen mehr definiert werden müssen."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         },
         {
           "question": "Welchem Produktionsfaktor werden im Rahmen der Leistungserstellung Materialien wie Kabelkanäle und Kabelbinder zugeordnet?",
@@ -1301,7 +1679,10 @@
             "Leitende Arbeitskräfte"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "In welche Kategorie der Produktionsfaktoren fallen langlebige Güter wie PCs, Laptops oder Geschäftsräume?",
@@ -1312,7 +1693,10 @@
             "Dispositiver Faktor"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie wird die Geschäftsleitung innerhalb der menschlichen Produktionsfaktoren klassifiziert?",
@@ -1323,7 +1707,10 @@
             "Hilfsstoffe"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Mit welcher Formel wird die Wirtschaftlichkeit eines Unternehmensbereichs ermittelt?",
@@ -1334,7 +1721,10 @@
             "(Leistung / Zeit) * 100"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches primäre Ziel verfolgen öffentlich-rechtliche Betriebe (z. B. kommunale Versorger)?",
@@ -1345,7 +1735,10 @@
             "Die Kosten sollen unabhängig von der Versorgungsqualität auf Null reduziert werden."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Gesetz enthält die wesentlichen Vorschriften zur Durchführung und Regelung der Berufsausbildung in Deutschland?",
@@ -1356,7 +1749,10 @@
             "Berufsbildungsgesetz"
           ],
           "correct_index": 3,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welcher Lernort ist im dualen System primär für die Vermittlung der theoretischen Inhalte des Rahmenlehrplans zuständig?",
@@ -1367,7 +1763,10 @@
             "Die Bundesagentur für Arbeit"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wer regelt die Prüfungsmodalitäten und nimmt die Abschlussprüfung im Ausbildungsverhältnis ab?",
@@ -1378,7 +1777,10 @@
             "Der Ausbildungsbetrieb allein"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welcher Lernort ist dafür verantwortlich, die Eintragung des Ausbildungsverhältnisses bei der zuständigen Stelle zu beantragen?",
@@ -1389,7 +1791,10 @@
             "Das Arbeitsgericht"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Ein Auszubildender startet mit 18 Jahren und Abitur eine Ausbildung in NRW. Besteht laut Schulgesetz weiterhin Berufsschulpflicht?",
@@ -1400,7 +1805,10 @@
             "Nur, wenn der Ausbildungsbetrieb ihn ausdrücklich dazu verpflichtet."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welches Ziel verfolgt das Instrument 'Europass' der Europäischen Kommission?",
@@ -1411,7 +1819,10 @@
             "Die automatische Anerkennung jedes deutschen Zeugnisses als Hochschulabschluss."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Aufgabe gehört laut Gesetz zu den Pflichten eines Betriebsrats?",
@@ -1422,7 +1833,10 @@
             "Die Organisation von Streiks bei Lohnverhandlungen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Zwischen welchen Parteien können Tarifverträge abgeschlossen werden?",
@@ -1433,7 +1847,10 @@
             "Zwischen allen Mitarbeitern eines Betriebs und dem Staat."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wie lange darf die Probezeit in einem Berufsausbildungsverhältnis laut § 20 BBiG höchstens dauern?",
@@ -1444,7 +1861,10 @@
             "6 Monate"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welcher Art von Tarifvertrag werden die konkreten Entgeltregelungen wie Stundenlöhne, Monatsgehälter und Ausbildungsvergütungen festgelegt?",
@@ -1455,7 +1875,10 @@
             "Firmentarifvertrag"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Regelungen sind typischerweise Bestandteil eines Manteltarifvertrages?",
@@ -1466,7 +1889,10 @@
             "Steuerfreie Inflationsausgleichsprämien"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was versteht man im Tarifrecht unter einer 'Öffnungsklausel'?",
@@ -1477,7 +1903,10 @@
             "Sie ist eine gesetzliche Regelung, die Tarifverträge grundsätzlich für ungültig erklärt."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welcher Versicherungsträger ist für die gesetzliche Unfallversicherung zuständig?",
@@ -1488,7 +1917,10 @@
             "Pflegekasse"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wer ist der Träger der Arbeitslosenversicherung in Deutschland?",
@@ -1499,7 +1931,10 @@
             "Sozialamt der jeweiligen Kommune"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Sozialversicherung wird ausschließlich durch die Beiträge des Arbeitgebers finanziert?",
@@ -1510,7 +1945,10 @@
             "Pflegeversicherung"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Für welche Sozialversicherung wurde im Jahr 1995 eine gesetzliche Pflicht eingeführt?",
@@ -1521,7 +1959,10 @@
             "Krankenversicherung"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welcher Sozialversicherung zahlen kinderlose Mitglieder über 23 Jahre einen zusätzlichen Beitragszuschlag von 0,60 %?",
@@ -1532,7 +1973,10 @@
             "Arbeitslosenversicherung"
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Versicherung gewährt primär Leistungen wie ärztliche Behandlungen und Arzneien?",
@@ -1543,7 +1987,10 @@
             "Rentenversicherung"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Sozialversicherung weist in der Regel den höchsten Prozentsatz beim Versicherungsbeitrag auf?",
@@ -1554,7 +2001,10 @@
             "Unfallversicherung"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was garantiert die 1961 vom Europarat ins Leben gerufene Europäische Sozialcharta (ESC) der Bevölkerung der Unterzeichnerstaaten?",
@@ -1565,7 +2015,10 @@
             "Den freien Zugang zu allen europäischen Streaming-Diensten."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Ein Mitarbeiter im Lager soll künftig weitreichendere Aufgaben übernehmen und macht dafür einen Gabelstaplerführerschein. Um welche Art der Bildungsmaßnahme handelt es sich?",
@@ -1576,7 +2029,10 @@
             "Erstausbildung"
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Ein Buchhalter strebt den Abschluss zum Bilanzbuchhalter bei der IHK an, um künftig die Erstellung von Jahresabschlüssen zu übernehmen. Wie wird diese Maßnahme klassifiziert?",
@@ -1587,7 +2043,10 @@
             "Trainee-Programm"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Gemeinsamkeit weisen die Rechtsformen OHG (Offene Handelsgesellschaft) und KG (Kommanditgesellschaft) auf?",
@@ -1598,7 +2057,10 @@
             "Nur die KG gilt rechtlich als Personengesellschaft."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Regelung zur Geschäftsführung gilt typischerweise für die OHG im Gegensatz zur KG?",
@@ -1609,7 +2071,10 @@
             "Kommanditisten führen die Geschäfte allein."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Für welche Gesellschafter gilt grundsätzlich ein Wettbewerbsverbot?",
@@ -1620,7 +2085,11 @@
             "Das Wettbewerbsverbot ist in Personengesellschaften gesetzlich verboten."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "An welches Organ müssen sich Gründer wenden, um die Eintragung eines Unternehmens in das Handelsregister zu veranlassen?",
@@ -1631,7 +2100,11 @@
             "Handwerkskammer"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "In welcher Abteilung des Handelsregisters werden Kapitalgesellschaften (wie GmbH oder AG) geführt?",
@@ -1642,7 +2115,10 @@
             "Abteilung D"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Warum wird eine GmbH im Sinne des Handelsgesetzbuches (HGB) als 'Kaufmann' eingestuft?",
@@ -1653,7 +2129,10 @@
             "Sie gilt als Ist-Kaufmann, sofern ihr Umsatz eine bestimmte Grenze überschreitet."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche formale Anforderung stellt der Gesetzgeber an den Gesellschaftsvertrag einer GmbH?",
@@ -1664,7 +2143,10 @@
             "Es ist gesetzlich gar kein Gesellschaftsvertrag vorgeschrieben."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welchen Zusatz muss ein Prokurist bei der Unterzeichnung von Geschäftsdokumenten zwingend verwenden?",
@@ -1675,7 +2157,10 @@
             "Einzelunterschrift ohne Zusatz"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Inwieweit kann die Prokura im Außenverhältnis gegenüber Dritten beschränkt werden?",
@@ -1686,7 +2171,10 @@
             "Sie kann zeitlich auf die Dauer von sechs Monaten befristet werden."
           ],
           "correct_index": 0,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Ein Nachbarunternehmen stellt Kartons unentgeltlich zur Verfügung, wobei am Folgetag gleichartige Kartons zurückgegeben werden müssen. Welcher Vertrag liegt vor?",
@@ -1697,7 +2185,10 @@
             "Schenkungsvertrag"
           ],
           "correct_index": 2,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Ein IT-Systemhaus plant den Zusammenschluss mit einem regionalen Konkurrenten der gleichen Wirtschaftsstufe. Wie wird diese Form des Zusammenschlusses genannt?",
@@ -1708,7 +2199,10 @@
             "Diagonaler Zusammenschluss"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Was ist eine typische Auswirkung der weltweiten Arbeitsteilung auf Unternehmen und Umwelt?",
@@ -1719,7 +2213,10 @@
             "Das weltweite Transportaufkommen wird drastisch reduziert."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Zusammenschluss liegt vor, wenn rechtlich und wirtschaftlich selbständige Unternehmen kooperieren, um den Wettbewerb (z. B. durch Preisabsprachen) auszuschalten?",
@@ -1730,7 +2227,10 @@
             "Arbeitsgemeinschaft"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Bei welcher Form des Zusammenschlusses geben Unternehmen ihre rechtliche und wirtschaftliche Selbständigkeit vollständig auf?",
@@ -1741,7 +2241,10 @@
             "Interessengemeinschaft"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie nennt man den Zusammenschluss mehrerer rechtlich selbstständiger Unternehmen zu einer wirtschaftlichen Einheit unter einer gemeinsamen Leitung?",
@@ -1752,7 +2255,10 @@
             "Genossenschaft"
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Mit welcher Formel wird die Eigenkapitalrentabilität ermittelt?",
@@ -1763,7 +2269,10 @@
             "(Umsatzerlöse · 100) : Gewinn"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie lautet die Formel zur Berechnung der Produktivität?",
@@ -1774,7 +2283,10 @@
             "Aufwendungen : Erträge"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie wird der Punkt im Preis-Mengen-Diagramm genannt, an dem sich die Angebots- und die Nachfragekurve schneiden?",
@@ -1785,7 +2297,10 @@
             "Mindestpreis"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Was passiert am Markt, wenn der aktuelle Preis über dem Gleichgewichtspreis liegt?",
@@ -1796,7 +2311,10 @@
             "Der Markt ist im perfekten Gleichgewicht."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "In welcher Wirtschaftsordnung agiert der Staat lediglich als 'Nachtwächter' und überlässt die Steuerung dem freien Spiel der Kräfte?",
@@ -1807,7 +2325,10 @@
             "Planwirtschaft"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Ziel steht bei einer Zentralverwaltungswirtschaft (Planwirtschaft) im Vordergrund?",
@@ -1818,7 +2339,10 @@
             "Der Schutz des individuellen Privateigentums an Produktionsmitteln."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Was ist ein wesentliches Merkmal der Sozialen Marktwirtschaft in Deutschland?",
@@ -1829,7 +2353,10 @@
             "Es gibt keinen privaten Wettbewerb mehr."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welchem Wirtschaftssektor wird ein Unternehmen zugeordnet, das Rohstoffe gewinnt (Urerzeugung), wie zum Beispiel eine Försterei oder eine Hühnerzucht?",
@@ -1840,7 +2367,10 @@
             "Quartärer Wirtschaftssektor"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Regelung gilt laut Jugendarbeitsschutzgesetz (JArbSchG) für minderjährige Auszubildende bezüglich der Rückkehr in den Betrieb nach der Berufsschule?",
@@ -1851,7 +2381,10 @@
             "Der Ausbildende kann unabhängig vom Alter immer entscheiden, ob der Azubi zurückkommen muss."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche der folgenden Leistungen gehört laut Gesetz nicht zu den Pflichten eines Ausbildenden?",
@@ -1862,7 +2395,10 @@
             "Sorge tragen, dass der Auszubildende berufliche Handlungsfähigkeit erwirbt."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Rechtsgrundlage enthält notwendige Informationen und Vorschriften für die Einrichtung eines ergonomischen PC-Arbeitsplatzes?",
@@ -1873,7 +2409,10 @@
             "Ausbildungsordnung"
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Voraussetzung muss erfüllt sein, damit ein Auszubildender zur Abschlussprüfung zugelassen wird?",
@@ -1884,7 +2423,10 @@
             "Vorlage eines guten Arbeitszeugnisses bei der IHK."
           ],
           "correct_index": 0,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wann endet das Ausbildungsverhältnis genau, wenn der Auszubildende die Prüfung erfolgreich besteht?",
@@ -1895,7 +2437,10 @@
             "Erst mit der Aushändigung des Berufsschulzeugnisses."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche dieser Fragen ist in einem Vorstellungsgespräch für eine Ausbildungsstelle rechtlich zulässig?",
@@ -1906,7 +2451,10 @@
             "Liegt aktuell eine Schwangerschaft vor?"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welcher dieser Themenbereiche wird dem Kollektivarbeitsrecht zugeordnet?",
@@ -1917,7 +2465,10 @@
             "Entgeltfortzahlung im Krankheitsfall"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welcher Rechtsgrundlage wird die regelmäßige wöchentliche Arbeitszeit einer ganzen Branche (z. B. der Metallindustrie) festgelegt?",
@@ -1928,7 +2479,10 @@
             "Betriebsverfassungsgesetz"
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Auf welcher gesetzlichen Basis wählen die Mitarbeiter eines Betriebes die Mitglieder für den Betriebsrat?",
@@ -1939,7 +2493,10 @@
             "Arbeitszeitgesetz"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wann ist die Kündigung eines Mitarbeiters laut Kündigungsschutzgesetz (KSchG) wirksam?",
@@ -1950,7 +2507,10 @@
             "Wenn der Betriebsrat die Kündigung selbst schreibt."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was muss laut Allgemeinem Gleichbehandlungsgesetz (AGG) bei der Auswahl von neuen Mitarbeitern primär zugrunde gelegt werden?",
@@ -1961,7 +2521,10 @@
             "Das Geschlecht (weibliche Bewerberinnen bevorzugt)."
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Für welche der folgenden Personengruppen besteht im deutschen Arbeitsrecht ein besonderer Kündigungsschutz?",
@@ -1972,7 +2535,11 @@
             "Alle Mitarbeiter über 50 Jahre."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Ein Arbeitgeber spricht am 15. März eine ordentliche Kündigung aus. Der Mitarbeiter ist 30 Jahre alt und seit 5 Jahren im Betrieb. Zu welchem Termin wird die Kündigung laut BGB wirksam?",
@@ -1983,7 +2550,10 @@
             "Sofort am Tag der Aussprache."
           ],
           "correct_index": 1,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Wie lange ist die gesetzliche Kündigungsfrist für einen Arbeitgeber, wenn das Arbeitsverhältnis im Betrieb seit 20 Jahren besteht?",
@@ -1994,7 +2564,10 @@
             "Ein Jahr zum Ende des Quartals."
           ],
           "correct_index": 2,
-          "difficulty": "hard"
+          "difficulty": "hard",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Eine Auszubildende erleidet auf dem direkten Arbeitsweg einen Unfall und ist arbeitsunfähig. Wem muss der Betrieb diesen Unfall melden?",
@@ -2005,7 +2578,10 @@
             "Der Arbeitsagentur."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Was versteht man im Rahmen der gesetzlichen Rentenversicherung unter dem sogenannten 'Generationenvertrag'?",
@@ -2016,7 +2592,10 @@
             "Ein Verfahren zur Sicherung von Unternehmensdaten über drei Generationen."
           ],
           "correct_index": 2,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Bei welcher der folgenden Unternehmensformen haften grundsätzlich alle Gesellschafter unbeschränkt mit ihrem Privatvermögen?",
@@ -2027,7 +2606,10 @@
             "Kommanditgesellschaft (KG)"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie hoch muss das Grundkapital bei der Gründung einer Aktiengesellschaft (AG) laut Gesetz mindestens sein?",
@@ -2038,7 +2620,10 @@
             "Es gibt keine gesetzliche Untergrenze."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Organ einer Aktiengesellschaft (AG) ist primär für die Kontrolle des Vorstands zuständig?",
@@ -2049,7 +2634,11 @@
             "Wirtschaftsausschuss"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht",
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Organ der AG ist laut Aktiengesetz für die Geschäftsführung und die gerichtliche sowie außergerichtliche Vertretung der Gesellschaft verantwortlich?",
@@ -2060,7 +2649,10 @@
             "Einigungsstelle"
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "In welcher Situation handelt ein Unternehmen nach dem Minimalprinzip?",
@@ -2071,7 +2663,10 @@
             "Ein festes Budget von 2.000 € wird genutzt, um den schnellsten Drucker am Markt zu kaufen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Was versteht man unter dem Begriff der Tarifautonomie?",
@@ -2082,7 +2677,10 @@
             "Das Recht einzelner Arbeitnehmer, ihren Tarifvertrag selbst auszuhandeln."
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Aussage über das Handelsregister ist korrekt?",
@@ -2093,7 +2691,10 @@
             "Es ist ein Verzeichnis für alle Kleingewerbetreibenden ohne Kaufmannseigenschaft."
           ],
           "correct_index": 0,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Befugnis hat ein Prokurist im Gegensatz zu einem Mitarbeiter mit allgemeiner Handlungsvollmacht?",
@@ -2104,7 +2705,10 @@
             "Er darf die Prokura für andere Mitarbeiter selbständig erteilen."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Unterzeichnungszusatz ist für einen Mitarbeiter mit allgemeiner Handlungsvollmacht vorgeschrieben?",
@@ -2115,7 +2719,10 @@
             "Einzelunterschrift ohne Zusatz"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "In welchem Fall hat der Betriebsrat ein gesetzliches Informations- bzw. Unterrichtungsrecht?",
@@ -2126,7 +2733,10 @@
             "Bei der Auswahl der zu kündigenden Personen unter sozialen Gesichtspunkten."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welches Gericht ist zuständig, wenn es zu Konflikten zwischen Arbeitnehmern (oder dem Betriebsrat) und dem Arbeitgeber kommt?",
@@ -2137,7 +2747,10 @@
             "Bundessozialgericht"
           ],
           "correct_index": 1,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "arbeitsrecht"
+          ]
         },
         {
           "question": "Welche Situation beschreibt typischerweise einen Verkäufermarkt?",
@@ -2148,7 +2761,10 @@
             "Die Anbieter verzeichnen hohe Verkaufszahlen trotz langer Lieferzeiten."
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Ein Unternehmen hat viele Konkurrenten und einen sehr umfangreichen Kundenkreis. Welche Marktform liegt hier vor?",
@@ -2159,7 +2775,10 @@
             "Zweiseitiges Polypol"
           ],
           "correct_index": 3,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welche Bedingung muss erfüllt sein, damit man von einem vollkommenen Markt sprechen kann?",
@@ -2170,7 +2789,10 @@
             "Die angebotenen Güter sind verschiedenartig (inhomogen)."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Wie wird der Punkt in einer grafischen Darstellung genannt, an dem die Erlöskurve die Gesamtkostenkurve schneidet?",
@@ -2181,7 +2803,10 @@
             "Kapazitätsgrenze"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welcher Bereich in der Break-even-Grafik liegt rechts vom Break-even-Point, wo die Erlöse höher als die Gesamtkosten sind?",
@@ -2192,7 +2817,10 @@
             "Variable Kostenzone"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Welches Ziel verfolgt die Ablauforganisation innerhalb eines Unternehmens?",
@@ -2203,7 +2831,10 @@
             "Sie ist ausschließlich für die Bildung von Stellen und Abteilungen zuständig."
           ],
           "correct_index": 1,
-          "difficulty": "medium"
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft"
+          ]
         },
         {
           "question": "Bei welcher Führungstechnik werden Ziele gemeinsam mit den Mitarbeitern abgestimmt, die diese dann selbstständig umsetzen (oft kombiniert mit Prämienzahlungen)?",
@@ -2214,9 +2845,64 @@
             "Autoritärer Führungsstil"
           ],
           "correct_index": 2,
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
         }
       ]
+    }
+  },
+  "subjects": {
+    "projektmanagement": {
+      "name": "Projektmanagement",
+      "icon": "📋",
+      "color": "#2E5BFF"
+    },
+    "scrum_agile": {
+      "name": "Scrum & Agile",
+      "icon": "🔄",
+      "color": "#00BCD4"
+    },
+    "datenschutz": {
+      "name": "Datenschutz & DSGVO",
+      "icon": "🔒",
+      "color": "#9C27B0"
+    },
+    "it_sicherheit": {
+      "name": "IT-Sicherheit",
+      "icon": "🛡️",
+      "color": "#FF3D00"
+    },
+    "netzwerktechnik": {
+      "name": "Netzwerktechnik",
+      "icon": "🌐",
+      "color": "#00C853"
+    },
+    "softwareentwicklung": {
+      "name": "Softwareentwicklung",
+      "icon": "💻",
+      "color": "#FF6B35"
+    },
+    "wirtschaft": {
+      "name": "Wirtschaft & Recht",
+      "icon": "📊",
+      "color": "#FFC107"
+    },
+    "arbeitsrecht": {
+      "name": "Arbeits- & Sozialrecht",
+      "icon": "⚖️",
+      "color": "#E91E63"
+    },
+    "qualitaetsmanagement": {
+      "name": "Qualitätsmanagement",
+      "icon": "✅",
+      "color": "#8BC34A"
+    },
+    "datenanalyse": {
+      "name": "Datenanalyse & KI",
+      "icon": "📈",
+      "color": "#B24BFF"
     }
   }
 }
