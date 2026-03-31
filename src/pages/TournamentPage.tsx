@@ -139,6 +139,16 @@ export function TournamentPage() {
       .eq('tournament_id', tournamentId)
       .eq('user_id', user.id);
     if (error) { setError(getErrorMessage(error)); return; }
+
+    // If no participants remain, cancel the tournament automatically
+    const { count } = await supabase
+      .from('tournament_participants')
+      .select('id', { count: 'exact', head: true })
+      .eq('tournament_id', tournamentId);
+    if (count === 0) {
+      await supabase.from('tournaments').update({ status: 'cancelled' }).eq('id', tournamentId);
+    }
+
     fetchTournaments();
   };
 

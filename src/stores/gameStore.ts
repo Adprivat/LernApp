@@ -316,6 +316,22 @@ export const useGameStore = create<GameState>((set, get) => ({
       });
     }
 
+    // Tournament: check if all players are now finished → mark tournament as done
+    if (session.mode === 'tournament' && session.tournament_id) {
+      const { data: remaining } = await supabase
+        .from('game_players')
+        .select('id')
+        .eq('session_id', session.id)
+        .eq('is_finished', false);
+      if (!remaining || remaining.length === 0) {
+        await supabase
+          .from('tournaments')
+          .update({ status: 'finished', finished_at: new Date().toISOString() })
+          .eq('id', session.tournament_id)
+          .eq('status', 'active');
+      }
+    }
+
     // Tournament end: first finisher sends winner notification to all participants
     if (session.mode === 'tournament' && didTransition) {
       const { data: allPlayers } = await supabase
