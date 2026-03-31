@@ -216,6 +216,10 @@ function AppLayout() {
         if (notif.type === 'challenge_accepted' && notif.data?.session_id) {
           navigate(`/game/${notif.data.session_id}`);
         }
+        // Auto-navigate tournament participants when tournament starts
+        if (notif.type === 'tournament_start' && notif.data?.session_id) {
+          navigate(`/game/${notif.data.session_id}`);
+        }
       })
       .subscribe();
 

@@ -185,6 +185,20 @@ export function TournamentPage() {
     }
 
     if (data?.session_id) {
+      // Notify all other participants so they get redirected to the game
+      const otherParticipants = tournament.participants.filter(p => p.user_id !== user.id);
+      if (otherParticipants.length > 0) {
+        await supabase.from('notifications').insert(
+          otherParticipants.map(p => ({
+            user_id: p.user_id,
+            type: 'tournament_start',
+            title: 'Turnier gestartet!',
+            message: `Das Turnier "${tournament.name}" hat begonnen. Viel Erfolg!`,
+            data: { session_id: data.session_id, tournament_id: tournament.id },
+            is_read: false,
+          }))
+        );
+      }
       navigate(`/game/${data.session_id}`);
     }
   };

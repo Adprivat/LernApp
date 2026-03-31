@@ -46,7 +46,15 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
         navigate('/challenge');
         break;
       case 'tournament_created':
+        navigate('/tournament');
+        break;
       case 'tournament_start':
+        if (notif.data?.session_id) {
+          navigate(`/game/${notif.data.session_id}`);
+        } else {
+          navigate('/tournament');
+        }
+        break;
       case 'tournament_end':
         navigate('/tournament');
         break;
