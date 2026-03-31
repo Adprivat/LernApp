@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-error-handling-hardening/04-02-PLAN.md
-last_updated: "2026-03-31T06:51:51.646Z"
+stopped_at: Completed 04-error-handling-hardening/04-05-PLAN.md
+last_updated: "2026-03-31T06:52:36.143Z"
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 9
+  completed_plans: 10
   percent: 50
 ---
 
@@ -69,6 +69,8 @@ Progress: [█████░░░░░] 50%
 - [Phase 04-error-handling-hardening]: fetchProfile logs non-PGRST116 errors but continues — missing profile handled by existing null check
 - [Phase 04-error-handling-hardening]: updateProfile returns early on error — prevents stale state from silent DB update failure
 - [Phase 04-error-handling-hardening]: joinSession treats PGRST116 as expected (player not yet joined) — only logs unexpected errors
+- [Phase 04-error-handling-hardening]: AdminPage uses console.error for DB operation failures — admin-only context where devtools are acceptable
+- [Phase 04-error-handling-hardening]: LearnPage replaces alert() with setError(getErrorMessage(err)) and inline UI error display
 
 ## Performance Metrics
 
@@ -83,8 +85,9 @@ Progress: [█████░░░░░] 50%
 | Phase 04-error-handling-hardening P01 | 1min | 1 tasks | 1 files |
 | Phase 02-subscription-leak-fix P01 | 2min | 2 tasks | 2 files |
 | Phase 04-error-handling-hardening P02 | 2min | 2 tasks | 2 files |
+| Phase 04-error-handling-hardening P05 | 2min | 2 tasks | 3 files |
 
 ## Session
 
-- **Last session:** 2026-03-31T06:51:51.642Z
-- **Stopped at:** Completed 04-error-handling-hardening/04-02-PLAN.md
+- **Last session:** 2026-03-31T06:52:36.139Z
+- **Stopped at:** Completed 04-error-handling-hardening/04-05-PLAN.md
