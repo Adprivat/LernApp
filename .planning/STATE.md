@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-subscription-leak-fix/02-01-PLAN.md
-last_updated: "2026-03-31T06:20:07.161Z"
+stopped_at: Completed 04-error-handling-hardening/04-04-PLAN.md
+last_updated: "2026-03-31T06:53:18.201Z"
 progress:
   total_phases: 4
   completed_phases: 3
@@ -66,6 +66,8 @@ Progress: [█████░░░░░] 50%
 - [Phase 04-error-handling-hardening]: hint-based discrimination used first in handleSupabaseError — aligns with Phase 01 decision to discriminate by error.hint over code/message
 - [Phase 04-error-handling-hardening]: isSupabaseError requires only message+code as strings — hint/details may be null in non-RPC errors
 - [Phase 02-subscription-leak-fix]: supabase.removeChannel() + null ref is the canonical channel cleanup pattern — prevents orphaned channel accumulation in the Supabase client registry on repeated navigation
+- [Phase 04-error-handling-hardening]: PGRST116 in joinLobby is an expected 'not found' signal from .single() — checked explicitly before allowing insert
+- [Phase 04-error-handling-hardening]: LobbyPage fetchData returns early on sessionError rather than setting null — prevents indefinite spinner on invalid session IDs
 
 ## Performance Metrics
 
@@ -79,8 +81,9 @@ Progress: [█████░░░░░] 50%
 | Phase 03-auth-security-fix P02 | 5min | 2 tasks | 1 files |
 | Phase 04-error-handling-hardening P01 | 1min | 1 tasks | 1 files |
 | Phase 02-subscription-leak-fix P01 | 2min | 2 tasks | 2 files |
+| Phase 04-error-handling-hardening P04 | 5min | 2 tasks | 3 files |
 
 ## Session
 
-- **Last session:** 2026-03-31T06:20:07.157Z
-- **Stopped at:** Completed 02-subscription-leak-fix/02-01-PLAN.md
+- **Last session:** 2026-03-31T06:53:18.197Z
+- **Stopped at:** Completed 04-error-handling-hardening/04-04-PLAN.md
