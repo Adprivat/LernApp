@@ -38,11 +38,15 @@ export function GameChat({ sessionId }: GameChatProps) {
         table: 'chat_messages',
         filter: `session_id=eq.${sessionId}`,
       }, async (payload) => {
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from('chat_messages')
           .select('*, profile:profiles(username, is_online)')
           .eq('id', payload.new.id)
           .single();
+        if (error) {
+          console.error('Failed to load chat message:', error.message);
+          return;
+        }
         if (data) setMessages(prev => [...prev, data]);
       })
       .subscribe();

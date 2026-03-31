@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Users, Plus, Play, Copy, Check, Crown, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
+import { getErrorMessage } from '@/lib/errorHandler';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -23,6 +24,7 @@ export function GroupPage() {
   const [teamSize, setTeamSize] = useState(2);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
   const fetchLobbies = async () => {
     const { data } = await supabase
@@ -47,8 +49,9 @@ export function GroupPage() {
   const createLobby = async () => {
     if (!user) return;
     setLoading(true);
+    setError('');
     try {
-      const { data: session } = await supabase
+      const { data: session, error: createError } = await supabase
         .from('game_sessions')
         .insert({
           mode: 'group',
@@ -63,7 +66,7 @@ export function GroupPage() {
         .select()
         .single();
 
-      if (!session) throw new Error('Fehler beim Erstellen');
+      if (createError || !session) throw new Error(getErrorMessage(createError) || 'Fehler beim Erstellen');
 
       await supabase.from('game_players').insert({
         session_id: session.id,
@@ -78,8 +81,8 @@ export function GroupPage() {
 
       setShowCreate(false);
       navigate(`/lobby/${session.id}`);
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -131,6 +134,12 @@ export function GroupPage() {
           </Button>
         </div>
       </Card>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400 mb-6">
+          {error}
+        </div>
+      )}
 
       {/* Lobby list */}
       <div>

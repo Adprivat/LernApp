@@ -23,11 +23,15 @@ export function LobbyPage() {
 
   const fetchData = async () => {
     if (!sessionId) return;
-    const { data: s } = await supabase
+    const { data: s, error: sessionError } = await supabase
       .from('game_sessions')
       .select('*')
       .eq('id', sessionId)
       .single();
+    if (sessionError) {
+      console.error('Failed to load lobby session:', sessionError.message);
+      return;
+    }
     setSession(s);
 
     const { data: p } = await supabase
@@ -47,14 +51,19 @@ export function LobbyPage() {
     // Join if not already in lobby
     const joinLobby = async () => {
       if (!user || !sessionId) return;
-      const { data: existing } = await supabase
+      const { data: existing, error: existingError } = await supabase
         .from('game_players')
         .select('id')
         .eq('session_id', sessionId)
         .eq('user_id', user.id)
         .single();
 
-      if (!existing) {
+      if (existingError && existingError.code !== 'PGRST116') {
+        console.error('Failed to check lobby membership:', existingError.message);
+        return;
+      }
+
+      if (!existing && (!existingError || existingError.code === 'PGRST116')) {
         await supabase.from('game_players').insert({
           session_id: sessionId,
           user_id: user.id,

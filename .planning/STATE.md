@@ -3,27 +3,27 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-error-handling-hardening/04-03-PLAN.md
-last_updated: "2026-03-31T06:53:33.185Z"
+stopped_at: Completed 04-error-handling-hardening/04-04-PLAN.md
+last_updated: "2026-03-31T06:53:18.201Z"
 progress:
   total_phases: 4
-  completed_phases: 4
+  completed_phases: 3
   total_plans: 12
-  completed_plans: 12
+  completed_plans: 8
   percent: 50
 ---
 
 # Project State
 
 **Last updated:** 2026-03-30T11:04:47Z
-**Status:** Executing Phase 04
+**Status:** Executing Phase 02
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Nutzer können jederzeit stabil und sicher gegeneinander spielen — ohne Race Conditions, Memory Leaks oder Sicherheitslücken.
-**Current focus:** Phase 04 — error-handling-hardening
+**Current focus:** Phase 02 — subscription-leak-fix
 
 ## Current Phase
 
@@ -66,12 +66,8 @@ Progress: [█████░░░░░] 50%
 - [Phase 04-error-handling-hardening]: hint-based discrimination used first in handleSupabaseError — aligns with Phase 01 decision to discriminate by error.hint over code/message
 - [Phase 04-error-handling-hardening]: isSupabaseError requires only message+code as strings — hint/details may be null in non-RPC errors
 - [Phase 02-subscription-leak-fix]: supabase.removeChannel() + null ref is the canonical channel cleanup pattern — prevents orphaned channel accumulation in the Supabase client registry on repeated navigation
-- [Phase 04-error-handling-hardening]: fetchProfile logs non-PGRST116 errors but continues — missing profile handled by existing null check
-- [Phase 04-error-handling-hardening]: updateProfile returns early on error — prevents stale state from silent DB update failure
-- [Phase 04-error-handling-hardening]: joinSession treats PGRST116 as expected (player not yet joined) — only logs unexpected errors
-- [Phase 04-error-handling-hardening]: AdminPage uses console.error for DB operation failures — admin-only context where devtools are acceptable
-- [Phase 04-error-handling-hardening]: LearnPage replaces alert() with setError(getErrorMessage(err)) and inline UI error display
-- [Phase 04-error-handling-hardening]: respondToChallenge alert(err.message) fixed as Rule 1 bug — same file scope, alert() replaced with setError(getErrorMessage(err))
+- [Phase 04-error-handling-hardening]: PGRST116 in joinLobby is an expected 'not found' signal from .single() — checked explicitly before allowing insert
+- [Phase 04-error-handling-hardening]: LobbyPage fetchData returns early on sessionError rather than setting null — prevents indefinite spinner on invalid session IDs
 
 ## Performance Metrics
 
@@ -85,11 +81,9 @@ Progress: [█████░░░░░] 50%
 | Phase 03-auth-security-fix P02 | 5min | 2 tasks | 1 files |
 | Phase 04-error-handling-hardening P01 | 1min | 1 tasks | 1 files |
 | Phase 02-subscription-leak-fix P01 | 2min | 2 tasks | 2 files |
-| Phase 04-error-handling-hardening P02 | 2min | 2 tasks | 2 files |
-| Phase 04-error-handling-hardening P05 | 2min | 2 tasks | 3 files |
-| Phase 04-error-handling-hardening P03 | 2min | 2 tasks | 2 files |
+| Phase 04-error-handling-hardening P04 | 5min | 2 tasks | 3 files |
 
 ## Session
 
-- **Last session:** 2026-03-31T06:53:33.180Z
-- **Stopped at:** Completed 04-error-handling-hardening/04-03-PLAN.md
+- **Last session:** 2026-03-31T06:53:18.197Z
+- **Stopped at:** Completed 04-error-handling-hardening/04-04-PLAN.md
