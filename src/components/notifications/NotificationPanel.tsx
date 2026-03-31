@@ -31,13 +31,42 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
 
   const handleNotifClick = async (notif: any) => {
     if (!notif.is_read) await markRead(notif.id);
-    if (notif.data?.session_id) {
-      navigate(`/game/${notif.data.session_id}`);
-      onClose();
-    } else if (notif.data?.challenge_id) {
-      navigate('/challenge');
-      onClose();
+
+    // Navigate based on notification type
+    switch (notif.type) {
+      case 'challenge_accepted':
+        if (notif.data?.session_id) {
+          navigate(`/game/${notif.data.session_id}`);
+        } else {
+          navigate('/challenge');
+        }
+        break;
+      case 'challenge_received':
+      case 'challenge_declined':
+        navigate('/challenge');
+        break;
+      case 'tournament_created':
+      case 'tournament_start':
+      case 'tournament_end':
+        navigate('/tournament');
+        break;
+      case 'game_invite':
+        if (notif.data?.session_id) {
+          navigate(`/lobby/${notif.data.session_id}`);
+        } else {
+          navigate('/groups');
+        }
+        break;
+      case 'achievement_earned':
+        navigate('/profile');
+        break;
+      default:
+        if (notif.data?.session_id) {
+          navigate(`/game/${notif.data.session_id}`);
+        }
+        break;
     }
+    onClose();
   };
 
   return (

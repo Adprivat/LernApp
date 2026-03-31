@@ -19,7 +19,7 @@ export function GroupPage() {
   const [lobbies, setLobbies] = useState<(GameSession & { players: GamePlayer[] })[]>([]);
   const [showCreate, setShowCreate] = useState(false);
   const [joinCode, setJoinCode] = useState('');
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState('');
   const [questionCount, setQuestionCount] = useState(10);
   const [teamSize, setTeamSize] = useState(2);
   const [loading, setLoading] = useState(false);
@@ -50,6 +50,11 @@ export function GroupPage() {
     if (!user) return;
     setLoading(true);
     setError('');
+    if (!category) {
+      setError('Bitte wähle eine Kategorie aus');
+      setLoading(false);
+      return;
+    }
     try {
       const { data: session, error: createError } = await supabase
         .from('game_sessions')

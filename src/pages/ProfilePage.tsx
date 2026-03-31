@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Star, Target, Trophy, TrendingUp, Zap, BookOpen, Award, Lock, ChevronDown, ChevronRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Star, Target, Trophy, TrendingUp, Zap, BookOpen, Award, Lock, ChevronDown, ChevronRight, Camera } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
+import { getErrorMessage } from '@/lib/errorHandler';
 import { Card } from '@/components/ui/Card';
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
@@ -58,6 +59,10 @@ export function ProfilePage() {
   const { user } = useAuthStore();
   const [achievements, setAchievements] = useState<UserAchievement[]>([]);
   const [recentGames, setRecentGames] = useState<any[]>([]);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState('');
+  const [avatarHover, setAvatarHover] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!user) return;

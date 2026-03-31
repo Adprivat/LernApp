@@ -6,6 +6,7 @@ interface AvatarProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isOnline?: boolean;
   className?: string;
+  avatarUrl?: string;
 }
 
 const colors = [
@@ -22,7 +23,7 @@ function getColor(username: string) {
   return colors[Math.abs(hash) % colors.length];
 }
 
-export function Avatar({ username, size = 'md', isOnline, className }: AvatarProps) {
+export function Avatar({ username, size = 'md', isOnline, className, avatarUrl }: AvatarProps) {
   const sizeMap = {
     sm: 'w-8 h-8 text-xs',
     md: 'w-10 h-10 text-sm',
@@ -40,11 +41,14 @@ export function Avatar({ username, size = 'md', isOnline, className }: AvatarPro
   return (
     <div className={clsx('relative inline-flex flex-shrink-0', className)}>
       <div className={clsx(
-        'rounded-full flex items-center justify-center font-bold text-white uppercase',
+        'rounded-full flex items-center justify-center font-bold text-white uppercase overflow-hidden',
         sizeMap[size],
-        getColor(username)
+        avatarUrl ? '' : getColor(username)
       )}>
-        {username.slice(0, 2)}
+        {avatarUrl
+          ? <img src={avatarUrl} className="w-full h-full object-cover" alt={username} />
+          : username.slice(0, 2)
+        }
       </div>
       {isOnline !== undefined && (
         <div className={clsx(

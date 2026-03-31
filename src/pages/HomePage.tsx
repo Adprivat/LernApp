@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Users, Trophy, Zap, Star, Target, TrendingUp, Crown } from 'lucide-react';
+import { BookOpen, Users, Trophy, Zap, Star, Target, TrendingUp, Crown, AlertTriangle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { supabase } from '@/lib/supabase';
 import { Card } from '@/components/ui/Card';
@@ -75,6 +75,15 @@ export function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Beta Warning */}
+      <div className="mb-6 flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3 backdrop-blur-sm">
+        <AlertTriangle size={18} className="text-amber-400 flex-shrink-0 mt-0.5" />
+        <div className="text-sm">
+          <span className="font-bold text-amber-400">Beta-Version</span>
+          <p className="text-amber-200/70 mt-0.5">Diese App befindet sich in aktiver Entwicklung. Funktionen können sich ändern und es können Fehler auftreten.</p>
+        </div>
+      </div>
+
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="text-3xl font-black text-white">

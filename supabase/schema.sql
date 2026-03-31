@@ -30,7 +30,10 @@ create policy "Profiles are viewable by everyone"
   on public.profiles for select using (true);
 
 create policy "Users can update own profile"
-  on public.profiles for update using (auth.uid() = id);
+  on public.profiles for update using (
+    auth.uid() = id or
+    exists (select 1 from public.profiles where id = auth.uid() and is_admin = true)
+  );
 
 create policy "Users can insert own profile"
   on public.profiles for insert with check (auth.uid() = id);

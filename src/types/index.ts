@@ -131,12 +131,22 @@ export interface ChatMessage {
 export interface Notification {
   id: string;
   user_id: string;
-  type: 'challenge_received' | 'challenge_accepted' | 'challenge_declined' | 'tournament_start' | 'achievement_earned' | 'game_invite';
+  type: 'challenge_received' | 'challenge_accepted' | 'challenge_declined' | 'tournament_start' | 'tournament_created' | 'tournament_end' | 'achievement_earned' | 'game_invite';
   title: string;
   message: string;
   data?: Record<string, unknown>;
   is_read: boolean;
   created_at: string;
+}
+
+export interface Friendship {
+  id: string;
+  user_id: string;
+  friend_id: string;
+  status: 'pending' | 'accepted' | 'declined';
+  created_at: string;
+  user?: Profile;
+  friend?: Profile;
 }
 
 export interface QuestionData {

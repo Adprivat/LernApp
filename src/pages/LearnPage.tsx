@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { BookOpen, Settings, Play } from 'lucide-react';
+import { BookOpen, Settings, Play, Timer, TimerOff } from 'lucide-react';
 import { useGameStore } from '@/stores/gameStore';
 import { CategorySelector } from '@/components/game/CategorySelector';
 import { QuestionCard } from '@/components/game/QuestionCard';
@@ -17,8 +17,9 @@ export function LearnPage() {
   const initialCount = parseInt(searchParams.get('count') || '10');
 
   const [pageState, setPageState] = useState<PageState>('setup');
-  const [category, setCategory] = useState(initialCategory);
+  const [category, setCategory] = useState(initialCategory === 'general' ? '' : initialCategory);
   const [questionCount, setQuestionCount] = useState(initialCount);
+  const [timerEnabled, setTimerEnabled] = useState(true);
   const [error, setError] = useState('');
   const { user } = useAuthStore();
   const {
@@ -29,6 +30,10 @@ export function LearnPage() {
 
   const handleStart = async () => {
     setError('');
+    if (!category) {
+      setError('Bitte wähle eine Kategorie aus');
+      return;
+    }
     try {
       await createSoloSession(category, questionCount);
       setPageState('playing');
@@ -99,7 +104,7 @@ export function LearnPage() {
           questionNumber={currentQuestionIndex + 1}
           totalQuestions={questions.length}
           onAnswer={handleAnswer}
-          timeLeft={20}
+          timeLeft={timerEnabled ? 20 : 0}
           onTimeUp={handleTimeUp}
         />
       </div>
@@ -155,9 +160,41 @@ export function LearnPage() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-nexus-muted mt-3 text-center">
-            ⏱ 20 Sekunden pro Frage
-          </p>
+        </Card>
+
+        {/* Timer toggle */}
+        <Card>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {timerEnabled ? (
+                <Timer size={18} className="text-nexus-accent" />
+              ) : (
+                <TimerOff size={18} className="text-nexus-muted" />
+              )}
+              <div>
+                <h2 className="font-bold text-white">Zeitlimit</h2>
+                <p className="text-xs text-nexus-muted mt-0.5">
+                  {timerEnabled ? '20 Sekunden pro Frage' : 'Kein Zeitlimit — lerne ohne Druck'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setTimerEnabled(!timerEnabled)}
+              className={`relative w-12 h-7 rounded-full transition-all duration-300 cursor-pointer border ${
+                timerEnabled
+                  ? 'bg-nexus-primary/30 border-[#2E5BFF]/40 shadow-[0_0_12px_rgba(46,91,255,0.15)]'
+                  : 'bg-nexus-surface/50 border-nexus-border'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 w-6 h-6 rounded-full transition-all duration-300 ${
+                  timerEnabled
+                    ? 'left-[calc(100%-1.625rem)] bg-[#2E5BFF] shadow-[0_0_8px_rgba(46,91,255,0.4)]'
+                    : 'left-0.5 bg-nexus-muted'
+                }`}
+              />
+            </button>
+          </div>
         </Card>
 
         {error && (

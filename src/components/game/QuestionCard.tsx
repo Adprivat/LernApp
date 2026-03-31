@@ -30,12 +30,15 @@ export function QuestionCard({
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [localTime, setLocalTime] = useState(timeLeft);
   const [timesUp, setTimesUp] = useState(false);
+  const hasTimer = timeLeft > 0;
 
   useEffect(() => {
     setLocalSelected(null);
     setLocalRevealed(false);
     setLocalTime(timeLeft);
     setTimesUp(false);
+
+    if (!hasTimer) return;
 
     timerRef.current = setInterval(() => {
       setLocalTime(t => {
@@ -82,6 +85,7 @@ export function QuestionCard({
         </div>
 
         {/* Circular timer */}
+        {hasTimer ? (
         <div className="relative w-24 h-24">
           <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r={radius} fill="none" stroke="#091328" strokeWidth="8" />
@@ -100,6 +104,17 @@ export function QuestionCard({
             {localTime}
           </div>
         </div>
+        ) : (
+        <div className="relative w-24 h-24">
+          <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r={radius} fill="none" stroke="#091328" strokeWidth="8" />
+            <circle cx="50" cy="50" r={radius} fill="none" stroke="#2E5BFF" strokeWidth="8" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={0} opacity="0.3" />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-nexus-accent">
+            ∞
+          </div>
+        </div>
+        )}
       </div>
 
       {/* Progress bar */}

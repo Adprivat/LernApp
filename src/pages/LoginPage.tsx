@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BookOpen, User, Lock, LogIn, UserPlus } from 'lucide-react';
+import { BookOpen, User, Lock, LogIn, UserPlus, AlertTriangle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -70,6 +70,15 @@ export function LoginPage() {
           </div>
           <h1 className="text-3xl font-black text-white">LernApp</h1>
           <p className="text-nexus-muted mt-2">Die kompetitive Lernplattform</p>
+        </div>
+
+        {/* Beta Warning */}
+        <div className="mb-6 flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3 backdrop-blur-sm">
+          <AlertTriangle size={18} className="text-amber-400 flex-shrink-0 mt-0.5" />
+          <div className="text-sm">
+            <span className="font-bold text-amber-400">Beta-Version</span>
+            <p className="text-amber-200/70 mt-0.5">Diese App befindet sich in aktiver Entwicklung. Es können Fehler auftreten und Daten verloren gehen.</p>
+          </div>
         </div>
 
         {/* Card */}

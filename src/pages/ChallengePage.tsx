@@ -24,7 +24,7 @@ export function ChallengePage() {
   const [loading, setLoading] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [targetUsername, setTargetUsername] = useState('');
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState('');
   const [questionCount, setQuestionCount] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState('');
@@ -72,6 +72,10 @@ export function ChallengePage() {
   const createChallenge = async () => {
     if (!user) return;
     setError('');
+    if (!category) {
+      setError('Bitte wähle eine Kategorie aus');
+      return;
+    }
     setLoading(true);
 
     try {

@@ -20,7 +20,7 @@ export function TournamentPage() {
   const [tournaments, setTournaments] = useState<(Tournament & { participants: TournamentParticipant[] })[]>([]);
   const [showCreate, setShowCreate] = useState(false);
   const [name, setName] = useState('');
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState('');
   const [maxPlayers, setMaxPlayers] = useState(8);
   const [questionCount, setQuestionCount] = useState(10);
   const [loading, setLoading] = useState(false);
@@ -55,6 +55,11 @@ export function TournamentPage() {
     if (!user || !name.trim()) return;
     setLoading(true);
     setError('');
+    if (!category) {
+      setError('Bitte wähle eine Kategorie aus');
+      setLoading(false);
+      return;
+    }
     try {
       const { data: t, error: createError } = await supabase
         .from('tournaments')
