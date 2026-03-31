@@ -3133,6 +3133,719 @@
           "tags": [
             "softwareentwicklung"
           ]
+        },
+        {
+          "question": "Welche Maßnahmen sind für Technik- und Serverräume angemessen?",
+          "answers": [
+            "Zutrittskontrolle, Klimatisierung und USV-System",
+            "Zutrittskontrolle, WLAN-Repeater und USV-System",
+            "Nur Klimatisierung und USV-System",
+            "Zutrittskontrolle, Klimatisierung und WLAN-Repeater"
+          ],
+          "correct_index": 0,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
+        },
+        {
+          "question": "Integrität bedeutet:",
+          "answers": [
+            "Daten sind jederzeit erreichbar",
+            "Daten sind unverändert und korrekt",
+            "Daten sind verschlüsselt",
+            "Daten sind repliziert"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
+        },
+        {
+          "question": "Bei zwei Investitionsvarianten mit gleicher Funktion entscheidet primär:",
+          "answers": [
+            "Anzahl VLANs",
+            "Anzahl Benutzer",
+            "Kosten-/Nutzen-Verhältnis",
+            "IP-Adressbereich"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
+        },
+        {
+          "question": "Welche Aussagen zu Muss- und Kann-Kriterien treffen zu?",
+          "answers": [
+            "Muss-Kriterien sind verpflichtend und Kann-Kriterien erhöhen ggf. die Qualität",
+            "Kann-Kriterien sind rechtlich bindend und Muss-Kriterien sind optional",
+            "Muss-Kriterien sind verpflichtend und Kann-Kriterien sind rechtlich bindend",
+            "Alle Kriterien sind gleich wichtig und austauschbar"
+          ],
+          "correct_index": 0,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Ein Single Point of Failure beschreibt:",
+          "answers": [
+            "mehrere redundante Systeme",
+            "eine einzelne Komponente, deren Ausfall das Gesamtsystem beeinträchtigt",
+            "eine VLAN-Struktur",
+            "einen Router mit ACL"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit",
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Aussagen zu Twisted-Pair-Kabeln sind korrekt?",
+          "answers": [
+            "Maximale Länge 100 m und Cat6A unterstützt 10 Gbit/s bis 100 m",
+            "Cat5e unterstützt 40 Gbit/s und Cat7 ist ungeschirmt",
+            "Maximale Länge 100 m und Cat7 ist ungeschirmt",
+            "Cat6A unterstützt 10 Gbit/s und Cat5e unterstützt 40 Gbit/s"
+          ],
+          "correct_index": 0,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "MAC-Adressen gehören primär zu welchem OSI-Layer?",
+          "answers": [
+            "Layer 1",
+            "Layer 2",
+            "Layer 3",
+            "Layer 4"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Aussagen zu DNS-Abfragen sind korrekt?",
+          "answers": [
+            "DNS vergibt IP-Adressen und arbeitet auf Layer 2",
+            "DNS kann rekursiv und iterativ arbeiten",
+            "DNS arbeitet ausschließlich rekursiv und vergibt IP-Adressen",
+            "DNS kann nur iterativ arbeiten und ist auf Layer 2"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Die DHCP-Lease-Zeit bestimmt:",
+          "answers": [
+            "VLAN-ID",
+            "Dauer der DNS-Zone",
+            "Dauer der IP-Zuweisung",
+            "Dauer der MAC-Adresse"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Aufgaben gehören zum Lizenzmanagement?",
+          "answers": [
+            "Inventarisierung, Lizenznachweis-Dokumentation und Audit-Vorbereitung",
+            "RAID-Konfiguration, Inventarisierung und Audit-Vorbereitung",
+            "Nur Inventarisierung und RAID-Konfiguration",
+            "Lizenznachweis-Dokumentation und RAID-Konfiguration"
+          ],
+          "correct_index": 0,
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
+        },
+        {
+          "question": "Ein Terminalserver ermöglicht:",
+          "answers": [
+            "physische Trennung von Netzen",
+            "lokale CPU-Optimierung",
+            "zentrale Bereitstellung von Anwendungen für mehrere Benutzer",
+            "VLAN-Tagging"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Bestandteile können Teil eines SLA (Service Level Agreement) sein?",
+          "answers": [
+            "Reaktionszeit, Verfügbarkeit in Prozent und Eskalationsstufen",
+            "VLAN-Struktur, Reaktionszeit und Verfügbarkeit",
+            "Nur Verfügbarkeit in Prozent und VLAN-Struktur",
+            "Reaktionszeit, VLAN-Struktur und Eskalationsstufen"
+          ],
+          "correct_index": 0,
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Präventive Instandhaltung dient primär:",
+          "answers": [
+            "Kostensteigerung",
+            "Lizenzprüfung",
+            "Vermeidung ungeplanter Ausfälle",
+            "Reduzierung der IP-Adressen"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Monitoring in der IT dient:",
+          "answers": [
+            "VLAN-Definition und DNS-Zonenverwaltung",
+            "Früherkennung von Problemen und Kapazitätsplanung",
+            "Nur DNS-Zonenverwaltung und VLAN-Definition",
+            "VLAN-Definition und Früherkennung von Problemen"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Ein Mikrocontroller eignet sich besonders für:",
+          "answers": [
+            "Office-Server",
+            "Hochleistungsdatenbanken",
+            "Echtzeit-Steuerungsaufgaben",
+            "Cloud-Rechenzentren"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Aussagen zur Simulation mit TinkerCAD treffen zu?",
+          "answers": [
+            "Linux-Server werden installiert und VLANs konfiguriert",
+            "Virtuelle Schaltungen können getestet und Arduino-Code simuliert werden",
+            "Nur Arduino-Code kann simuliert und Linux-Server installiert werden",
+            "VLANs werden konfiguriert und virtuelle Schaltungen getestet"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Der Superuser unter Linux heißt:",
+          "answers": [
+            "admin",
+            "root",
+            "sys",
+            "master"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Aussagen zur Linux-Rechteverwaltung sind korrekt?",
+          "answers": [
+            "r = Lesen, w = Schreiben und chmod 777 vergibt nur Leserechte",
+            "r = Lesen, w = Schreiben und x = Ausführen",
+            "r = Ausführen, w = Schreiben und x = Lesen",
+            "w = Lesen, x = Schreiben und chmod 777 vergibt Vollzugriff"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung",
+            "it_sicherheit"
+          ]
+        },
+        {
+          "question": "Ein Mountpoint dient:",
+          "answers": [
+            "VLAN-Zuordnung",
+            "DHCP-Zuweisung",
+            "Einbindung eines Dateisystems in die Verzeichnisstruktur",
+            "Lizenzverwaltung"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Dienste können unter Linux betrieben werden?",
+          "answers": [
+            "Samba, BIND und FTP-Server",
+            "VLAN-Controller, Samba und BIND",
+            "Nur FTP-Server und VLAN-Controller",
+            "BIND, FTP-Server und VLAN-Controller"
+          ],
+          "correct_index": 0,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik",
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Eine Softwareerweiterung bedeutet:",
+          "answers": [
+            "Austausch der Hardware",
+            "Ergänzung zusätzlicher Funktionen zur bestehenden Software",
+            "IP-Adresswechsel",
+            "Lizenzkündigung"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Merkmale hat das Spiralmodell der Softwareentwicklung?",
+          "answers": [
+            "Starre lineare Phasen ohne Feedbackschleifen",
+            "Iterative Entwicklung mit Risikobetrachtung in jeder Schleife",
+            "Lineare Phasen mit Risikobetrachtung",
+            "Iterative Entwicklung ohne Feedbackschleifen"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Eine Entscheidungstabelle dient:",
+          "answers": [
+            "Netzwerksegmentierung",
+            "strukturierter Darstellung komplexer Entscheidungsregeln",
+            "VLAN-Konfiguration",
+            "DNS-Auflösung"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Bestandteile gehören zum ER-Modell (Entity-Relationship-Modell)?",
+          "answers": [
+            "Entitäten, Attribute und Sequenzen",
+            "Entitäten, Beziehungen und Sequenzen",
+            "Entitäten, Attribute und Beziehungen",
+            "Attribute, Sequenzen und Beziehungen"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Ein Klassendiagramm zeigt:",
+          "answers": [
+            "Datenpakete",
+            "Netzwerkpfade",
+            "Klassen, Attribute und Beziehungen",
+            "VLAN-Strukturen"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Phasen gehören zur Softwareentwicklung?",
+          "answers": [
+            "Analyse, Planung und MAC-Adressierung",
+            "Analyse, Planung und Wartung",
+            "Planung, Wartung und MAC-Adressierung",
+            "Nur Analyse und MAC-Adressierung"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "In einer Facharbeit bedeutet Reproduzierbarkeit:",
+          "answers": [
+            "mehr Bilder einfügen",
+            "längere Einleitung schreiben",
+            "Vorgehen und Parameter so dokumentieren, dass Ergebnisse nachvollziehbar sind",
+            "VLAN dokumentieren"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "projektmanagement",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Welche Schritte gehören typischerweise zur Risikoanalyse?",
+          "answers": [
+            "VLAN-Konfiguration, Identifikation und Bewertung",
+            "Identifikation von Bedrohungen, Bewertung der Schadenshöhe und Ableitung von Maßnahmen",
+            "Nur Identifikation und VLAN-Konfiguration",
+            "Bewertung der Schadenshöhe und VLAN-Konfiguration"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "it_sicherheit",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Unique Local IPv6-Adressen beginnen mit:",
+          "answers": [
+            "fe80",
+            "fc00",
+            "2001",
+            "169.254"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Elemente gehören in eine saubere Projektdokumentation?",
+          "answers": [
+            "Versionshistorie, Quellenangaben und klare Gliederung",
+            "MAC-Tabelle, Versionshistorie und Quellenangaben",
+            "Nur Quellenangaben und MAC-Tabelle",
+            "Versionshistorie, klare Gliederung und MAC-Tabelle"
+          ],
+          "correct_index": 0,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Welche Maßnahme zählt zu den organisatorischen Maßnahmen (TOM)?",
+          "answers": [
+            "Firewall",
+            "Verschlüsselung",
+            "Sicherheitsrichtlinien",
+            "RAID-System"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit",
+            "datenschutz"
+          ]
+        },
+        {
+          "question": "Was ist der erste Schritt bei einer Schutzbedarfsanalyse?",
+          "answers": [
+            "Firewall konfigurieren",
+            "Schutzobjekte identifizieren",
+            "Backup testen",
+            "Benutzer schulen"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "it_sicherheit"
+          ]
+        },
+        {
+          "question": "Abnahmekriterien sollten sein:",
+          "answers": [
+            "ungenau formuliert",
+            "optional",
+            "messbar und überprüfbar",
+            "nur mündlich vereinbart"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Ein Gantt-Diagramm wird verwendet zur:",
+          "answers": [
+            "Netzwerksegmentierung",
+            "Lizenzverwaltung",
+            "Termin- und Ablaufplanung",
+            "Verschlüsselung von Daten"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "TCO steht für:",
+          "answers": [
+            "Technical Core Operation",
+            "Total Cost of Ownership",
+            "Time Controlled Operation",
+            "Terminal Client Option"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "wirtschaft"
+          ]
+        },
+        {
+          "question": "Welche Netzwerktopologie besitzt typischerweise einen zentralen Verteiler?",
+          "answers": [
+            "Ring",
+            "Bus",
+            "Stern",
+            "Linie"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Bei welcher Übertragungsart kann gleichzeitig gesendet und empfangen werden?",
+          "answers": [
+            "Simplex",
+            "Halbduplex",
+            "Vollduplex",
+            "Broadcast"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche Einheit wird auf Layer 3 des OSI-Modells übertragen?",
+          "answers": [
+            "Frame",
+            "Paket",
+            "Bit",
+            "Signal"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welcher DNS-Record verweist auf einen Mailserver?",
+          "answers": [
+            "A",
+            "CNAME",
+            "MX",
+            "TXT"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Eine IPv4-Adresse besteht aus:",
+          "answers": [
+            "16 Byte",
+            "48 Bit",
+            "32 Bit",
+            "182 Bit"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welche IPv6-Adresse ist Link-Local?",
+          "answers": [
+            "2001::/16",
+            "fc00::/7",
+            "fe80::/10",
+            "10.0.0.0/8"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Nested Virtualization bedeutet:",
+          "answers": [
+            "mehrere Benutzer auf einem Terminalserver",
+            "VLAN innerhalb eines VLANs",
+            "Virtualisierung innerhalb einer virtuellen Maschine",
+            "Cloudspeicher in einem Rechenzentrum"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welcher Schritt gehört typischerweise zum Roll-out-Prozess?",
+          "answers": [
+            "Routing-Tabelle erstellen",
+            "DHCP-Server konfigurieren",
+            "Paketierung der Software",
+            "RAID-Level bestimmen"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung",
+            "projektmanagement"
+          ]
+        },
+        {
+          "question": "Welcher Schritt gehört zum IT-Service-Lifecycle?",
+          "answers": [
+            "BIOS-Konfiguration",
+            "Patch-Kompilierung",
+            "Helpdesk",
+            "Netzsegmentierung"
+          ],
+          "correct_index": 2,
+          "difficulty": "medium",
+          "tags": [
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Ein OLA (Operational Level Agreement) ist:",
+          "answers": [
+            "ein externer Dienstleistervertrag",
+            "eine interne Vereinbarung zwischen Organisationseinheiten",
+            "ein Lizenzmodell",
+            "eine Firewall-Regel"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "wirtschaft",
+            "qualitaetsmanagement"
+          ]
+        },
+        {
+          "question": "Ein Mikrocomputer zeichnet sich aus durch:",
+          "answers": [
+            "integrierte I/O ohne Betriebssystem",
+            "vollständiges Betriebssystem und höhere Rechenleistung als ein Mikrocontroller",
+            "ausschließlich analoge Steuerung",
+            "keine Netzwerkschnittstelle"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "netzwerktechnik"
+          ]
+        },
+        {
+          "question": "Welches Symbol steht für 'Ausführen' bei Linux-Dateirechten?",
+          "answers": [
+            "r",
+            "w",
+            "x",
+            "e"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welches Linux-Verzeichnis enthält typischerweise Benutzerdateien?",
+          "answers": [
+            "/etc",
+            "/home",
+            "/var",
+            "/boot"
+          ],
+          "correct_index": 1,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welche Form der Softwareanpassung bezeichnet das Anpassen vorhandener Funktionen ohne Quellcodeänderung?",
+          "answers": [
+            "Individualentwicklung",
+            "Customizing",
+            "Implementierung",
+            "Kompilierung"
+          ],
+          "correct_index": 1,
+          "difficulty": "medium",
+          "tags": [
+            "softwareentwicklung"
+          ]
+        },
+        {
+          "question": "Welches UML-Diagramm stellt den zeitlichen Ablauf von Nachrichten zwischen Objekten dar?",
+          "answers": [
+            "Klassendiagramm",
+            "Aktivitätsdiagramm",
+            "Sequenzdiagramm",
+            "ER-Diagramm"
+          ],
+          "correct_index": 2,
+          "difficulty": "easy",
+          "tags": [
+            "softwareentwicklung"
+          ]
         }
       ]
     }
