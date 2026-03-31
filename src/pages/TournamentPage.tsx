@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Trophy, Users, Clock, Play, Plus, RefreshCw, Crown } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/errorHandler';
 import { useAuthStore } from '@/stores/authStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -22,6 +23,7 @@ export function TournamentPage() {
   const [maxPlayers, setMaxPlayers] = useState(8);
   const [questionCount, setQuestionCount] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const fetchTournaments = async () => {
     const { data } = await supabase
@@ -43,9 +45,10 @@ export function TournamentPage() {
 
   const createTournament = async () => {
     if (!user || !name.trim()) return;
+    setError('');
     setLoading(true);
     try {
-      const { data: t } = await supabase
+      const { data: t, error: createError } = await supabase
         .from('tournaments')
         .insert({
           name: name.trim(),
@@ -58,20 +61,23 @@ export function TournamentPage() {
         .select()
         .single();
 
-      if (t) {
-        await supabase.from('tournament_participants').insert({
-          tournament_id: t.id,
-          user_id: user.id,
-          is_eliminated: false,
-          current_round: 0,
-          total_score: 0,
-        });
-        setShowCreate(false);
-        setName('');
-        fetchTournaments();
+      if (createError || !t) {
+        setError(getErrorMessage(createError));
+        return;
       }
-    } catch (err: any) {
-      alert(err.message);
+
+      await supabase.from('tournament_participants').insert({
+        tournament_id: t.id,
+        user_id: user.id,
+        is_eliminated: false,
+        current_round: 0,
+        total_score: 0,
+      });
+      setShowCreate(false);
+      setName('');
+      fetchTournaments();
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -79,21 +85,23 @@ export function TournamentPage() {
 
   const joinTournament = async (tournamentId: string) => {
     if (!user) return;
-    const { error } = await supabase.from('tournament_participants').insert({
+    setError('');
+    const { error: joinError } = await supabase.from('tournament_participants').insert({
       tournament_id: tournamentId,
       user_id: user.id,
       is_eliminated: false,
       current_round: 0,
       total_score: 0,
     });
-    if (!error) fetchTournaments();
-    else alert('Bereits angemeldet');
+    if (!joinError) fetchTournaments();
+    else setError('Bereits angemeldet');
   };
 
   const startTournament = async (tournament: any) => {
     if (!user || tournament.status !== 'registering') return;
+    setError('');
     if (tournament.participants.length < 2) {
-      alert('Mindestens 2 Spieler benötigt');
+      setError('Mindestens 2 Spieler benötigt');
       return;
     }
 
@@ -150,6 +158,12 @@ export function TournamentPage() {
           Turnier erstellen
         </Button>
       </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400 mb-4">
+          {error}
+        </div>
+      )}
 
       <div className="flex flex-col gap-4">
         {tournaments.length === 0 ? (
