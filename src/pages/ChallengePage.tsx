@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Zap, Users, Plus, Clock, Check, X, Play, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/errorHandler';
 import { useAuthStore } from '@/stores/authStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -70,12 +71,12 @@ export function ChallengePage() {
       let challengedId: string | undefined;
 
       if (!isOpen && targetUsername.trim()) {
-        const { data: target } = await supabase
+        const { data: target, error: targetError } = await supabase
           .from('profiles')
           .select('id')
           .eq('username', targetUsername.trim())
           .single();
-        if (!target) throw new Error(`Spieler "${targetUsername}" nicht gefunden`);
+        if (targetError || !target) throw new Error(`Spieler "${targetUsername}" nicht gefunden`);
         if (target.id === user.id) throw new Error('Du kannst dich nicht selbst herausfordern');
         challengedId = target.id;
       }
@@ -109,8 +110,8 @@ export function ChallengePage() {
       setShowCreate(false);
       setTargetUsername('');
       fetchChallenges();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -165,8 +166,8 @@ export function ChallengePage() {
         navigate(`/game/${session.id}`);
       }
       fetchChallenges();
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
