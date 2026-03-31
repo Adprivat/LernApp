@@ -3,27 +3,27 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-subscription-leak-fix/02-01-PLAN.md
-last_updated: "2026-03-31T06:20:07.161Z"
+stopped_at: Completed 04-error-handling-hardening/04-02-PLAN.md
+last_updated: "2026-03-31T06:51:51.646Z"
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 8
+  completed_plans: 9
   percent: 50
 ---
 
 # Project State
 
 **Last updated:** 2026-03-30T11:04:47Z
-**Status:** Executing Phase 02
+**Status:** Executing Phase 04
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Nutzer können jederzeit stabil und sicher gegeneinander spielen — ohne Race Conditions, Memory Leaks oder Sicherheitslücken.
-**Current focus:** Phase 02 — subscription-leak-fix
+**Current focus:** Phase 04 — error-handling-hardening
 
 ## Current Phase
 
@@ -66,6 +66,9 @@ Progress: [█████░░░░░] 50%
 - [Phase 04-error-handling-hardening]: hint-based discrimination used first in handleSupabaseError — aligns with Phase 01 decision to discriminate by error.hint over code/message
 - [Phase 04-error-handling-hardening]: isSupabaseError requires only message+code as strings — hint/details may be null in non-RPC errors
 - [Phase 02-subscription-leak-fix]: supabase.removeChannel() + null ref is the canonical channel cleanup pattern — prevents orphaned channel accumulation in the Supabase client registry on repeated navigation
+- [Phase 04-error-handling-hardening]: fetchProfile logs non-PGRST116 errors but continues — missing profile handled by existing null check
+- [Phase 04-error-handling-hardening]: updateProfile returns early on error — prevents stale state from silent DB update failure
+- [Phase 04-error-handling-hardening]: joinSession treats PGRST116 as expected (player not yet joined) — only logs unexpected errors
 
 ## Performance Metrics
 
@@ -79,8 +82,9 @@ Progress: [█████░░░░░] 50%
 | Phase 03-auth-security-fix P02 | 5min | 2 tasks | 1 files |
 | Phase 04-error-handling-hardening P01 | 1min | 1 tasks | 1 files |
 | Phase 02-subscription-leak-fix P01 | 2min | 2 tasks | 2 files |
+| Phase 04-error-handling-hardening P02 | 2min | 2 tasks | 2 files |
 
 ## Session
 
-- **Last session:** 2026-03-31T06:20:07.157Z
-- **Stopped at:** Completed 02-subscription-leak-fix/02-01-PLAN.md
+- **Last session:** 2026-03-31T06:51:51.642Z
+- **Stopped at:** Completed 04-error-handling-hardening/04-02-PLAN.md
