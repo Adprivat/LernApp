@@ -51,7 +51,9 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
         navigate('/tournament');
         break;
       case 'game_invite':
-        if (notif.data?.session_id) {
+        if (notif.data?.friendship_type === 'request') {
+          navigate('/friends');
+        } else if (notif.data?.session_id) {
           navigate(`/lobby/${notif.data.session_id}`);
         } else {
           navigate('/groups');
