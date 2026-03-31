@@ -58,10 +58,7 @@ export function GamePage() {
   }, [sessionId]);
 
   const quitGame = async () => {
-    const { data: { user: authUser } } = await supabase.auth.getUser();
-    if (authUser && session) {
-      await supabase.from('game_players').update({ is_finished: true }).eq('session_id', session.id).eq('user_id', authUser.id);
-    }
+    await endGame();
     reset();
     navigate('/');
   };
