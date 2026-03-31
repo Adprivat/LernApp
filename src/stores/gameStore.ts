@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
+import { getErrorMessage } from '@/lib/errorHandler';
 import type { GameSession, GamePlayer, Question, GameAnswer } from '@/types';
 import questionsData from '@/data/questions.json';
 
@@ -103,14 +104,19 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    const existing = await supabase
+    const { data: existingData, error: existingError } = await supabase
       .from('game_players')
       .select('id')
       .eq('session_id', sessionId)
       .eq('user_id', user.id)
       .single();
 
-    if (!existing.data) {
+    // PGRST116 = row not found — expected when player hasn't joined yet
+    if (existingError && existingError.code !== 'PGRST116') {
+      console.error('joinSession check error:', getErrorMessage(existingError));
+    }
+
+    if (!existingData) {
       await supabase.from('game_players').insert({
         session_id: sessionId,
         user_id: user.id,
@@ -126,11 +132,16 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   loadSession: async (sessionId: string) => {
-    const { data: session } = await supabase
+    const { data: session, error: sessionError } = await supabase
       .from('game_sessions')
       .select('*')
       .eq('id', sessionId)
       .single();
+
+    if (sessionError) {
+      console.error('loadSession error:', getErrorMessage(sessionError));
+      return;
+    }
 
     if (!session) return;
 
