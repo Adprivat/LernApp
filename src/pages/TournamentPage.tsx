@@ -148,23 +148,27 @@ export function TournamentPage() {
             <Trophy className="text-yellow-400" size={32} />
             Turniere
           </h1>
-          <p className="text-slate-400 mt-1">Kämpfe gegen viele Spieler</p>
+          <p className="text-nexus-muted mt-1">Kämpfe gegen viele Spieler</p>
         </div>
-        <Button onClick={() => setShowCreate(true)} variant="primary">
-          <Plus size={18} />
-          Turnier erstellen
-        </Button>
+        <button
+          onClick={() => setShowCreate(true)}
+          className="group relative overflow-hidden inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-bold text-sm text-white cursor-pointer transition-all duration-300 active:scale-[0.97] bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#B24BFF]/40 hover:shadow-[0_0_20px_rgba(178,75,255,0.12)] hover:scale-[1.02]"
+        >
+          <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#B24BFF,transparent)]" />
+          <span className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[#B24BFF] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+          <span className="relative z-10 inline-flex items-center gap-2"><Plus size={18} /> Turnier erstellen</span>
+        </button>
       </div>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400 mb-4">
+        <div className="bg-nexus-danger/10 border border-nexus-danger/30 rounded-lg px-4 py-3 text-sm text-nexus-danger mb-4">
           {error}
         </div>
       )}
 
       <div className="flex flex-col gap-4">
         {tournaments.length === 0 ? (
-          <Card className="text-center py-16 text-slate-400">
+          <Card className="text-center py-16 text-nexus-muted">
             <Trophy size={48} className="mx-auto mb-4 opacity-30 text-yellow-400" />
             <h2 className="text-xl font-bold text-white mb-2">Keine aktiven Turniere</h2>
             <p className="text-sm">Erstelle das erste Turnier!</p>
@@ -183,7 +187,7 @@ export function TournamentPage() {
                       <Trophy size={18} className="text-yellow-400" />
                       <h2 className="text-xl font-bold text-white">{t.name}</h2>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <div className="flex items-center gap-2 text-sm text-nexus-muted">
                       <span>{t.category}</span>
                       <span>·</span>
                       <span>{t.question_count} Fragen</span>
@@ -204,16 +208,16 @@ export function TournamentPage() {
                         key={p.id}
                         username={p.profile?.username || '?'}
                         size="sm"
-                        className="ring-2 ring-slate-800"
+                        className="ring-2 ring-nexus-bg"
                       />
                     ))}
                     {t.participants.length > 8 && (
-                      <div className="w-8 h-8 rounded-full bg-slate-600 ring-2 ring-slate-800 flex items-center justify-center text-xs text-slate-300">
+                      <div className="w-8 h-8 rounded-full bg-nexus-surface ring-2 ring-nexus-bg flex items-center justify-center text-xs text-nexus-muted">
                         +{t.participants.length - 8}
                       </div>
                     )}
                   </div>
-                  <span className="text-sm text-slate-400">
+                  <span className="text-sm text-nexus-muted">
                     {t.participants.length}/{t.max_players} Spieler
                   </span>
                   {isFull && <Badge variant="warning" size="sm">Voll</Badge>}
@@ -261,14 +265,16 @@ export function TournamentPage() {
           />
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Maximale Teilnehmer</label>
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Maximale Teilnehmer</label>
             <div className="grid grid-cols-4 gap-2">
               {[4, 8, 16, 32].map(n => (
                 <button
                   key={n}
                   onClick={() => setMaxPlayers(n)}
-                  className={`py-2 rounded-xl font-bold transition-all ${
-                    maxPlayers === n ? 'bg-yellow-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`py-2 rounded-xl font-bold transition-all duration-300 cursor-pointer ${
+                    maxPlayers === n
+                      ? 'bg-gradient-to-b from-[#FFB300] to-[#E6A200] text-white shadow-[0_0_20px_rgba(255,179,0,0.3)] border border-white/10'
+                      : 'bg-nexus-surface/60 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface hover:border-nexus-accent/20'
                   }`}
                 >
                   {n}
@@ -278,31 +284,48 @@ export function TournamentPage() {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Kategorie</label>
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Kategorie</label>
             <CategorySelector selected={category} onChange={setCategory} />
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Fragen pro Runde</label>
-            <div className="grid grid-cols-4 gap-2">
-              {[5, 10, 15, 20].map(n => (
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Fragen pro Runde</label>
+            <div className="grid grid-cols-5 gap-3">
+              {[5, 10, 15, 20, 50].map(n => (
                 <button
                   key={n}
                   onClick={() => setQuestionCount(n)}
-                  className={`py-2 rounded-xl font-bold transition-all ${
-                    questionCount === n ? 'bg-yellow-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`relative overflow-hidden py-4 rounded-xl font-bold text-lg transition-all duration-300 cursor-pointer group backdrop-blur-sm ${
+                    questionCount === n
+                      ? 'bg-nexus-surface/90 text-white border border-[#B24BFF]/40 shadow-[0_0_20px_rgba(178,75,255,0.15)] scale-[1.03]'
+                      : 'bg-nexus-surface/50 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/70 hover:border-[#B24BFF]/20 hover:scale-[1.02]'
                   }`}
                 >
-                  {n}
+                  {/* Top accent line */}
+                  <span className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#B24BFF,transparent)] ${
+                    questionCount === n ? 'opacity-80' : 'opacity-0 group-hover:opacity-30'
+                  }`} />
+                  {questionCount === n && (
+                    <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#B24BFF] opacity-[0.1] blur-2xl" />
+                  )}
+                  <span className="relative z-10">{n}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <Button variant="primary" fullWidth onClick={createTournament} loading={loading} disabled={!name.trim()}>
-            <Trophy size={18} />
-            Turnier erstellen
-          </Button>
+          <button
+            onClick={createTournament}
+            disabled={loading || !name.trim()}
+            className="group relative w-full overflow-hidden rounded-2xl py-4 px-8 font-bold text-lg text-white tracking-wide cursor-pointer transition-all duration-300 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#B24BFF]/40 hover:shadow-[0_0_30px_rgba(178,75,255,0.15)] hover:scale-[1.02]"
+          >
+            <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#B24BFF,transparent)]" />
+            <span className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-[#B24BFF] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+            <span className="relative z-10 inline-flex items-center justify-center gap-2">
+              <Trophy size={18} />
+              {loading ? 'Wird erstellt...' : 'Turnier erstellen'}
+            </span>
+          </button>
         </div>
       </Modal>
     </div>

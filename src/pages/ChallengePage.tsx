@@ -204,6 +204,11 @@ export function ChallengePage() {
     }
   };
 
+  const cancelChallenge = async (challengeId: string) => {
+    await supabase.from('challenges').update({ status: 'cancelled' }).eq('id', challengeId);
+    fetchChallenges();
+  };
+
   const myReceived = challenges.filter(c => c.challenged_id === user?.id && c.status === 'pending');
   const mySent = challenges.filter(c => c.challenger_id === user?.id && c.status === 'pending');
 
@@ -215,12 +220,16 @@ export function ChallengePage() {
             <Zap className="text-amber-400" size={32} />
             Herausforderungen
           </h1>
-          <p className="text-slate-400 mt-1">Fordere andere Spieler heraus</p>
+          <p className="text-nexus-muted mt-1">Fordere andere Spieler heraus</p>
         </div>
-        <Button onClick={() => setShowCreate(true)} variant="primary">
-          <Plus size={18} />
-          Herausfordern
-        </Button>
+        <button
+          onClick={() => setShowCreate(true)}
+          className="group relative overflow-hidden inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-bold text-sm text-white cursor-pointer transition-all duration-300 active:scale-[0.97] bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#FF6B35]/40 hover:shadow-[0_0_20px_rgba(255,107,53,0.12)] hover:scale-[1.02]"
+        >
+          <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#FF6B35,transparent)]" />
+          <span className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[#FF6B35] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+          <span className="relative z-10 inline-flex items-center gap-2"><Plus size={18} /> Herausfordern</span>
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -234,7 +243,7 @@ export function ChallengePage() {
             )}
           </h2>
           {myReceived.length === 0 ? (
-            <Card className="text-center py-8 text-slate-400">
+            <Card className="text-center py-8 text-nexus-muted">
               <Zap size={32} className="mx-auto mb-2 opacity-30" />
               <p className="text-sm">Keine Herausforderungen</p>
             </Card>
@@ -246,13 +255,13 @@ export function ChallengePage() {
                     <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} />
                     <div>
                       <p className="font-semibold text-white">{c.challenger?.username}</p>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-nexus-muted">
                         {formatDistanceToNow(new Date(c.created_at), { addSuffix: true, locale: de })}
                       </p>
                     </div>
                     <Badge variant="warning" size="sm" className="ml-auto">{c.category}</Badge>
                   </div>
-                  <p className="text-sm text-slate-300 mb-3">{c.question_count} Fragen</p>
+                  <p className="text-sm text-nexus-text mb-3">{c.question_count} Fragen</p>
                   <div className="flex gap-2">
                     <Button
                       size="sm"
@@ -284,12 +293,12 @@ export function ChallengePage() {
           <h2 className="font-bold text-white mb-3 flex items-center gap-2">
             <Users size={16} className="text-blue-400" />
             Offene Herausforderungen
-            <button onClick={fetchChallenges} className="text-slate-400 hover:text-white ml-1">
+            <button onClick={fetchChallenges} className="p-1 rounded-lg text-nexus-muted hover:text-white hover:bg-nexus-surface/60 transition-all duration-300 ml-1 cursor-pointer">
               <RefreshCw size={14} />
             </button>
           </h2>
           {openChallenges.length === 0 ? (
-            <Card className="text-center py-8 text-slate-400">
+            <Card className="text-center py-8 text-nexus-muted">
               <Users size={32} className="mx-auto mb-2 opacity-30" />
               <p className="text-sm">Keine offenen Herausforderungen</p>
             </Card>
@@ -301,7 +310,7 @@ export function ChallengePage() {
                     <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} />
                     <div>
                       <p className="font-semibold text-white">{c.challenger?.username}</p>
-                      <p className="text-xs text-slate-400">wartet auf Gegner...</p>
+                      <p className="text-xs text-nexus-muted">wartet auf Gegner...</p>
                     </div>
                     <Badge variant="info" size="sm" className="ml-auto">{c.category}</Badge>
                   </div>
@@ -326,7 +335,7 @@ export function ChallengePage() {
       {mySent.length > 0 && (
         <div className="mt-6">
           <h2 className="font-bold text-white mb-3 flex items-center gap-2">
-            <Clock size={16} className="text-slate-400" />
+            <Clock size={16} className="text-nexus-muted" />
             Gesendete Herausforderungen
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -337,9 +346,16 @@ export function ChallengePage() {
                     <p className="text-sm text-white font-medium">
                       {c.is_open ? 'Offene Herausforderung' : `→ ${c.challenged?.username || '?'}`}
                     </p>
-                    <p className="text-xs text-slate-400">{c.question_count} Fragen · {c.category}</p>
+                    <p className="text-xs text-nexus-muted">{c.question_count} Fragen · {c.category}</p>
                   </div>
                   <Badge variant="warning" size="sm">Ausstehend</Badge>
+                  <button
+                    onClick={() => cancelChallenge(c.id)}
+                    className="p-1 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-colors"
+                    title="Herausforderung abbrechen"
+                  >
+                    <X size={14} />
+                  </button>
                 </div>
               </Card>
             ))}
@@ -350,19 +366,23 @@ export function ChallengePage() {
       {/* Create challenge modal */}
       <Modal isOpen={showCreate} onClose={() => { setShowCreate(false); setError(''); }} title="Herausforderung erstellen">
         <div className="flex flex-col gap-4">
-          <div className="flex bg-slate-700/50 rounded-xl p-1">
+          <div className="flex bg-nexus-bg/60 rounded-xl p-1 border border-nexus-border">
             <button
               onClick={() => setIsOpen(false)}
-              className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-                !isOpen ? 'bg-white text-slate-900 shadow' : 'text-slate-400'
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
+                !isOpen
+                  ? 'bg-nexus-surface/90 text-white border border-[#FF6B35]/30 shadow-[0_0_15px_rgba(255,107,53,0.1)]'
+                  : 'text-nexus-muted hover:text-white border border-transparent'
               }`}
             >
               Gezielt herausfordern
             </button>
             <button
               onClick={() => setIsOpen(true)}
-              className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-                isOpen ? 'bg-white text-slate-900 shadow' : 'text-slate-400'
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
+                isOpen
+                  ? 'bg-nexus-surface/90 text-white border border-[#FF6B35]/30 shadow-[0_0_15px_rgba(255,107,53,0.1)]'
+                  : 'text-nexus-muted hover:text-white border border-transparent'
               }`}
             >
               Offene Herausforderung
@@ -379,37 +399,54 @@ export function ChallengePage() {
           )}
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Kategorie</label>
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Kategorie</label>
             <CategorySelector selected={category} onChange={setCategory} />
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-300 block mb-2">Anzahl Fragen</label>
-            <div className="grid grid-cols-4 gap-2">
-              {[5, 10, 15, 20].map(n => (
+            <label className="text-sm font-medium text-nexus-muted block mb-2">Anzahl Fragen</label>
+            <div className="grid grid-cols-3 gap-3">
+              {[5, 10, 15, 20, 50, 0].map(n => (
                 <button
                   key={n}
                   onClick={() => setQuestionCount(n)}
-                  className={`py-2 rounded-xl font-bold transition-all ${
-                    questionCount === n ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  className={`relative overflow-hidden py-4 rounded-xl font-bold text-lg transition-all duration-300 cursor-pointer group backdrop-blur-sm ${
+                    questionCount === n
+                      ? 'bg-nexus-surface/90 text-white border border-[#FF6B35]/40 shadow-[0_0_20px_rgba(255,107,53,0.15)] scale-[1.03]'
+                      : 'bg-nexus-surface/50 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/70 hover:border-[#FF6B35]/20 hover:scale-[1.02]'
                   }`}
                 >
-                  {n}
+                  {/* Top accent line */}
+                  <span className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#FF6B35,transparent)] ${
+                    questionCount === n ? 'opacity-80' : 'opacity-0 group-hover:opacity-30'
+                  }`} />
+                  {questionCount === n && (
+                    <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#FF6B35] opacity-[0.1] blur-2xl" />
+                  )}
+                  <span className="relative z-10">{n === 0 ? '∞' : n}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400">
+            <div className="bg-nexus-danger/10 border border-nexus-danger/30 rounded-lg px-4 py-3 text-sm text-nexus-danger">
               {error}
             </div>
           )}
 
-          <Button variant="primary" fullWidth onClick={createChallenge} loading={loading}>
-            <Zap size={18} />
-            Herausforderung senden
-          </Button>
+          <button
+            onClick={createChallenge}
+            disabled={loading}
+            className="group relative w-full overflow-hidden rounded-2xl py-4 px-8 font-bold text-lg text-white tracking-wide cursor-pointer transition-all duration-300 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#FF6B35]/40 hover:shadow-[0_0_30px_rgba(255,107,53,0.15)] hover:scale-[1.02]"
+          >
+            <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#FF6B35,transparent)]" />
+            <span className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-[#FF6B35] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+            <span className="relative z-10 inline-flex items-center justify-center gap-2">
+              <Zap size={18} />
+              {loading ? 'Wird gesendet...' : 'Herausforderung senden'}
+            </span>
+          </button>
         </div>
       </Modal>
     </div>

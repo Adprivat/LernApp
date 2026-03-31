@@ -5,7 +5,6 @@ import { useGameStore } from '@/stores/gameStore';
 import { CategorySelector } from '@/components/game/CategorySelector';
 import { QuestionCard } from '@/components/game/QuestionCard';
 import { GameResultScreen } from '@/components/game/GameResultScreen';
-import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -111,11 +110,13 @@ export function LearnPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="mb-8 text-center">
-        <div className="inline-flex items-center justify-center w-14 h-14 bg-indigo-600 rounded-2xl mb-4">
-          <BookOpen size={28} className="text-white" />
+        <div className="relative inline-flex items-center justify-center w-14 h-14 bg-nexus-surface/80 backdrop-blur-sm rounded-xl mb-4 border border-[#2E5BFF]/25 shadow-[0_0_20px_rgba(46,91,255,0.15)] overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,#2E5BFF,transparent)]" />
+          <div className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-[#2E5BFF] opacity-[0.15] blur-xl" />
+          <BookOpen size={26} className="text-nexus-accent relative z-10 drop-shadow-[0_0_6px_rgba(151,169,255,0.4)]" />
         </div>
         <h1 className="text-3xl font-black text-white">Selbst lernen</h1>
-        <p className="text-slate-400 mt-2">Lerne in deinem eigenen Tempo</p>
+        <p className="text-nexus-muted mt-2">Lerne in deinem eigenen Tempo</p>
       </div>
 
       <div className="flex flex-col gap-6">
@@ -128,45 +129,61 @@ export function LearnPage() {
         {/* Question count */}
         <Card>
           <h2 className="font-bold text-white mb-4 flex items-center gap-2">
-            <Settings size={18} className="text-slate-400" />
+            <Settings size={18} className="text-nexus-accent" />
             Anzahl Fragen
           </h2>
-          <div className="grid grid-cols-4 gap-3">
-            {[5, 10, 15, 20].map(count => (
+          <div className="grid grid-cols-3 gap-3">
+            {[5, 10, 15, 20, 50, 0].map(count => (
               <button
                 key={count}
                 onClick={() => setQuestionCount(count)}
-                className={`py-3 rounded-xl font-bold text-lg transition-all ${
+                className={`relative overflow-hidden py-4 rounded-xl font-bold text-lg transition-all duration-300 cursor-pointer group backdrop-blur-sm ${
                   questionCount === count
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                    ? 'bg-nexus-surface/90 text-white border border-[#2E5BFF]/40 shadow-[0_0_20px_rgba(46,91,255,0.15)] scale-[1.03]'
+                    : 'bg-nexus-surface/50 border border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/70 hover:border-nexus-accent/20 hover:scale-[1.02]'
                 }`}
               >
-                {count}
+                {/* Top accent line */}
+                <span className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#2E5BFF,transparent)] ${
+                  questionCount === count ? 'opacity-80' : 'opacity-0 group-hover:opacity-30'
+                }`} />
+                {/* Radial glow blob */}
+                {questionCount === count && (
+                  <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#2E5BFF] opacity-[0.1] blur-2xl" />
+                )}
+                <span className="relative z-10">{count === 0 ? '∞' : count}</span>
               </button>
             ))}
           </div>
-          <p className="text-xs text-slate-500 mt-3 text-center">
-            20 Sekunden pro Frage
+          <p className="text-xs text-nexus-muted mt-3 text-center">
+            ⏱ 20 Sekunden pro Frage
           </p>
         </Card>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-400">
+          <div className="bg-nexus-danger/10 border border-nexus-danger/30 rounded-lg px-4 py-3 text-sm text-nexus-danger">
             {error}
           </div>
         )}
 
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          loading={loading}
+        <button
           onClick={handleStart}
+          disabled={loading}
+          className="group relative w-full overflow-hidden rounded-2xl py-4 px-8 font-bold text-lg text-white tracking-wide cursor-pointer transition-all duration-300 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border hover:border-[#2E5BFF]/40 hover:shadow-[0_0_30px_rgba(46,91,255,0.15)] hover:scale-[1.02]"
         >
-          <Play size={20} />
-          Spiel starten
-        </Button>
+          {/* Top accent line */}
+          <span className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300 bg-[linear-gradient(90deg,transparent,#2E5BFF,transparent)]" />
+          {/* Radial glow blob */}
+          <span className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-[#2E5BFF] opacity-[0.07] group-hover:opacity-[0.12] transition-opacity duration-500 blur-2xl" />
+          <span className="relative z-10 inline-flex items-center gap-2">
+            {loading ? (
+              <span className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <Play size={20} />
+            )}
+            Spiel starten
+          </span>
+        </button>
       </div>
     </div>
   );

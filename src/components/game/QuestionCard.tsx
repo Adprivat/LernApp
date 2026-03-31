@@ -75,20 +75,20 @@ export function QuestionCard({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <span className="text-sm text-slate-400">Frage</span>
+          <span className="text-sm text-nexus-muted">Frage</span>
           <h2 className="text-2xl font-bold text-white">
-            {questionNumber} <span className="text-slate-500">/ {totalQuestions}</span>
+            {questionNumber} <span className="text-nexus-muted">/ {totalQuestions}</span>
           </h2>
         </div>
 
         {/* Circular timer */}
         <div className="relative w-24 h-24">
           <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r={radius} fill="none" stroke="#1e293b" strokeWidth="8" />
+            <circle cx="50" cy="50" r={radius} fill="none" stroke="#091328" strokeWidth="8" />
             <circle
               cx="50" cy="50" r={radius}
               fill="none"
-              stroke={isLowTime ? '#ef4444' : '#6366f1'}
+              stroke={isLowTime ? '#FF3D00' : '#2E5BFF'}
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={circumference}
@@ -96,23 +96,23 @@ export function QuestionCard({
               className="transition-all duration-1000"
             />
           </svg>
-          <div className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isLowTime ? 'text-red-400' : 'text-white'}`}>
+          <div className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isLowTime ? 'text-nexus-danger' : 'text-white'}`}>
             {localTime}
           </div>
         </div>
       </div>
 
       {/* Progress bar */}
-      <div className="w-full bg-slate-700 rounded-full h-1.5">
+      <div className="w-full bg-nexus-surface rounded-full h-1.5">
         <div
-          className="bg-indigo-500 h-1.5 rounded-full transition-all"
+          className="bg-nexus-primary h-1.5 rounded-full transition-all"
           style={{ width: `${((questionNumber - 1) / totalQuestions) * 100}%` }}
         />
       </div>
 
       {/* Category badge */}
       <div className="flex items-center gap-2">
-        <span className="px-3 py-1 bg-slate-700 rounded-full text-xs font-medium text-slate-300 capitalize">
+        <span className="px-3 py-1 bg-nexus-surface rounded-full text-xs font-medium text-nexus-muted capitalize">
           {question.category}
         </span>
         <span className={clsx(
@@ -126,8 +126,8 @@ export function QuestionCard({
       </div>
 
       {/* Question */}
-      <div className="bg-slate-700/40 rounded-2xl p-6 border border-slate-600/50">
-        <p className="text-xl font-semibold text-white leading-relaxed">{question.question}</p>
+      <div className="bg-nexus-surface/60 backdrop-blur-sm rounded-lg p-6 border border-nexus-border">
+        <p className="text-xl font-semibold text-white leading-relaxed break-words overflow-hidden">{question.question}</p>
       </div>
 
       {/* Answers */}
@@ -137,18 +137,18 @@ export function QuestionCard({
           const showResult = localRevealed || revealed;
           const correct = isCorrect(index);
 
-          let buttonClass = 'bg-slate-700/50 border-slate-600 text-white hover:bg-slate-700 hover:border-slate-500';
+          let buttonClass = 'bg-nexus-surface/80 border-nexus-border text-white hover:bg-nexus-surface hover:border-nexus-accent/30 hover:shadow-[0_0_12px_rgba(151,169,255,0.08)]';
 
           if (showResult) {
             if (correct) {
-              buttonClass = 'bg-emerald-500/20 border-emerald-500 text-emerald-300';
+              buttonClass = 'bg-emerald-500/20 border-emerald-500 text-emerald-300 shadow-[0_0_15px_rgba(0,200,83,0.15)]';
             } else if (isSelected && !correct) {
-              buttonClass = 'bg-red-500/20 border-red-500 text-red-300 animate-shake';
+              buttonClass = 'bg-red-500/20 border-red-500 text-red-300 animate-shake shadow-[0_0_15px_rgba(255,61,0,0.15)]';
             } else {
-              buttonClass = 'bg-slate-800/50 border-slate-700 text-slate-500';
+              buttonClass = 'bg-nexus-bg/50 border-nexus-border text-nexus-muted opacity-50';
             }
           } else if (isSelected) {
-            buttonClass = 'bg-indigo-600/30 border-indigo-500 text-indigo-200';
+            buttonClass = 'bg-nexus-primary/30 border-nexus-primary text-nexus-accent shadow-[0_0_15px_rgba(46,91,255,0.2)]';
           }
 
           return (
@@ -157,7 +157,7 @@ export function QuestionCard({
               onClick={() => handleSelect(index)}
               disabled={localSelected !== null || localRevealed}
               className={clsx(
-                'flex items-center gap-3 px-5 py-4 rounded-xl border-2 transition-all duration-200 text-left font-medium',
+                'flex items-center gap-3 px-5 py-4 rounded-xl border-2 transition-all duration-300 text-left font-medium cursor-pointer',
                 'disabled:cursor-not-allowed',
                 buttonClass
               )}
@@ -166,20 +166,20 @@ export function QuestionCard({
                 'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold',
                 showResult && correct ? 'bg-emerald-500 text-white' :
                 showResult && isSelected && !correct ? 'bg-red-500 text-white' :
-                'bg-slate-600 text-slate-300'
+                'bg-nexus-surface text-nexus-muted'
               )}>
                 {showResult && correct ? <CheckCircle size={16} /> :
                  showResult && isSelected && !correct ? <XCircle size={16} /> :
                  answerLabels[index]}
               </span>
-              <span className="flex-1 leading-snug">{answer}</span>
+              <span className="flex-1 leading-snug break-words min-w-0">{answer}</span>
             </button>
           );
         })}
       </div>
 
       {timesUp && !localSelected && (
-        <div className="text-center py-2 px-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 font-medium">
+        <div className="text-center py-2 px-4 bg-nexus-danger/20 border border-nexus-danger/50 rounded-lg text-nexus-danger font-medium">
           Zeit abgelaufen! Die richtige Antwort war: {question.answers[question.correct_index]}
         </div>
       )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
@@ -8,6 +9,7 @@ import { QuestionCard } from '@/components/game/QuestionCard';
 import { Scoreboard } from '@/components/game/Scoreboard';
 import { GameChat } from '@/components/game/GameChat';
 import { GameResultScreen } from '@/components/game/GameResultScreen';
+import { Button } from '@/components/ui/Button';
 
 export function GamePage() {
   const { sessionId } = useParams<{ sessionId: string }>();
@@ -18,6 +20,7 @@ export function GamePage() {
     answers, gameOver, joinSession, submitAnswer, nextQuestion, endGame, reset
   } = useGameStore();
   const [localPlayers, setLocalPlayers] = useState(players);
+  const [showQuit, setShowQuit] = useState(false);
   const channelRef = useRef<RealtimeChannel | null>(null);
 
   useEffect(() => {
@@ -54,6 +57,15 @@ export function GamePage() {
     };
   }, [sessionId]);
 
+  const quitGame = async () => {
+    const { data: { user: authUser } } = await supabase.auth.getUser();
+    if (authUser && session) {
+      await supabase.from('game_players').update({ is_finished: true }).eq('session_id', session.id).eq('user_id', authUser.id);
+    }
+    reset();
+    navigate('/');
+  };
+
   const handleAnswer = async (index: number, timeTaken: number) => {
     await submitAnswer(index, timeTaken);
     setTimeout(() => {
@@ -78,8 +90,8 @@ export function GamePage() {
   if (!session) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-slate-400 text-center">
-          <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="text-nexus-muted text-center">
+          <div className="w-8 h-8 border-2 border-nexus-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           Spiel wird geladen...
         </div>
       </div>
@@ -105,6 +117,26 @@ export function GamePage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      <button
+        onClick={() => setShowQuit(true)}
+        className="fixed top-20 right-4 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-400/30 text-sm transition-colors"
+      >
+        <X size={14} /> Abbrechen
+      </button>
+
+      {showQuit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-sm w-full mx-4">
+            <h3 className="font-bold text-white text-lg mb-2">Spiel abbrechen?</h3>
+            <p className="text-slate-400 text-sm mb-5">Deine aktuellen Punkte gehen verloren.</p>
+            <div className="flex gap-3">
+              <Button variant="ghost" fullWidth onClick={() => setShowQuit(false)}>Weiterspielen</Button>
+              <Button variant="danger" fullWidth onClick={quitGame}>Abbrechen</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className={`grid ${isMultiplayer ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1'} gap-6`}>
         {/* Question */}
         <div className={isMultiplayer ? 'lg:col-span-2' : ''}>
@@ -120,7 +152,7 @@ export function GamePage() {
               revealed={answers[currentQuestionIndex] !== undefined}
             />
           ) : (
-            <div className="text-center text-slate-400 py-20">
+            <div className="text-center text-nexus-muted py-20">
               Warte auf nächste Frage...
             </div>
           )}
@@ -130,7 +162,7 @@ export function GamePage() {
         {isMultiplayer && (
           <div className="flex flex-col gap-4">
             {/* Live scoreboard */}
-            <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4">
+            <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-4">
               <h3 className="font-bold text-white mb-3 text-sm">Live-Rangliste</h3>
               <Scoreboard
                 players={localPlayers.length > 0 ? localPlayers : players}

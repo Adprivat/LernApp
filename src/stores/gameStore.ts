@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
 import { getErrorMessage } from '@/lib/errorHandler';
+import { useAuthStore } from '@/stores/authStore';
 import type { GameSession, GamePlayer, Question, GameAnswer } from '@/types';
 import questionsData from '@/data/questions.json';
 
@@ -33,6 +34,7 @@ function shuffleQuestions(category: string, count: number): Question[] {
     ...q,
   }));
   const shuffled = [...qs].sort(() => Math.random() - 0.5);
+  if (count === 0) return shuffled; // endless mode
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
@@ -86,6 +88,15 @@ export const useGameStore = create<GameState>((set, get) => ({
         .eq('session_id', session.id);
 
       const questions = shuffleQuestions(category, questionCount);
+
+      // For endless mode (questionCount === 0), use actual question count in DB record
+      if (questionCount === 0) {
+        await supabase
+          .from('game_sessions')
+          .update({ question_count: questions.length })
+          .eq('id', session.id);
+        session.question_count = questions.length;
+      }
 
       set({
         session,
@@ -178,7 +189,12 @@ export const useGameStore = create<GameState>((set, get) => ({
     const isCorrect = answerIndex === question.correct_index;
     const maxPoints = 100;
     const timeBonus = Math.max(0, Math.floor((20000 - timeTakenMs) / 200));
-    const pointsEarned = isCorrect ? maxPoints + timeBonus : 0;
+    const basePoints = isCorrect ? maxPoints + timeBonus : 0;
+    // Mode multiplier
+    const mode = session.mode;
+    const pointsEarned = mode === 'challenge' ? basePoints * 2
+      : mode === 'group' ? Math.floor(basePoints / 2)
+      : basePoints; // solo and tournament unchanged
 
     await supabase.from('game_answers').insert({
       session_id: session.id,
@@ -262,6 +278,19 @@ export const useGameStore = create<GameState>((set, get) => ({
       p_won: isWinner,
       p_correct: myPlayer?.correct_answers || 0,
     });
+
+    // Tournament winner bonus: add the score again as a bonus
+    if (session.mode === 'tournament' && isWinner) {
+      await supabase.rpc('update_player_stats', {
+        p_user_id: user.id,
+        p_score: myPlayer?.score || 0,
+        p_won: false, // don't double count the win
+        p_correct: 0,
+      });
+    }
+
+    // Refresh profile so stats on HomePage/ProfilePage are up to date
+    await useAuthStore.getState().fetchProfile();
 
     set({ gameOver: true });
   },

@@ -121,6 +121,16 @@ export function LobbyPage() {
     navigate(`/game/${sessionId}`);
   };
 
+  const leaveLobby = async () => {
+    if (user && sessionId) {
+      await supabase.from('game_players')
+        .delete()
+        .eq('session_id', sessionId)
+        .eq('user_id', user.id);
+    }
+    navigate(-1);
+  };
+
   const copyCode = () => {
     if (!sessionId) return;
     navigator.clipboard.writeText(sessionId);
@@ -130,8 +140,8 @@ export function LobbyPage() {
 
   if (!session) return (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="text-slate-400 text-center">
-        <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+      <div className="text-nexus-muted text-center">
+        <div className="w-8 h-8 border-2 border-nexus-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
         Lobby wird geladen...
       </div>
     </div>
@@ -148,11 +158,11 @@ export function LobbyPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
+        onClick={leaveLobby}
+        className="flex items-center gap-2 text-nexus-muted hover:text-white mb-6 transition-all duration-300 px-3 py-1.5 rounded-lg hover:bg-nexus-surface/60 border border-transparent hover:border-nexus-border cursor-pointer"
       >
         <ArrowLeft size={18} />
-        Zurück
+        Lobby verlassen
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -163,7 +173,7 @@ export function LobbyPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h1 className="text-xl font-black text-white">Lobby</h1>
-                <p className="text-slate-400 text-sm">{session.category} · {session.question_count} Fragen</p>
+                <p className="text-nexus-muted text-sm">{session.category} · {session.question_count} Fragen</p>
               </div>
               <div className="flex items-center gap-2">
                 <Badge variant={players.length >= maxPlayers ? 'danger' : 'success'}>
@@ -177,7 +187,7 @@ export function LobbyPage() {
                 {copied ? <Check size={14} /> : <Copy size={14} />}
                 {copied ? 'Kopiert!' : 'Code kopieren'}
               </Button>
-              <code className="flex-1 px-3 py-1.5 bg-slate-700 rounded-xl text-xs text-slate-300 font-mono truncate">
+              <code className="flex-1 px-3 py-1.5 bg-nexus-bg border border-nexus-border rounded-lg text-xs text-nexus-muted font-mono truncate">
                 {sessionId}
               </code>
             </div>
@@ -195,7 +205,7 @@ export function LobbyPage() {
                   <Badge variant={badge as any} size="sm">{tp.length}</Badge>
                 </div>
                 {tp.length === 0 ? (
-                  <div className="text-center py-4 text-slate-500 text-sm">Leer</div>
+                  <div className="text-center py-4 text-nexus-muted text-sm">Leer</div>
                 ) : (
                   <div className="flex flex-col gap-2">
                     {tp.map(p => (
