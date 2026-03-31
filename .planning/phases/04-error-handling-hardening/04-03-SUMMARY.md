@@ -120,3 +120,11 @@ None — all error messages are real text strings, no placeholders.
 ---
 *Phase: 04-error-handling-hardening*
 *Completed: 2026-03-31*
+
+## Self-Check: PASSED
+
+- FOUND: src/pages/ChallengePage.tsx
+- FOUND: src/pages/TournamentPage.tsx
+- FOUND: .planning/phases/04-error-handling-hardening/04-03-SUMMARY.md
+- FOUND commit: a91f1f8 (fix ChallengePage)
+- FOUND commit: 25ad582 (fix TournamentPage)

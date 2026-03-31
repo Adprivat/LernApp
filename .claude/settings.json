@@ -1,4 +1,35 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state advance-plan)",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state update-progress)",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state record-metric --phase \"02-subscription-leak-fix\" --plan \"02\" --duration \"5min\" --tasks \"2\" --files \"2\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" roadmap update-plan-progress 2)",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state record-metric --phase \"02-subscription-leak-fix\" --plan \"03\" --duration \"5min\" --tasks \"1\" --files \"1\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state add-decision --phase \"02-subscription-leak-fix\" --summary \"Use useRef instead of local const for channel storage — prevents orphaned channels in Supabase registry on React StrictMode double-mount\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state record-session --stopped-at \"Completed 02-subscription-leak-fix/02-02-PLAN.md \\(plan 02 of 02\\)\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state add-decision --phase \"02-subscription-leak-fix\" --summary \"Use supabase.removeChannel + null ref in BOTH cleanup paths \\(early-exit and useEffect return\\) to fully deregister notification channel from Supabase client registry\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state add-decision --phase \"02-subscription-leak-fix\" --summary \"Auth listener subscription.unsubscribe\\(\\) \\(onAuthStateChange\\) is distinct from realtime channel cleanup and must not be changed\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" roadmap update-plan-progress \"2\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" requirements mark-complete BUG-02)",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" state record-session --stopped-at \"Completed 02-subscription-leak-fix/02-03-PLAN.md \\(plan 03 of 03\\)\")",
+      "Bash(ls C:/DEV/LernAPP/LernApp/.planning/phases/02-subscription-leak-fix/02-01*)",
+      "Bash(echo \"EXIT_CODE: $?\")",
+      "Bash(node \".claude/get-shit-done/bin/gsd-tools.cjs\" phase complete \"02\")",
+      "WebSearch",
+      "Bash(node .claude/get-shit-done/bin/gsd-tools.cjs frontmatter validate \".planning/phases/03-auth-security-fix/03-01-PLAN.md\" --schema plan)",
+      "Bash(node .claude/get-shit-done/bin/gsd-tools.cjs verify plan-structure \".planning/phases/03-auth-security-fix/03-01-PLAN.md\")",
+      "Bash(node .claude/get-shit-done/bin/gsd-tools.cjs verify plan-structure \".planning/phases/03-auth-security-fix/03-02-PLAN.md\")",
+      "Bash(node .claude/get-shit-done/bin/gsd-tools.cjs commit \"docs\\(03\\): create phase plans for auth security fix\" --files .planning/phases/03-auth-security-fix/03-01-PLAN.md .planning/phases/03-auth-security-fix/03-02-PLAN.md .planning/ROADMAP.md)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Skill(gsd:progress)",
+      "Skill(gsd:progress:*)",
+      "Bash(npm install:*)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {

@@ -15,13 +15,13 @@ export function GamePage() {
   const navigate = useNavigate();
   const {
     session, players, questions, currentQuestion, currentQuestionIndex,
-    answers, gameOver, loadSession, submitAnswer, nextQuestion, endGame, reset
+    answers, gameOver, joinSession, submitAnswer, nextQuestion, endGame, reset
   } = useGameStore();
   const [localPlayers, setLocalPlayers] = useState(players);
   const channelRef = useRef<RealtimeChannel | null>(null);
 
   useEffect(() => {
-    if (sessionId) loadSession(sessionId);
+    if (sessionId) joinSession(sessionId);
     return () => { reset(); };
   }, [sessionId]);
 

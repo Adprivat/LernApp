@@ -48,23 +48,24 @@ export async function usernameToHashedEmail(username: string): Promise<string> {
     .map(b => b.toString(16).padStart(2, '0'))
     .join('');
 
-  // Result: 64-char hex string + @lernapp.local = 78 chars total
-  // RFC 5321 limits: local part <= 64 chars, total <= 254 chars
-  return `${hexHash}@lernapp.local`;
+  // Result: 64-char hex string + @example.com = 76 chars total
+  // @example.com is IANA-reserved (RFC 2606) with real DNS — passes all email validators.
+  // No real emails are ever sent; Supabase auth is password-only.
+  return `${hexHash}@example.com`;
 }
 
 /**
- * Returns true if the email is in the old plaintext format (username@lernapp.local
+ * Returns true if the email is in the old plaintext format (username@example.com
  * where the local part is NOT a 64-char hex string).
  * Used during lazy migration to identify users still on the old scheme.
  */
 export function isLegacyEmail(email: string): boolean {
-  const hashedPattern = /^[0-9a-f]{64}@lernapp\.local$/;
-  return email.endsWith('@lernapp.local') && !hashedPattern.test(email);
+  const hashedPattern = /^[0-9a-f]{64}@example\.com$/;
+  return email.endsWith('@example.com') && !hashedPattern.test(email);
 }
 
 /** @deprecated Use usernameToHashedEmail() instead. Kept for lazy migration fallback only. */
 export const usernameToEmail = (username: string): string =>
-  `${username.toLowerCase()}@lernapp.local`;
+  `${username.toLowerCase()}@example.com`;
 
 export default supabase;

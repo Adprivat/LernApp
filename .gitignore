@@ -3,3 +3,8 @@ dist/
 .env
 *.local
 .DS_Store
+.agents
+.claude
+.planning
+.idea/  
+claude.md

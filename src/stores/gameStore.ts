@@ -80,10 +80,16 @@ export const useGameStore = create<GameState>((set, get) => ({
         is_finished: false,
       });
 
+      const { data: players } = await supabase
+        .from('game_players')
+        .select('*, profile:profiles(*)')
+        .eq('session_id', session.id);
+
       const questions = shuffleQuestions(category, questionCount);
 
       set({
         session,
+        players: players || [],
         questions,
         currentQuestion: questions[0] || null,
         currentQuestionIndex: 0,
@@ -184,17 +190,27 @@ export const useGameStore = create<GameState>((set, get) => ({
       points_earned: pointsEarned,
     });
 
-    // Update player score
+    // Update player score — also update local store so endGame reads current values
     const player = get().players.find(p => p.user_id === user.id);
     if (player) {
+      const updatedPlayer = {
+        ...player,
+        score: player.score + pointsEarned,
+        correct_answers: player.correct_answers + (isCorrect ? 1 : 0),
+        wrong_answers: player.wrong_answers + (isCorrect ? 0 : 1),
+      };
       await supabase
         .from('game_players')
         .update({
-          score: player.score + pointsEarned,
-          correct_answers: player.correct_answers + (isCorrect ? 1 : 0),
-          wrong_answers: player.wrong_answers + (isCorrect ? 0 : 1),
+          score: updatedPlayer.score,
+          correct_answers: updatedPlayer.correct_answers,
+          wrong_answers: updatedPlayer.wrong_answers,
         })
         .eq('id', player.id);
+
+      set({
+        players: get().players.map(p => p.id === player.id ? updatedPlayer : p),
+      });
     }
 
     set({
