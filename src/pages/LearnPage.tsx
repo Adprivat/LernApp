@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { BookOpen, Settings, Play, Timer, TimerOff } from 'lucide-react';
 import { useGameStore } from '@/stores/gameStore';
 import { CategorySelector } from '@/components/game/CategorySelector';
@@ -24,10 +24,8 @@ export function LearnPage() {
   const { user } = useAuthStore();
   const {
     session, questions, currentQuestion, currentQuestionIndex,
-    answers, gameOver, loading, createSoloSession, submitAnswer, nextQuestion, endGame, reset
+    answers, gameOver, loading, createSoloSession, submitAnswer, nextQuestion, reset
   } = useGameStore();
-  const navigate = useNavigate();
-
   const handleStart = async () => {
     setError('');
     if (!category) {
