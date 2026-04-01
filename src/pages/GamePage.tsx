@@ -105,7 +105,14 @@ export function GamePage() {
           answers={answers}
           currentUserId={user?.id || ''}
           mode={session.mode}
-          onPlayAgain={() => navigate('/')}
+          onPlayAgain={() => {
+            const modeRoutes: Record<string, string> = {
+              challenge: '/challenge',
+              group: '/groups',
+              tournament: '/tournament',
+            };
+            navigate(modeRoutes[session.mode] || '/');
+          }}
         />
       </div>
     );

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { BookOpen, Settings, Play, Timer, TimerOff } from 'lucide-react';
+import { BookOpen, Settings, Play, Timer, TimerOff, X } from 'lucide-react';
 import { useGameStore } from '@/stores/gameStore';
 import { CategorySelector } from '@/components/game/CategorySelector';
 import { QuestionCard } from '@/components/game/QuestionCard';
 import { GameResultScreen } from '@/components/game/GameResultScreen';
 import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
 import { calculateQuestionTime } from '@/lib/utils';
@@ -21,11 +22,12 @@ export function LearnPage() {
   const [category, setCategory] = useState(initialCategory === 'general' ? '' : initialCategory);
   const [questionCount, setQuestionCount] = useState(initialCount);
   const [timerEnabled, setTimerEnabled] = useState(true);
+  const [showQuit, setShowQuit] = useState(false);
   const [error, setError] = useState('');
   const { user } = useAuthStore();
   const {
     session, questions, currentQuestion, currentQuestionIndex,
-    answers, gameOver, loading, createSoloSession, submitAnswer, nextQuestion, reset
+    answers, gameOver, loading, createSoloSession, submitAnswer, nextQuestion, endGame, reset
   } = useGameStore();
   const handleStart = async () => {
     setError('');
@@ -65,6 +67,13 @@ export function LearnPage() {
     setPageState('setup');
   };
 
+  const quitGame = async () => {
+    await endGame();
+    reset();
+    setShowQuit(false);
+    setPageState('setup');
+  };
+
   if (pageState === 'finished' || gameOver) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -98,6 +107,26 @@ export function LearnPage() {
   if (pageState === 'playing' && currentQuestion) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
+        <button
+          onClick={() => setShowQuit(true)}
+          className="fixed top-20 right-4 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-nexus-surface/80 border border-nexus-border text-nexus-muted hover:text-red-400 hover:border-red-400/30 text-sm transition-colors"
+        >
+          <X size={14} /> Abbrechen
+        </button>
+
+        {showQuit && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="bg-nexus-surface border border-nexus-border rounded-2xl p-6 max-w-sm w-full mx-4">
+              <h3 className="font-bold text-white text-lg mb-2">Spiel abbrechen?</h3>
+              <p className="text-nexus-muted text-sm mb-5">Deine aktuellen Punkte gehen verloren.</p>
+              <div className="flex gap-3">
+                <Button variant="ghost" fullWidth onClick={() => setShowQuit(false)}>Weiterspielen</Button>
+                <Button variant="danger" fullWidth onClick={quitGame}>Abbrechen</Button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <QuestionCard
           question={currentQuestion}
           questionNumber={currentQuestionIndex + 1}
