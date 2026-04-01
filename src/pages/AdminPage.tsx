@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ShieldCheck, Users, Trash2, Crown, Search, RefreshCw, BarChart3, Pencil, X, Trophy, Zap, RotateCcw } from 'lucide-react';
+import { ShieldCheck, Users, Trash2, Crown, Search, RefreshCw, BarChart3, Pencil, X, Trophy, Zap, RotateCcw, Megaphone, Plus, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -9,10 +9,10 @@ import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import type { Profile } from '@/types';
+import type { Profile, Announcement } from '@/types';
 import { useNavigate } from 'react-router-dom';
 
-type ActiveTab = 'users' | 'lobbies' | 'challenges' | 'tournaments';
+type ActiveTab = 'users' | 'lobbies' | 'challenges' | 'tournaments' | 'updates';
 
 interface EditStatsForm {
   total_score: number;
@@ -43,6 +43,14 @@ export function AdminPage() {
   const [challenges, setChallenges] = useState<any[]>([]);
   const [tournaments, setTournaments] = useState<any[]>([]);
 
+  // Announcements
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [announcementModal, setAnnouncementModal] = useState(false);
+  const [editAnnouncement, setEditAnnouncement] = useState<Announcement | null>(null);
+  const [annForm, setAnnForm] = useState({ title: '', content: '', category: 'info' as Announcement['category'] });
+  const [annLoading, setAnnLoading] = useState(false);
+  const [annError, setAnnError] = useState('');
+
   useEffect(() => {
     if (!user?.is_admin) { navigate('/'); return; }
     fetchUsers();
@@ -50,6 +58,7 @@ export function AdminPage() {
     fetchLobbies();
     fetchChallenges();
     fetchTournaments();
+    fetchAnnouncements();
   }, [user]);
 
   const fetchUsers = async () => {
@@ -172,6 +181,74 @@ export function AdminPage() {
     else fetchTournaments();
   };
 
+  const fetchAnnouncements = async () => {
+    const { data } = await supabase
+      .from('announcements')
+      .select('*')
+      .order('created_at', { ascending: false });
+    setAnnouncements(data || []);
+  };
+
+  const openCreateAnnouncement = () => {
+    setEditAnnouncement(null);
+    setAnnForm({ title: '', content: '', category: 'info' });
+    setAnnError('');
+    setAnnouncementModal(true);
+  };
+
+  const openEditAnnouncement = (ann: Announcement) => {
+    setEditAnnouncement(ann);
+    setAnnForm({ title: ann.title, content: ann.content, category: ann.category });
+    setAnnError('');
+    setAnnouncementModal(true);
+  };
+
+  const saveAnnouncement = async () => {
+    if (!annForm.title.trim() || !annForm.content.trim()) {
+      setAnnError('Titel und Inhalt sind erforderlich');
+      return;
+    }
+    setAnnLoading(true);
+    setAnnError('');
+    if (editAnnouncement) {
+      const { error } = await supabase.from('announcements').update({
+        title: annForm.title.trim(),
+        content: annForm.content.trim(),
+        category: annForm.category,
+        updated_at: new Date().toISOString(),
+      }).eq('id', editAnnouncement.id);
+      if (error) { setAnnError(getErrorMessage(error)); setAnnLoading(false); return; }
+    } else {
+      const { error } = await supabase.from('announcements').insert({
+        title: annForm.title.trim(),
+        content: annForm.content.trim(),
+        category: annForm.category,
+        created_by: user?.id,
+        is_published: false,
+      });
+      if (error) { setAnnError(getErrorMessage(error)); setAnnLoading(false); return; }
+    }
+    setAnnLoading(false);
+    setAnnouncementModal(false);
+    fetchAnnouncements();
+  };
+
+  const togglePublish = async (ann: Announcement) => {
+    const { error } = await supabase.from('announcements').update({
+      is_published: !ann.is_published,
+      updated_at: new Date().toISOString(),
+    }).eq('id', ann.id);
+    if (error) setError(getErrorMessage(error));
+    else fetchAnnouncements();
+  };
+
+  const deleteAnnouncement = async (ann: Announcement) => {
+    if (!confirm(`Update "${ann.title}" wirklich löschen?`)) return;
+    const { error } = await supabase.from('announcements').delete().eq('id', ann.id);
+    if (error) setError(getErrorMessage(error));
+    else fetchAnnouncements();
+  };
+
   const filtered = users.filter(u => u.username.toLowerCase().includes(search.toLowerCase()));
 
   if (!user?.is_admin) return null;
@@ -181,6 +258,7 @@ export function AdminPage() {
     { id: 'lobbies', label: 'Lobbys', count: lobbies.length },
     { id: 'challenges', label: 'Herausforderungen', count: challenges.length },
     { id: 'tournaments', label: 'Turniere', count: tournaments.length },
+    { id: 'updates', label: 'Updates', count: announcements.length },
   ];
 
   return (
@@ -485,6 +563,132 @@ export function AdminPage() {
           )}
         </Card>
       )}
+
+      {/* Updates tab */}
+      {activeTab === 'updates' && (
+        <Card padding="none">
+          <div className="flex items-center justify-between p-5 border-b border-nexus-border">
+            <h2 className="font-bold text-white flex items-center gap-2"><Megaphone size={18} className="text-blue-400" /> Update Board</h2>
+            <div className="flex gap-2">
+              <Button size="sm" variant="ghost" onClick={fetchAnnouncements}><RefreshCw size={14} /></Button>
+              <Button size="sm" variant="primary" onClick={openCreateAnnouncement}><Plus size={14} /> Neues Update</Button>
+            </div>
+          </div>
+          {announcements.length === 0 ? (
+            <div className="text-center py-16 text-nexus-muted">
+              <Megaphone size={40} className="mx-auto mb-3 opacity-30" />
+              <p className="font-semibold text-white mb-1">Keine Updates</p>
+              <p className="text-sm">Erstelle dein erstes Update für die Nutzer</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-nexus-border">
+              {announcements.map(ann => {
+                const catStyles: Record<string, { label: string; variant: 'info' | 'success' | 'warning' | 'danger' }> = {
+                  feature: { label: 'Feature', variant: 'success' },
+                  bugfix: { label: 'Bugfix', variant: 'danger' },
+                  wartung: { label: 'Wartung', variant: 'warning' },
+                  info: { label: 'Info', variant: 'info' },
+                };
+                const cat = catStyles[ann.category] || catStyles.info;
+                return (
+                  <div key={ann.id} className="px-5 py-4 hover:bg-nexus-surface/30 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-semibold text-white">{ann.title}</span>
+                          <Badge variant={cat.variant} size="sm">{cat.label}</Badge>
+                          {ann.is_published
+                            ? <Badge variant="success" size="sm">Veröffentlicht</Badge>
+                            : <Badge variant="default" size="sm">Entwurf</Badge>
+                          }
+                        </div>
+                        <p className="text-sm text-nexus-muted line-clamp-2">{ann.content}</p>
+                        <p className="text-xs text-nexus-muted mt-1">{new Date(ann.created_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                      </div>
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        <button
+                          onClick={() => togglePublish(ann)}
+                          className={`p-2 rounded-xl transition-all duration-300 cursor-pointer ${ann.is_published ? 'text-emerald-400 bg-emerald-400/10 hover:bg-emerald-400/20' : 'text-nexus-muted hover:text-emerald-400 hover:bg-emerald-400/10'}`}
+                          title={ann.is_published ? 'Zurückziehen' : 'Veröffentlichen'}
+                        >
+                          {ann.is_published ? <Eye size={14} /> : <EyeOff size={14} />}
+                        </button>
+                        <button
+                          onClick={() => openEditAnnouncement(ann)}
+                          className="p-2 rounded-xl text-nexus-muted hover:text-blue-400 hover:bg-blue-400/10 transition-all duration-300 cursor-pointer"
+                          title="Bearbeiten"
+                        >
+                          <Pencil size={14} />
+                        </button>
+                        <button
+                          onClick={() => deleteAnnouncement(ann)}
+                          className="p-2 rounded-xl text-nexus-muted hover:text-nexus-danger hover:bg-nexus-danger/10 transition-all duration-300 cursor-pointer"
+                          title="Löschen"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </Card>
+      )}
+
+      {/* Announcement modal */}
+      <Modal isOpen={announcementModal} onClose={() => setAnnouncementModal(false)} title={editAnnouncement ? 'Update bearbeiten' : 'Neues Update'}>
+        <div className="flex flex-col gap-4">
+          <Input
+            label="Titel"
+            value={annForm.title}
+            onChange={e => setAnnForm(f => ({ ...f, title: e.target.value }))}
+            placeholder="z.B. Neue Funktion: Gruppenspiel"
+          />
+          <div>
+            <label className="text-xs font-medium text-nexus-muted block mb-1">Inhalt</label>
+            <textarea
+              value={annForm.content}
+              onChange={e => setAnnForm(f => ({ ...f, content: e.target.value }))}
+              placeholder="Beschreibe das Update..."
+              rows={4}
+              className="w-full bg-nexus-bg border border-nexus-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-nexus-accent resize-none"
+            />
+          </div>
+          <div>
+            <label className="text-xs font-medium text-nexus-muted block mb-2">Kategorie</label>
+            <div className="grid grid-cols-4 gap-2">
+              {([
+                { key: 'feature', label: '✨ Feature', active: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' },
+                { key: 'bugfix', label: '🐛 Bugfix', active: 'bg-red-500/20 border-red-500/40 text-red-400' },
+                { key: 'wartung', label: '🔧 Wartung', active: 'bg-amber-500/20 border-amber-500/40 text-amber-400' },
+                { key: 'info', label: 'ℹ️ Info', active: 'bg-blue-500/20 border-blue-500/40 text-blue-400' },
+              ] as const).map(({ key, label, active }) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setAnnForm(f => ({ ...f, category: key }))}
+                  className={`py-2 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer border ${
+                    annForm.category === key
+                      ? active
+                      : 'border-nexus-border text-nexus-muted hover:text-white hover:bg-nexus-surface/50'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {annError && <p className="text-sm text-nexus-danger">{annError}</p>}
+          <div className="flex gap-3">
+            <Button variant="secondary" fullWidth onClick={() => setAnnouncementModal(false)}>Abbrechen</Button>
+            <Button variant="primary" fullWidth loading={annLoading} onClick={saveAnnouncement}>
+              {editAnnouncement ? 'Speichern' : 'Erstellen'}
+            </Button>
+          </div>
+        </div>
+      </Modal>
 
       {/* Edit stats modal */}
       <Modal isOpen={!!editTarget} onClose={() => setEditTarget(null)} title={`Statistiken: ${editTarget?.username}`}>

@@ -34,6 +34,7 @@ export function LeaderboardPage() {
       supabase
         .from('profiles')
         .select('*')
+        .eq('hide_from_leaderboard', false)
         .order(sortBy, { ascending: false })
         .limit(50)
         .then(({ data }) => { setPlayers(data || []); setLoading(false); });
@@ -59,7 +60,7 @@ export function LeaderboardPage() {
       const ids = sessions.map(s => s.id);
       const { data: gamePlayers } = await supabase
         .from('game_players')
-        .select('user_id, score, profile:profiles(id,username,is_online,avatar_url)')
+        .select('user_id, score, profile:profiles(id,username,is_online,avatar_url,hide_from_leaderboard)')
         .in('session_id', ids);
 
       if (!gamePlayers) { setTournamentEntries([]); setTournamentLoading(false); return; }
@@ -68,7 +69,7 @@ export function LeaderboardPage() {
       const map = new Map<string, TournamentEntry>();
       for (const p of gamePlayers) {
         const prof = (p as any).profile;
-        if (!prof) continue;
+        if (!prof || prof.hide_from_leaderboard) continue;
         if (!map.has(p.user_id)) {
           map.set(p.user_id, { user_id: p.user_id, username: prof.username, is_online: prof.is_online, avatar_url: prof.avatar_url, total_score: 0, games: 0 });
         }

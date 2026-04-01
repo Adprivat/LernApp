@@ -8,6 +8,7 @@ import { GameResultScreen } from '@/components/game/GameResultScreen';
 import { Card } from '@/components/ui/Card';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
+import { calculateQuestionTime } from '@/lib/utils';
 
 type PageState = 'setup' | 'playing' | 'finished';
 
@@ -102,7 +103,7 @@ export function LearnPage() {
           questionNumber={currentQuestionIndex + 1}
           totalQuestions={questions.length}
           onAnswer={handleAnswer}
-          timeLeft={timerEnabled ? 20 : 0}
+          timeLeft={timerEnabled ? calculateQuestionTime(currentQuestion.question, currentQuestion.answers) : 0}
           onTimeUp={handleTimeUp}
         />
       </div>

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, User, Lock, LogIn, UserPlus, AlertTriangle } from 'lucide-react';
+import { BookOpen, User, Lock, LogIn, UserPlus, AlertTriangle, Megaphone } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { Badge } from '@/components/ui/Badge';
 import { getErrorMessage } from '@/lib/errorHandler';
+import type { Announcement } from '@/types';
 
 export function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,8 +15,19 @@ export function LoginPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const { login, register, loading } = useAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase
+      .from('announcements')
+      .select('*')
+      .eq('is_published', true)
+      .order('created_at', { ascending: false })
+      .limit(3)
+      .then(({ data }) => setAnnouncements(data || []));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,6 +94,33 @@ export function LoginPage() {
             <p className="text-amber-200/70 mt-0.5">Diese App befindet sich in aktiver Entwicklung. Es können Fehler auftreten und Daten verloren gehen.</p>
           </div>
         </div>
+
+        {/* Announcements */}
+        {announcements.length > 0 && (
+          <div className="mb-6 flex flex-col gap-2">
+            {announcements.map(ann => {
+              const catStyles: Record<string, { label: string; variant: 'info' | 'success' | 'warning' | 'danger' }> = {
+                feature: { label: 'Feature', variant: 'success' },
+                bugfix: { label: 'Bugfix', variant: 'danger' },
+                wartung: { label: 'Wartung', variant: 'warning' },
+                info: { label: 'Info', variant: 'info' },
+              };
+              const cat = catStyles[ann.category] || catStyles.info;
+              return (
+                <div key={ann.id} className="flex items-start gap-3 bg-nexus-surface/50 border border-nexus-border rounded-xl px-4 py-3 backdrop-blur-sm">
+                  <Megaphone size={16} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-white text-sm">{ann.title}</span>
+                      <Badge variant={cat.variant} size="sm">{cat.label}</Badge>
+                    </div>
+                    <p className="text-xs text-nexus-muted mt-0.5 line-clamp-2">{ann.content}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Card */}
         <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg shadow-2xl shadow-nexus-primary/5 p-8">

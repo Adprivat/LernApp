@@ -20,6 +20,7 @@ create table if not exists public.profiles (
   best_streak integer not null default 0,
   is_admin boolean not null default false,
   is_online boolean not null default false,
+  hide_from_leaderboard boolean not null default false,
   last_seen timestamptz default now(),
   created_at timestamptz default now()
 );
@@ -686,4 +687,41 @@ create policy "Users can upload own avatar"
 create policy "Users can update own avatar"
   on storage.objects for update using (
     bucket_id = 'avatars' and auth.uid()::text = name
+  );
+
+-- ============================================================
+-- ANNOUNCEMENTS (Update Board)
+-- ============================================================
+create table if not exists public.announcements (
+  id uuid default uuid_generate_v4() primary key,
+  title text not null,
+  content text not null,
+  category text not null default 'info' check (category in ('feature', 'bugfix', 'wartung', 'info')),
+  is_published boolean not null default false,
+  created_by uuid references public.profiles(id) on delete set null,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+alter table public.announcements enable row level security;
+
+create policy "Published announcements are viewable by everyone"
+  on public.announcements for select using (
+    is_published = true
+    or exists (select 1 from public.profiles where id = auth.uid() and is_admin = true)
+  );
+
+create policy "Admins can create announcements"
+  on public.announcements for insert with check (
+    exists (select 1 from public.profiles where id = auth.uid() and is_admin = true)
+  );
+
+create policy "Admins can update announcements"
+  on public.announcements for update using (
+    exists (select 1 from public.profiles where id = auth.uid() and is_admin = true)
+  );
+
+create policy "Admins can delete announcements"
+  on public.announcements for delete using (
+    exists (select 1 from public.profiles where id = auth.uid() and is_admin = true)
   );

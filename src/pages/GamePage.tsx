@@ -10,6 +10,7 @@ import { Scoreboard } from '@/components/game/Scoreboard';
 import { GameChat } from '@/components/game/GameChat';
 import { GameResultScreen } from '@/components/game/GameResultScreen';
 import { Button } from '@/components/ui/Button';
+import { calculateQuestionTime } from '@/lib/utils';
 
 export function GamePage() {
   const { sessionId } = useParams<{ sessionId: string }>();
@@ -143,7 +144,7 @@ export function GamePage() {
               questionNumber={currentQuestionIndex + 1}
               totalQuestions={questions.length}
               onAnswer={handleAnswer}
-              timeLeft={20}
+              timeLeft={calculateQuestionTime(currentQuestion.question, currentQuestion.answers)}
               onTimeUp={handleTimeUp}
               selectedAnswer={answers[currentQuestionIndex]}
               revealed={answers[currentQuestionIndex] !== undefined}

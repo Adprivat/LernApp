@@ -9,8 +9,20 @@ export interface Profile {
   best_streak: number;
   is_admin: boolean;
   is_online: boolean;
+  hide_from_leaderboard: boolean;
   last_seen: string;
   created_at: string;
+}
+
+export interface Announcement {
+  id: string;
+  title: string;
+  content: string;
+  category: 'feature' | 'bugfix' | 'wartung' | 'info';
+  is_published: boolean;
+  created_by?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Question {

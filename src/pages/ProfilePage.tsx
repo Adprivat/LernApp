@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star, Target, Trophy, TrendingUp, Zap, BookOpen, Award, Lock, ChevronDown, ChevronRight, Camera } from 'lucide-react';
+import { Star, Target, Trophy, TrendingUp, Zap, BookOpen, Award, Lock, ChevronDown, ChevronRight, Camera, EyeOff, Eye } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -56,7 +56,7 @@ function PasswordChangeSection() {
 }
 
 export function ProfilePage() {
-  const { user, fetchProfile } = useAuthStore();
+  const { user, fetchProfile, updateProfile } = useAuthStore();
   const [achievements, setAchievements] = useState<UserAchievement[]>([]);
   const [recentGames, setRecentGames] = useState<any[]>([]);
   const [avatarUploading, setAvatarUploading] = useState(false);
@@ -233,6 +233,27 @@ export function ProfilePage() {
           {/* Password change */}
           <div className="mb-4">
             <PasswordChangeSection />
+          </div>
+
+          {/* Leaderboard visibility toggle */}
+          <div className="mb-4">
+            <button
+              onClick={() => updateProfile({ hide_from_leaderboard: !user.hide_from_leaderboard })}
+              className="w-full flex items-center gap-3 px-5 py-4 bg-nexus-surface/50 border border-nexus-border rounded-2xl hover:bg-nexus-surface/30 transition-colors"
+            >
+              {user.hide_from_leaderboard ? <EyeOff size={18} className="text-nexus-muted" /> : <Eye size={18} className="text-nexus-muted" />}
+              <div className="flex-1 text-left">
+                <p className="font-semibold text-white text-sm">Bestenliste</p>
+                <p className="text-xs text-nexus-muted">{user.hide_from_leaderboard ? 'Du bist ausgeblendet' : 'Du bist sichtbar'}</p>
+              </div>
+              <div className={`w-10 h-6 rounded-full p-0.5 transition-colors duration-300 ${
+                user.hide_from_leaderboard ? 'bg-red-500/30' : 'bg-emerald-500/30'
+              }`}>
+                <div className={`w-5 h-5 rounded-full bg-white shadow transition-transform duration-300 ${
+                  user.hide_from_leaderboard ? 'translate-x-4' : 'translate-x-0'
+                }`} />
+              </div>
+            </button>
           </div>
 
           <h2 className="font-bold text-white mb-4 flex items-center gap-2">

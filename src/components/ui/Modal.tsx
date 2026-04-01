@@ -24,7 +24,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
         className="absolute inset-0 bg-nexus-bg/80 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className={`relative bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg w-full ${sizeMap[size]} shadow-2xl shadow-nexus-primary/10`}>
+      <div className={`relative bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg w-full ${sizeMap[size]} shadow-2xl shadow-nexus-primary/10 flex flex-col max-h-[calc(100vh-2rem)]`}>
         {title && (
           <div className="flex items-center justify-between p-6 border-b border-nexus-border">
             <h2 className="text-lg font-bold text-white">{title}</h2>
@@ -36,7 +36,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
             </button>
           </div>
         )}
-        <div className="p-6">{children}</div>
+        <div className="p-6 overflow-y-auto min-h-0">{children}</div>
       </div>
     </div>
   );

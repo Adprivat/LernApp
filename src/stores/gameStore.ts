@@ -4,6 +4,7 @@ import { getErrorMessage } from '@/lib/errorHandler';
 import { useAuthStore } from '@/stores/authStore';
 import type { GameSession, GamePlayer, Question, GameAnswer } from '@/types';
 import questionsData from '@/data/questions.json';
+import { calculateQuestionTime } from '@/lib/utils';
 
 interface GameState {
   session: GameSession | null;
@@ -203,7 +204,8 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     const isCorrect = answerIndex === question.correct_index;
     const maxPoints = 100;
-    const timeBonus = Math.max(0, Math.floor((20000 - timeTakenMs) / 200));
+    const questionTimeMs = calculateQuestionTime(question.question, question.answers) * 1000;
+    const timeBonus = Math.max(0, Math.floor((questionTimeMs - timeTakenMs) / (questionTimeMs / 100)));
     const basePoints = isCorrect ? maxPoints + timeBonus : 0;
     // Mode multiplier
     const mode = session.mode;

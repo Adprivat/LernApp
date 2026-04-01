@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Users, Trophy, Zap, Star, Target, TrendingUp, Crown, AlertTriangle } from 'lucide-react';
+import { BookOpen, Users, Trophy, Zap, Star, Target, TrendingUp, Crown, AlertTriangle, Megaphone } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { supabase } from '@/lib/supabase';
 import { Card } from '@/components/ui/Card';
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
-import type { Profile } from '@/types';
+import type { Profile, Announcement } from '@/types';
 
 const modes = [
   {
@@ -51,11 +51,13 @@ export function HomePage() {
   const { user } = useAuthStore();
   const [leaderboard, setLeaderboard] = useState<Profile[]>([]);
   const [onlinePlayers, setOnlinePlayers] = useState(0);
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
 
   useEffect(() => {
     supabase
       .from('profiles')
       .select('*')
+      .eq('hide_from_leaderboard', false)
       .order('total_score', { ascending: false })
       .limit(5)
       .then(({ data }) => setLeaderboard(data || []));
@@ -65,6 +67,14 @@ export function HomePage() {
       .select('id', { count: 'exact' })
       .eq('is_online', true)
       .then(({ count }) => setOnlinePlayers(count || 0));
+
+    supabase
+      .from('announcements')
+      .select('*')
+      .eq('is_published', true)
+      .order('created_at', { ascending: false })
+      .limit(5)
+      .then(({ data }) => setAnnouncements(data || []));
   }, []);
 
   if (!user) return null;
@@ -218,6 +228,37 @@ export function HomePage() {
               Vollständige Bestenliste →
             </Link>
           </Card>
+
+          {/* Announcements */}
+          {announcements.length > 0 && (
+            <Card>
+              <h2 className="font-bold text-white mb-4 flex items-center gap-2">
+                <Megaphone size={18} className="text-blue-400" />
+                Updates
+              </h2>
+              <div className="flex flex-col gap-2">
+                {announcements.map(ann => {
+                  const catStyles: Record<string, { label: string; variant: 'info' | 'success' | 'warning' | 'danger' }> = {
+                    feature: { label: 'Feature', variant: 'success' },
+                    bugfix: { label: 'Bugfix', variant: 'danger' },
+                    wartung: { label: 'Wartung', variant: 'warning' },
+                    info: { label: 'Info', variant: 'info' },
+                  };
+                  const cat = catStyles[ann.category] || catStyles.info;
+                  return (
+                    <div key={ann.id} className="p-3 bg-nexus-bg/60 rounded-lg border border-nexus-border">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-semibold text-white">{ann.title}</span>
+                        <Badge variant={cat.variant} size="sm">{cat.label}</Badge>
+                      </div>
+                      <p className="text-xs text-nexus-muted line-clamp-2">{ann.content}</p>
+                      <p className="text-xs text-nexus-muted/50 mt-1">{new Date(ann.created_at).toLocaleDateString('de-DE')}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Card>
+          )}
         </div>
       </div>
     </div>

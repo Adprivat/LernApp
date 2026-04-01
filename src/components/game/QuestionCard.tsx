@@ -68,7 +68,7 @@ export function QuestionCard({
   const isCorrect = (index: number) => index === question.correct_index;
   const radius = 40;
   const circumference = 2 * Math.PI * radius;
-  const progress = (localTime / 20) * circumference;
+  const progress = (localTime / timeLeft) * circumference;
   const isLowTime = localTime <= 5;
 
   const answerLabels = ['A', 'B', 'C', 'D'];
