@@ -201,9 +201,9 @@ export function LearnPage() {
               )}
               <div>
                 <h2 className="font-bold text-white">Zeitlimit</h2>
-                <p className="text-xs text-nexus-muted mt-0.5">
-                  {timerEnabled ? '20 Sekunden pro Frage' : 'Kein Zeitlimit — lerne ohne Druck'}
-                </p>
+                {!timerEnabled && (
+                  <p className="text-xs text-nexus-muted mt-0.5">Kein Zeitlimit — lerne ohne Druck</p>
+                )}
               </div>
             </div>
             <button

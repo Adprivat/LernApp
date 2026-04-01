@@ -236,7 +236,7 @@ export function HomePage() {
                 <Megaphone size={18} className="text-blue-400" />
                 Updates
               </h2>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 max-h-80 overflow-y-auto pr-1">
                 {announcements.map(ann => {
                   const catStyles: Record<string, { label: string; variant: 'info' | 'success' | 'warning' | 'danger' }> = {
                     feature: { label: 'Feature', variant: 'success' },
@@ -251,7 +251,7 @@ export function HomePage() {
                         <span className="text-sm font-semibold text-white">{ann.title}</span>
                         <Badge variant={cat.variant} size="sm">{cat.label}</Badge>
                       </div>
-                      <p className="text-xs text-nexus-muted line-clamp-2">{ann.content}</p>
+                      <p className="text-xs text-nexus-muted">{ann.content}</p>
                       <p className="text-xs text-nexus-muted/50 mt-1">{new Date(ann.created_at).toLocaleDateString('de-DE')}</p>
                     </div>
                   );

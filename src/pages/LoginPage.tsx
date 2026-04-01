@@ -97,7 +97,7 @@ export function LoginPage() {
 
         {/* Announcements */}
         {announcements.length > 0 && (
-          <div className="mb-6 flex flex-col gap-2">
+          <div className="mb-6 flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
             {announcements.map(ann => {
               const catStyles: Record<string, { label: string; variant: 'info' | 'success' | 'warning' | 'danger' }> = {
                 feature: { label: 'Feature', variant: 'success' },
@@ -114,7 +114,7 @@ export function LoginPage() {
                       <span className="font-semibold text-white text-sm">{ann.title}</span>
                       <Badge variant={cat.variant} size="sm">{cat.label}</Badge>
                     </div>
-                    <p className="text-xs text-nexus-muted mt-0.5 line-clamp-2">{ann.content}</p>
+                    <p className="text-xs text-nexus-muted mt-0.5">{ann.content}</p>
                   </div>
                 </div>
               );
