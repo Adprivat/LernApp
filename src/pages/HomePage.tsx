@@ -213,7 +213,7 @@ export function HomePage() {
                   }`}>
                     {idx === 0 ? '👑' : idx + 1}
                   </span>
-                  <Avatar username={player.username} size="sm" isOnline={player.is_online} />
+                  <Avatar username={player.username} size="sm" isOnline={player.is_online} avatarUrl={player.avatar_url} />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white truncate">
                       {player.username}

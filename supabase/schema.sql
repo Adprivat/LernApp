@@ -273,10 +273,23 @@ create table if not exists public.chat_messages (
 alter table public.chat_messages enable row level security;
 
 create policy "Chat messages viewable by session participants"
-  on public.chat_messages for select using (auth.uid() is not null);
+  on public.chat_messages for select using (
+    exists (
+      select 1 from public.game_players gp
+      where gp.session_id = chat_messages.session_id
+        and gp.user_id = auth.uid()
+    )
+  );
 
-create policy "Authenticated users can send messages"
-  on public.chat_messages for insert with check (auth.uid() = user_id);
+create policy "Session participants can send messages"
+  on public.chat_messages for insert with check (
+    auth.uid() = user_id
+    and exists (
+      select 1 from public.game_players gp
+      where gp.session_id = chat_messages.session_id
+        and gp.user_id = auth.uid()
+    )
+  );
 
 -- ============================================================
 -- NOTIFICATIONS

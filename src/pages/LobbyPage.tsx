@@ -36,7 +36,7 @@ export function LobbyPage() {
 
     const { data: p } = await supabase
       .from('game_players')
-      .select('*, profile:profiles(username, is_online)')
+      .select('*, profile:profiles(username, is_online, avatar_url)')
       .eq('session_id', sessionId);
     setPlayers(p || []);
 
@@ -232,7 +232,7 @@ export function LobbyPage() {
                   <div className="flex flex-col gap-2">
                     {tp.map(p => (
                       <div key={p.id} className="flex items-center gap-2">
-                        <Avatar username={p.profile?.username || '?'} size="sm" isOnline={p.profile?.is_online} />
+                        <Avatar username={p.profile?.username || '?'} size="sm" isOnline={p.profile?.is_online} avatarUrl={p.profile?.avatar_url} />
                         <span className="text-sm text-white flex-1 truncate">{p.profile?.username}</span>
                         {p.user_id === session.host_id && <Crown size={12} className="text-yellow-400 flex-shrink-0" />}
                         {p.is_ready && p.user_id !== session.host_id && (

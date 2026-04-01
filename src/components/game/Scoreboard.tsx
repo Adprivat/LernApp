@@ -44,6 +44,7 @@ export function Scoreboard({ players, currentUserId }: ScoreboardProps) {
               username={player.profile?.username || 'Unbekannt'}
               size="md"
               isOnline={player.profile?.is_online}
+              avatarUrl={player.profile?.avatar_url}
             />
 
             {/* Name + stats */}

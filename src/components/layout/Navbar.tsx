@@ -99,7 +99,7 @@ export function Navbar() {
                 to="/profile"
                 className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-nexus-surface/60 border border-transparent hover:border-nexus-border transition-all duration-300"
               >
-                <Avatar username={user.username} size="sm" isOnline />
+                <Avatar username={user.username} size="sm" isOnline avatarUrl={user.avatar_url} />
                 <span className="hidden sm:block text-sm font-medium text-white">{user.username}</span>
               </Link>
 

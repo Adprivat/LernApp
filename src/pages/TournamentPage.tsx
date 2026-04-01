@@ -30,7 +30,7 @@ export function TournamentPage() {
   const fetchTournaments = async () => {
     const { data } = await supabase
       .from('tournaments')
-      .select('*, participants:tournament_participants(*, profile:profiles(username, is_online))')
+      .select('*, participants:tournament_participants(*, profile:profiles(username, is_online, avatar_url))')
       .in('status', ['registering', 'active'])
       .order('created_at', { ascending: false });
     setTournaments(data || []);
@@ -282,6 +282,7 @@ export function TournamentPage() {
                         username={p.profile?.username || '?'}
                         size="sm"
                         className="ring-2 ring-nexus-bg"
+                        avatarUrl={p.profile?.avatar_url}
                       />
                     ))}
                     {t.participants.length > 8 && (

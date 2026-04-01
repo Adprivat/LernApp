@@ -34,7 +34,7 @@ export function ChallengePage() {
     if (!user) return;
     const { data } = await supabase
       .from('challenges')
-      .select('*, challenger:profiles!challenger_id(username, is_online), challenged:profiles!challenged_id(username, is_online)')
+      .select('*, challenger:profiles!challenger_id(username, is_online, avatar_url), challenged:profiles!challenged_id(username, is_online, avatar_url)')
       .or(`challenger_id.eq.${user.id},challenged_id.eq.${user.id}`)
       .in('status', ['pending'])
       .order('created_at', { ascending: false });
@@ -42,7 +42,7 @@ export function ChallengePage() {
 
     const { data: open } = await supabase
       .from('challenges')
-      .select('*, challenger:profiles!challenger_id(username, is_online)')
+      .select('*, challenger:profiles!challenger_id(username, is_online, avatar_url)')
       .eq('is_open', true)
       .eq('status', 'pending')
       .neq('challenger_id', user.id)
@@ -258,7 +258,7 @@ export function ChallengePage() {
               {myReceived.map(c => (
                 <Card key={c.id} padding="sm">
                   <div className="flex items-center gap-3 mb-3">
-                    <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} />
+                    <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} avatarUrl={c.challenger?.avatar_url} />
                     <div>
                       <p className="font-semibold text-white">{c.challenger?.username}</p>
                       <p className="text-xs text-nexus-muted">
@@ -313,7 +313,7 @@ export function ChallengePage() {
               {openChallenges.map(c => (
                 <Card key={c.id} padding="sm">
                   <div className="flex items-center gap-3 mb-3">
-                    <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} />
+                    <Avatar username={c.challenger?.username || '?'} size="sm" isOnline={c.challenger?.is_online} avatarUrl={c.challenger?.avatar_url} />
                     <div>
                       <p className="font-semibold text-white">{c.challenger?.username}</p>
                       <p className="text-xs text-nexus-muted">wartet auf Gegner...</p>

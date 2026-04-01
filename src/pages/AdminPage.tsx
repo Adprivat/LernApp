@@ -353,7 +353,7 @@ export function AdminPage() {
                     <tr key={profile.id} className="border-b border-nexus-border hover:bg-nexus-surface/30 transition-all duration-300">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <Avatar username={profile.username} size="sm" isOnline={profile.is_online} />
+                          <Avatar username={profile.username} size="sm" isOnline={profile.is_online} avatarUrl={profile.avatar_url} />
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-semibold text-white">{profile.username}</span>

@@ -40,7 +40,7 @@ export function GameChat({ sessionId }: GameChatProps) {
       }, async (payload) => {
         const { data, error } = await supabase
           .from('chat_messages')
-          .select('*, profile:profiles(username, is_online)')
+          .select('*, profile:profiles(username, is_online, avatar_url)')
           .eq('id', payload.new.id)
           .single();
         if (error) {
@@ -114,7 +114,7 @@ export function GameChat({ sessionId }: GameChatProps) {
                   key={msg.id}
                   className={`flex gap-2 ${msg.user_id === user?.id ? 'flex-row-reverse' : ''}`}
                 >
-                  <Avatar username={msg.profile?.username || '?'} size="sm" />
+                  <Avatar username={msg.profile?.username || '?'} size="sm" avatarUrl={msg.profile?.avatar_url} />
                   <div className={`max-w-[75%] ${msg.user_id === user?.id ? 'items-end' : 'items-start'} flex flex-col gap-0.5`}>
                     {msg.user_id !== user?.id && (
                       <span className="text-xs text-nexus-muted px-1">{msg.profile?.username}</span>

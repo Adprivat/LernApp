@@ -29,7 +29,7 @@ export function GroupPage() {
   const fetchLobbies = async () => {
     const { data } = await supabase
       .from('game_sessions')
-      .select('*, players:game_players(*, profile:profiles(username, is_online))')
+      .select('*, players:game_players(*, profile:profiles(username, is_online, avatar_url))')
       .eq('mode', 'group')
       .eq('status', 'waiting')
       .order('created_at', { ascending: false })
@@ -206,7 +206,7 @@ export function GroupPage() {
                   {/* Players */}
                   <div className="flex -space-x-2 mb-3">
                     {players.slice(0, 6).map((p: any) => (
-                      <Avatar key={p.id} username={p.profile?.username || '?'} size="sm" className="ring-2 ring-nexus-bg" />
+                      <Avatar key={p.id} username={p.profile?.username || '?'} size="sm" className="ring-2 ring-nexus-bg" avatarUrl={p.profile?.avatar_url} />
                     ))}
                   </div>
 
