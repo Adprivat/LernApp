@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
@@ -18,6 +18,8 @@ import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { AdminPage } from '@/pages/AdminPage';
 import { GuidePage } from '@/pages/GuidePage';
 import { FriendsPage } from '@/pages/FriendsPage';
+import { ImpressumPage } from '@/pages/ImpressumPage';
+import { DatenschutzPage } from '@/pages/DatenschutzPage';
 import { BeamsBackground } from '@/components/ui/BeamsBackground';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
@@ -261,9 +263,18 @@ function AppLayout() {
           <Route path="/admin" element={<RequireAuth><AdminPage /></RequireAuth>} />
           <Route path="/guide" element={<RequireAuth><GuidePage /></RequireAuth>} />
           <Route path="/friends" element={<RequireAuth><FriendsPage /></RequireAuth>} />
+          <Route path="/impressum" element={<ImpressumPage />} />
+          <Route path="/datenschutz" element={<DatenschutzPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+      <footer className="py-4 text-center text-xs text-nexus-muted border-t border-nexus-border/30">
+        <div className="flex justify-center gap-3">
+          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
+          <span>·</span>
+          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
+        </div>
+      </footer>
     </div>
     </BeamsBackground>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, User, Lock, LogIn, UserPlus, AlertTriangle, Megaphone } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { supabase } from '@/lib/supabase';
@@ -220,6 +220,13 @@ export function LoginPage() {
               <div className="text-xs text-nexus-muted">{label}</div>
             </div>
           ))}
+        </div>
+
+        {/* Legal links */}
+        <div className="flex justify-center gap-4 mt-6 text-xs text-nexus-muted">
+          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
+          <span>·</span>
+          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
         </div>
       </div>
     </div>
