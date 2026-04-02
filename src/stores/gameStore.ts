@@ -50,8 +50,24 @@ function shuffleQuestions(category: string, count: number): Question[] {
 
   if (qs.length === 0) return [];
   const shuffled = [...qs].sort(() => Math.random() - 0.5);
-  if (count === 0) return shuffled; // endless mode
-  return shuffled.slice(0, Math.min(count, shuffled.length));
+
+  // Shuffle answer order per question so correct_index position varies
+  const withShuffledAnswers = shuffled.map((q) => {
+    const indices = [0, 1, 2, 3];
+    // Fisher-Yates shuffle
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return {
+      ...q,
+      answers: indices.map((i) => q.answers[i]),
+      correct_index: indices.indexOf(q.correct_index),
+    };
+  });
+
+  if (count === 0) return withShuffledAnswers; // endless mode
+  return withShuffledAnswers.slice(0, Math.min(count, withShuffledAnswers.length));
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
