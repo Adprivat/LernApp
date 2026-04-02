@@ -15,6 +15,7 @@ interface GameState {
   answers: Record<number, number>; // question_index -> answer_index
   timeLeft: number;
   gameOver: boolean;
+  statsFinalized: boolean;
   loading: boolean;
 
   createSoloSession: (category: string, questionCount: number) => Promise<string>;
@@ -23,6 +24,7 @@ interface GameState {
   submitAnswer: (answerIndex: number, timeTakenMs: number) => Promise<void>;
   nextQuestion: () => void;
   endGame: () => void;
+  finalizeMultiplayerGame: (finalPlayers: GamePlayer[]) => Promise<void>;
   reset: () => void;
 }
 
@@ -91,6 +93,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   answers: {},
   timeLeft: 20,
   gameOver: false,
+  statsFinalized: false,
   loading: false,
 
   createSoloSession: async (category: string, questionCount: number) => {
@@ -300,9 +303,52 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { session, players } = get();
     const { data: { user } } = await supabase.auth.getUser();
     if (!session || !user) {
+      set({ gameOver: true, statsFinalized: true });
+      return;
+    }
+
+    const isMultiplayer = session.mode !== 'solo';
+
+    // Mark this player as finished
+    await supabase
+      .from('game_players')
+      .update({ is_finished: true })
+      .eq('session_id', session.id)
+      .eq('user_id', user.id);
+
+    if (isMultiplayer) {
+      // Multiplayer: just mark gameOver, wait for all players before finalizing
       set({ gameOver: true });
       return;
     }
+
+    // Solo mode: finalize immediately
+    // Transition session active→finished
+    await supabase
+      .from('game_sessions')
+      .update({ status: 'finished', finished_at: new Date().toISOString() })
+      .eq('id', session.id);
+
+    const myPlayer = players.find(p => p.user_id === user.id);
+
+    await supabase.rpc('update_player_stats', {
+      p_user_id: user.id,
+      p_score: myPlayer?.score || 0,
+      p_won: false,
+      p_correct: myPlayer?.correct_answers || 0,
+    });
+
+    await useAuthStore.getState().fetchProfile();
+    set({ gameOver: true, statsFinalized: true });
+  },
+
+  finalizeMultiplayerGame: async (finalPlayers: GamePlayer[]) => {
+    const { session, statsFinalized } = get();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!session || !user || statsFinalized) return;
+
+    // Mark statsFinalized immediately to prevent double calls
+    set({ statsFinalized: true, players: finalPlayers });
 
     // Transition session active→finished; only succeeds for the first caller
     const { data: didTransition } = await supabase
@@ -313,7 +359,6 @@ export const useGameStore = create<GameState>((set, get) => ({
       .select('id')
       .maybeSingle();
 
-    // If already finished by another player, still mark it finished (idempotent)
     if (!didTransition) {
       await supabase
         .from('game_sessions')
@@ -321,16 +366,10 @@ export const useGameStore = create<GameState>((set, get) => ({
         .eq('id', session.id);
     }
 
-    await supabase
-      .from('game_players')
-      .update({ is_finished: true })
-      .eq('session_id', session.id)
-      .eq('user_id', user.id);
-
-    // Update profile stats
-    const myPlayer = players.find(p => p.user_id === user.id);
-    const isWinner = players.length > 1 &&
-      myPlayer?.score === Math.max(...players.map(p => p.score));
+    // Update profile stats with final scores
+    const myPlayer = finalPlayers.find(p => p.user_id === user.id);
+    const isWinner = finalPlayers.length > 1 &&
+      myPlayer?.score === Math.max(...finalPlayers.map(p => p.score));
 
     await supabase.rpc('update_player_stats', {
       p_user_id: user.id,
@@ -339,17 +378,17 @@ export const useGameStore = create<GameState>((set, get) => ({
       p_correct: myPlayer?.correct_answers || 0,
     });
 
-    // Tournament winner bonus: add the score again as a bonus
+    // Tournament winner bonus
     if (session.mode === 'tournament' && isWinner) {
       await supabase.rpc('update_player_stats', {
         p_user_id: user.id,
         p_score: myPlayer?.score || 0,
-        p_won: false, // don't double count the win
+        p_won: false,
         p_correct: 0,
       });
     }
 
-    // Tournament: check if all players are now finished → mark tournament as done
+    // Tournament: mark tournament as done if all finished
     if (session.mode === 'tournament' && session.tournament_id) {
       const { data: remaining } = await supabase
         .from('game_players')
@@ -365,7 +404,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       }
     }
 
-    // Tournament end: first finisher sends winner notification to all participants
+    // Tournament end: first finisher sends winner notification
     if (session.mode === 'tournament' && didTransition) {
       const { data: allPlayers } = await supabase
         .from('game_players')
@@ -391,10 +430,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       }
     }
 
-    // Refresh profile so stats on HomePage/ProfilePage are up to date
     await useAuthStore.getState().fetchProfile();
-
-    set({ gameOver: true });
   },
 
   reset: () => {
@@ -407,6 +443,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       answers: {},
       timeLeft: 20,
       gameOver: false,
+      statsFinalized: false,
       loading: false,
     });
   },

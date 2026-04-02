@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { useAuthStore } from '@/stores/authStore';
@@ -18,7 +18,7 @@ export function GamePage() {
   const navigate = useNavigate();
   const {
     session, players, questions, currentQuestion, currentQuestionIndex,
-    answers, gameOver, joinSession, submitAnswer, nextQuestion, endGame, reset
+    answers, gameOver, statsFinalized, joinSession, submitAnswer, nextQuestion, endGame, finalizeMultiplayerGame, reset
   } = useGameStore();
   const [localPlayers, setLocalPlayers] = useState(players);
   const [showQuit, setShowQuit] = useState(false);
@@ -57,6 +57,17 @@ export function GamePage() {
       }
     };
   }, [sessionId]);
+
+  // Multiplayer: detect when all players finished → finalize
+  useEffect(() => {
+    if (!session || session.mode === 'solo' || !gameOver || statsFinalized) return;
+    const activePlayers = localPlayers.length > 0 ? localPlayers : players;
+    if (activePlayers.length === 0) return;
+    const allFinished = activePlayers.every((p: any) => p.is_finished);
+    if (allFinished) {
+      finalizeMultiplayerGame(activePlayers);
+    }
+  }, [gameOver, statsFinalized, localPlayers, players, session]);
 
   const quitGame = async () => {
     await endGame();
@@ -97,6 +108,31 @@ export function GamePage() {
   }
 
   if (gameOver) {
+    const activePlayers = localPlayers.length > 0 ? localPlayers : players;
+    const isMultiplayerGame = session.mode !== 'solo';
+    const allFinished = activePlayers.every((p: any) => p.is_finished);
+    const finishedCount = activePlayers.filter((p: any) => p.is_finished).length;
+
+    // Multiplayer: wait for all players before showing results
+    if (isMultiplayerGame && (!allFinished || !statsFinalized)) {
+      return (
+        <div className="max-w-md mx-auto px-4 py-16 text-center">
+          <Loader2 className="w-10 h-10 text-nexus-primary animate-spin mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-white mb-2">Warte auf andere Spieler...</h2>
+          <p className="text-nexus-muted mb-6">
+            {finishedCount} von {activePlayers.length} Spielern fertig
+          </p>
+          <div className="bg-nexus-surface/70 backdrop-blur-sm border border-nexus-border rounded-lg p-4">
+            <h3 className="font-bold text-white mb-3 text-sm">Aktueller Punktestand</h3>
+            <Scoreboard
+              players={activePlayers}
+              currentUserId={user?.id}
+            />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
         <GameResultScreen
