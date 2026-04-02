@@ -67,6 +67,7 @@ export function GroupPage() {
           current_question_index: 0,
           host_id: user.id,
           max_players: teamSize * 2,
+          question_seed: Math.floor(Math.random() * 2147483647),
         })
         .select()
         .single();

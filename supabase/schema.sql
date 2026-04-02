@@ -59,6 +59,7 @@ create table if not exists public.game_sessions (
   host_id uuid references public.profiles(id) on delete set null,
   tournament_id uuid,
   max_players integer default 4,
+  question_seed integer,
   created_at timestamptz default now(),
   finished_at timestamptz
 );
@@ -472,11 +473,11 @@ BEGIN
   -- Create game session (same transaction — rolls back if this fails)
   INSERT INTO public.game_sessions (
     mode, status, category, question_count,
-    time_per_question, current_question_index, host_id
+    time_per_question, current_question_index, host_id, question_seed
   ) VALUES (
     'challenge', 'waiting',
     v_challenge.category, v_challenge.question_count,
-    20, 0, v_challenge.challenger_id
+    20, 0, v_challenge.challenger_id, floor(random() * 2147483647)::integer
   )
   RETURNING id INTO v_session_id;
 
@@ -542,11 +543,11 @@ BEGIN
   -- Create game session (same transaction)
   INSERT INTO public.game_sessions (
     mode, status, category, question_count,
-    time_per_question, current_question_index, host_id
+    time_per_question, current_question_index, host_id, question_seed
   ) VALUES (
     'challenge', 'waiting',
     v_challenge.category, v_challenge.question_count,
-    20, 0, v_challenge.challenger_id
+    20, 0, v_challenge.challenger_id, floor(random() * 2147483647)::integer
   )
   RETURNING id INTO v_session_id;
 
@@ -612,11 +613,11 @@ BEGIN
   -- Create game session for this tournament round (same transaction)
   INSERT INTO public.game_sessions (
     mode, status, category, question_count,
-    time_per_question, current_question_index, host_id, tournament_id
+    time_per_question, current_question_index, host_id, tournament_id, question_seed
   ) VALUES (
     'tournament', 'active',
     v_tournament.category, v_tournament.question_count,
-    20, 0, p_starter_id, v_tournament.id
+    20, 0, p_starter_id, v_tournament.id, floor(random() * 2147483647)::integer
   )
   RETURNING id INTO v_session_id;
 

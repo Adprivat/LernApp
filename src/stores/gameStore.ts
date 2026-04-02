@@ -26,7 +26,19 @@ interface GameState {
   reset: () => void;
 }
 
-function shuffleQuestions(category: string, count: number): Question[] {
+// Mulberry32: deterministic PRNG from a 32-bit seed
+function mulberry32(seed: number): () => number {
+  let s = seed | 0;
+  return () => {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffleQuestions(category: string, count: number, seed?: number | null): Question[] {
+  const rng = seed != null ? mulberry32(seed) : Math.random;
   const data = questionsData as any;
   const catData = data.categories[category];
 
@@ -49,14 +61,14 @@ function shuffleQuestions(category: string, count: number): Question[] {
   }
 
   if (qs.length === 0) return [];
-  const shuffled = [...qs].sort(() => Math.random() - 0.5);
+  const shuffled = [...qs].sort(() => rng() - 0.5);
 
   // Shuffle answer order per question so correct_index position varies
   const withShuffledAnswers = shuffled.map((q) => {
     const indices = [0, 1, 2, 3];
     // Fisher-Yates shuffle
     for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rng() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
     return {
@@ -87,6 +99,8 @@ export const useGameStore = create<GameState>((set, get) => ({
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('Nicht angemeldet');
 
+      const seed = Math.floor(Math.random() * 2147483647);
+
       const { data: session, error } = await supabase
         .from('game_sessions')
         .insert({
@@ -98,6 +112,7 @@ export const useGameStore = create<GameState>((set, get) => ({
           current_question_index: 0,
           host_id: user.id,
           question_start_time: new Date().toISOString(),
+          question_seed: seed,
         })
         .select()
         .single();
@@ -119,7 +134,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         .select('*, profile:profiles(*)')
         .eq('session_id', session.id);
 
-      const questions = shuffleQuestions(category, questionCount);
+      const questions = shuffleQuestions(category, questionCount, seed);
 
       // For endless mode (questionCount === 0), use actual question count in DB record
       if (questionCount === 0) {
@@ -199,7 +214,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       .select('*, profile:profiles(*)')
       .eq('session_id', sessionId);
 
-    const questions = shuffleQuestions(session.category, session.question_count);
+    const questions = shuffleQuestions(session.category, session.question_count, session.question_seed);
 
     set({
       session,
