@@ -222,12 +222,6 @@ export function LoginPage() {
           ))}
         </div>
 
-        {/* Legal links */}
-        <div className="flex justify-center gap-4 mt-6 text-xs text-nexus-muted">
-          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
-          <span>·</span>
-          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
-        </div>
       </div>
     </div>
   );
