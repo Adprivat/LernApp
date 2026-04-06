@@ -272,6 +272,8 @@ function AppLayout() {
         <div className="flex justify-center gap-3">
           <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
           <span>·</span>
+          <a href="https://buymeacoffee.com/adrianschuz" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">☕ Buy me a Coffee</a>
+          <span>·</span>
           <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
         </div>
       </footer>
