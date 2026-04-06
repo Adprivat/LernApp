@@ -1,6 +1,7 @@
-import React from 'react';
-import { Trophy, Star, Target, Zap, RotateCcw, Home } from 'lucide-react';
+import React, { useState } from 'react';
+import { Trophy, Star, Target, Zap, RotateCcw, Home, Flag } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { Modal } from '@/components/ui/Modal';
 import { Scoreboard } from './Scoreboard';
 import type { GamePlayer, Question, GameAnswer } from '@/types';
 import { Link } from 'react-router-dom';
@@ -24,6 +25,41 @@ export function GameResultScreen({
   const total = questions.length;
   const correct = myPlayer?.correct_answers || 0;
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+  const [reportQuestion, setReportQuestion] = useState<Question | null>(null);
+  const [reportMessage, setReportMessage] = useState('');
+  const [reportSending, setReportSending] = useState(false);
+  const [reportSent, setReportSent] = useState(false);
+  const [reportError, setReportError] = useState('');
+
+  const handleReportSubmit = async () => {
+    if (!reportQuestion || !reportMessage.trim()) return;
+    setReportSending(true);
+    setReportError('');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          subject: `Frage melden: ${reportQuestion.question}`,
+          message: reportMessage,
+          from_name: 'LernApp Spieler',
+        }),
+      });
+      if (!res.ok) throw new Error('Senden fehlgeschlagen');
+      setReportSent(true);
+      setTimeout(() => {
+        setReportQuestion(null);
+        setReportMessage('');
+        setReportSent(false);
+      }, 2000);
+    } catch {
+      setReportError('Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.');
+    } finally {
+      setReportSending(false);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-8 max-w-2xl mx-auto py-8 animate-fade-in-up">
@@ -95,6 +131,13 @@ export function GameResultScreen({
                     <p className="text-xs text-nexus-muted mt-1">Nicht beantwortet</p>
                   )}
                 </div>
+                <button
+                  onClick={() => { setReportQuestion(q); setReportMessage(''); setReportError(''); setReportSent(false); }}
+                  className="flex-shrink-0 p-1.5 rounded-lg text-nexus-muted hover:text-amber-400 hover:bg-nexus-bg/60 transition-all duration-200"
+                  title="Frage melden"
+                >
+                  <Flag size={14} />
+                </button>
               </div>
             );
           })}
@@ -124,6 +167,49 @@ export function GameResultScreen({
           </Button>
         </Link>
       </div>
+
+      {/* Report Question Modal */}
+      <Modal
+        isOpen={reportQuestion !== null}
+        onClose={() => { setReportQuestion(null); setReportMessage(''); setReportError(''); setReportSent(false); }}
+        title="Frage melden"
+        size="md"
+      >
+        {reportSent ? (
+          <div className="text-center py-4">
+            <div className="text-4xl mb-3">✅</div>
+            <p className="text-emerald-400 font-medium">Vielen Dank! Deine Meldung wurde gesendet.</p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4">
+            <div className="bg-nexus-bg/60 border border-nexus-border rounded-lg p-3">
+              <p className="text-xs text-nexus-muted mb-1">Betroffene Frage:</p>
+              <p className="text-sm text-white font-medium">{reportQuestion?.question}</p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-nexus-muted">Deine Nachricht</label>
+              <textarea
+                value={reportMessage}
+                onChange={e => setReportMessage(e.target.value)}
+                placeholder="Beschreibe das Problem mit dieser Frage..."
+                rows={4}
+                className="bg-nexus-bg border border-nexus-border rounded-lg px-4 py-3 text-white placeholder-nexus-muted focus:outline-none focus:border-nexus-primary focus:ring-2 focus:ring-nexus-primary/20 focus:shadow-[0_0_10px_rgba(46,91,255,0.15)] transition-all duration-300 ease-in-out w-full resize-none"
+              />
+            </div>
+            {reportError && <p className="text-sm text-red-400">{reportError}</p>}
+            <Button
+              variant="primary"
+              onClick={handleReportSubmit}
+              loading={reportSending}
+              disabled={!reportMessage.trim()}
+              fullWidth
+            >
+              <Flag size={16} />
+              Meldung senden
+            </Button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
