@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import type { RealtimeChannel } from '@supabase/supabase-js';
@@ -174,6 +174,50 @@ function playNotificationSound(type?: string) {
   }
 }
 
+function BmcFooter() {
+  const [bmcOpen, setBmcOpen] = useState(false);
+
+  return (
+    <footer className="border-t border-nexus-border/30">
+      {bmcOpen && (
+        <div className="bg-nexus-bg/95 backdrop-blur-sm border-b border-nexus-border/30 overflow-hidden transition-all duration-300">
+          <div className="max-w-md mx-auto px-4 py-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm font-medium text-white">☕ Unterstütze das Projekt</span>
+              <button
+                onClick={() => setBmcOpen(false)}
+                className="text-nexus-muted hover:text-white text-xs transition-colors cursor-pointer"
+              >
+                Schließen ✕
+              </button>
+            </div>
+            <iframe
+              src="https://buymeacoffee.com/widget/page/adrianschuz?description=Support%20Adrian%20Schultz&color=%232E5BFF"
+              className="w-full rounded-lg border border-nexus-border"
+              style={{ height: '400px', border: 'none' }}
+              title="Buy me a Coffee"
+            />
+          </div>
+        </div>
+      )}
+      <div className="py-4 text-center text-xs text-nexus-muted">
+        <div className="flex justify-center gap-3">
+          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
+          <span>·</span>
+          <button
+            onClick={() => setBmcOpen(!bmcOpen)}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            ☕ Buy me a Coffee
+          </button>
+          <span>·</span>
+          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function AppLayout() {
   const { user, fetchProfile } = useAuthStore();
   const { addNotification } = useNotificationStore();
@@ -268,15 +312,7 @@ function AppLayout() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <footer className="py-4 text-center text-xs text-nexus-muted border-t border-nexus-border/30">
-        <div className="flex justify-center gap-3">
-          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
-          <span>·</span>
-          <a href="https://buymeacoffee.com/adrianschuz" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">☕ Buy me a Coffee</a>
-          <span>·</span>
-          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
-        </div>
-      </footer>
+      <BmcFooter />
     </div>
     </BeamsBackground>
   );

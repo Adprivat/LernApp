@@ -22,6 +22,8 @@ export function ImpressumPage() {
           <section>
             <h2 className="text-white font-bold mb-2">Verantwortlich</h2>
             <p>Adrian Schultz</p>
+            <p>Oberste Gasse 16</p>
+            <p>34117 Kassel</p>
           </section>
 
           <section>
