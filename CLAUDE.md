@@ -20,8 +20,7 @@ src/
 ├── stores/            # Zustand-Stores: authStore, gameStore, notificationStore
 ├── lib/               # supabase.ts (Client-Singleton)
 ├── types/             # index.ts (alle TypeScript-Typen)
-└── data/
-    └── questions.json # Fragendatenbank (6 Kategorien, 60+ Fragen)
+└── data/              # (leer — Fragen sind in Supabase DB)
 supabase/
 └── schema.sql         # Vollständiges DB-Schema + RLS-Policies + Functions
 ```
@@ -59,9 +58,12 @@ supabase/
 | Tabelle | Zweck |
 |---|---|
 | `profiles` | Benutzerprofil, Stats, Admin-Flag |
+| `question_categories` | Fragekategorien (z.B. exam_prep) |
+| `subjects` | Themengebiete mit Metadaten (icon, color) |
+| `questions` | Fragendatenbank mit Tags, Schwierigkeit, sort_order |
 | `game_sessions` | Spielsitzung (solo/challenge/group/tournament) |
 | `game_players` | Spieler pro Sitzung mit Score |
-| `game_answers` | Einzelne Antworten mit Zeitnahme |
+| `game_answers` | Einzelne Antworten mit Zeitnahme + question_id |
 | `challenges` | 1v1 Herausforderungen (gezielt oder offen) |
 | `tournaments` | Turnierregistrierung und -status |
 | `tournament_participants` | Turnierteilnehmer |
@@ -88,30 +90,18 @@ supabase/
 
 ---
 
-## Fragendatenbank
+## Fragendatenbank (Supabase)
 
-Format in `src/data/questions.json`:
-```json
-{
-  "categories": {
-    "KEY": {
-      "name": "Anzeigename",
-      "icon": "🔬",
-      "color": "#hex",
-      "questions": [
-        {
-          "question": "...",
-          "answers": ["A", "B", "C", "D"],
-          "correct_index": 0,
-          "difficulty": "easy|medium|hard"
-        }
-      ]
-    }
-  }
-}
-```
+Fragen liegen vollständig in der Datenbank (Tabellen `question_categories`, `subjects`, `questions`).
 
-Neue Kategorien: Einfach neuen Key zu `categories` hinzufügen — wird automatisch in `CategorySelector` angezeigt.
+**Neue Fragen hinzufügen:** `INSERT INTO questions (category_id, question, answers, correct_index, difficulty, tags, sort_order)` — `sort_order` muss immer am Ende angehängt werden (append-only), damit bestehende Seeds nicht brechen.
+
+**Neue Kategorie:** Zeile in `question_categories` einfügen.
+**Neues Thema:** Zeile in `subjects` einfügen mit Verweis auf `category_id`.
+
+**Deterministisches Shuffling:** Fragen werden per `ORDER BY sort_order ASC` geladen, dann client-seitig mit Mulberry32 PRNG (Seed aus `game_sessions.question_seed`) gemischt. Gleicher Seed = gleiche Fragenreihenfolge für alle Spieler.
+
+**Soft-Delete:** Fragen nie hart löschen, sondern `is_active = false` setzen.
 
 ---
 

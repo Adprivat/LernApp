@@ -45,6 +45,126 @@ create policy "Admins can delete profiles"
   );
 
 -- ============================================================
+-- QUESTION CATEGORIES
+-- ============================================================
+create table if not exists public.question_categories (
+  id uuid default uuid_generate_v4() primary key,
+  key text unique not null,
+  name text not null,
+  icon text not null default '',
+  color text not null default '#000000',
+  sort_order integer not null default 0,
+  created_at timestamptz default now()
+);
+
+alter table public.question_categories enable row level security;
+
+create policy "Categories readable by all authenticated users"
+  on public.question_categories for select
+  using (auth.uid() is not null);
+
+create policy "Admins can insert categories"
+  on public.question_categories for insert
+  with check (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can update categories"
+  on public.question_categories for update
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can delete categories"
+  on public.question_categories for delete
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+-- ============================================================
+-- SUBJECTS (tag metadata)
+-- ============================================================
+create table if not exists public.subjects (
+  id uuid default uuid_generate_v4() primary key,
+  key text unique not null,
+  category_id uuid references public.question_categories(id) on delete cascade not null,
+  name text not null,
+  icon text not null default '',
+  color text not null default '#000000',
+  sort_order integer not null default 0,
+  created_at timestamptz default now()
+);
+
+alter table public.subjects enable row level security;
+
+create policy "Subjects readable by all authenticated users"
+  on public.subjects for select
+  using (auth.uid() is not null);
+
+create policy "Admins can insert subjects"
+  on public.subjects for insert
+  with check (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can update subjects"
+  on public.subjects for update
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can delete subjects"
+  on public.subjects for delete
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+-- ============================================================
+-- QUESTIONS
+-- ============================================================
+create table if not exists public.questions (
+  id uuid default uuid_generate_v4() primary key,
+  category_id uuid references public.question_categories(id) on delete cascade not null,
+  question text not null,
+  answers text[] not null check (array_length(answers, 1) = 4),
+  correct_index integer not null check (correct_index >= 0 and correct_index <= 3),
+  difficulty text not null check (difficulty in ('easy', 'medium', 'hard')),
+  tags text[] not null default '{}',
+  sort_order integer not null,
+  is_active boolean not null default true,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create index idx_questions_category on public.questions(category_id);
+create index idx_questions_tags on public.questions using gin(tags);
+create index idx_questions_sort_order on public.questions(category_id, sort_order);
+
+alter table public.questions enable row level security;
+
+create policy "Questions readable by all authenticated users"
+  on public.questions for select
+  using (auth.uid() is not null);
+
+create policy "Admins can insert questions"
+  on public.questions for insert
+  with check (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can update questions"
+  on public.questions for update
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+create policy "Admins can delete questions"
+  on public.questions for delete
+  using (exists (
+    select 1 from public.profiles where id = auth.uid() and is_admin = true
+  ));
+
+-- ============================================================
 -- GAME SESSIONS
 -- ============================================================
 create table if not exists public.game_sessions (
@@ -118,6 +238,7 @@ create table if not exists public.game_answers (
   session_id uuid references public.game_sessions(id) on delete cascade not null,
   user_id uuid references public.profiles(id) on delete cascade not null,
   question_index integer not null,
+  question_id uuid references public.questions(id) on delete set null,
   answer_index integer not null,
   is_correct boolean not null,
   time_taken_ms integer not null,

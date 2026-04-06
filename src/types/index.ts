@@ -25,14 +25,35 @@ export interface Announcement {
   updated_at: string;
 }
 
+export interface QuestionCategory {
+  id: string;
+  key: string;
+  name: string;
+  icon: string;
+  color: string;
+  sort_order: number;
+}
+
+export interface Subject {
+  id: string;
+  key: string;
+  category_id: string;
+  name: string;
+  icon: string;
+  color: string;
+  sort_order: number;
+}
+
 export interface Question {
   id: string;
   category: string;
+  category_id?: string;
   question: string;
   answers: string[];
   correct_index: number;
   difficulty: 'easy' | 'medium' | 'hard';
-  tags?: string[];
+  tags: string[];
+  sort_order?: number;
 }
 
 export interface GameSession {
@@ -162,18 +183,3 @@ export interface Friendship {
   friend?: Profile;
 }
 
-export interface QuestionData {
-  categories: {
-    [key: string]: {
-      name: string;
-      icon: string;
-      color: string;
-      questions: {
-        question: string;
-        answers: string[];
-        correct_index: number;
-        difficulty: 'easy' | 'medium' | 'hard';
-      }[];
-    };
-  };
-}

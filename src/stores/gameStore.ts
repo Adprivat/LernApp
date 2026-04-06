@@ -3,7 +3,6 @@ import { supabase } from '@/lib/supabase';
 import { getErrorMessage } from '@/lib/errorHandler';
 import { useAuthStore } from '@/stores/authStore';
 import type { GameSession, GamePlayer, Question, GameAnswer } from '@/types';
-import questionsData from '@/data/questions.json';
 import { calculateQuestionTime } from '@/lib/utils';
 
 interface GameState {
@@ -39,28 +38,71 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-function shuffleQuestions(category: string, count: number, seed?: number | null): Question[] {
-  const rng = seed != null ? mulberry32(seed) : Math.random;
-  const data = questionsData as any;
-  const catData = data.categories[category];
+// Cache fetched questions to avoid repeated DB calls within a session
+const questionCache: Record<string, Question[]> = {};
+
+async function fetchQuestions(categoryOrTag: string): Promise<Question[]> {
+  if (questionCache[categoryOrTag]) return questionCache[categoryOrTag];
+
+  // Try as category first
+  const { data: catData } = await supabase
+    .from('question_categories')
+    .select('id, key')
+    .eq('key', categoryOrTag)
+    .single();
 
   let qs: Question[];
+
   if (catData) {
-    // Direct category match (e.g. "exam_prep") → all questions
-    qs = catData.questions.map((q: any, i: number) => ({
-      id: `${category}_${i}`,
-      category,
-      ...q,
+    const { data, error } = await supabase
+      .from('questions')
+      .select('*')
+      .eq('category_id', catData.id)
+      .eq('is_active', true)
+      .order('sort_order', { ascending: true });
+
+    if (error) throw error;
+    qs = (data || []).map((q: any) => ({
+      id: q.id,
+      category: categoryOrTag,
+      category_id: q.category_id,
+      question: q.question,
+      answers: q.answers,
+      correct_index: q.correct_index,
+      difficulty: q.difficulty,
+      tags: q.tags || [],
+      sort_order: q.sort_order,
     }));
   } else {
-    // Subject/tag filter → collect matching questions across all categories
-    const all = Object.entries(data.categories).flatMap(([catKey, cat]: [string, any]) =>
-      cat.questions
-        .map((q: any, i: number) => ({ ...q, id: `${catKey}_${i}`, category: catKey }))
-        .filter((q: any) => q.tags?.includes(category))
-    );
-    qs = all;
+    // Subject/tag filter
+    const { data, error } = await supabase
+      .from('questions')
+      .select('*, question_categories(key)')
+      .contains('tags', [categoryOrTag])
+      .eq('is_active', true)
+      .order('sort_order', { ascending: true });
+
+    if (error) throw error;
+    qs = (data || []).map((q: any) => ({
+      id: q.id,
+      category: q.question_categories?.key || 'exam_prep',
+      category_id: q.category_id,
+      question: q.question,
+      answers: q.answers,
+      correct_index: q.correct_index,
+      difficulty: q.difficulty,
+      tags: q.tags || [],
+      sort_order: q.sort_order,
+    }));
   }
+
+  questionCache[categoryOrTag] = qs;
+  return qs;
+}
+
+async function shuffleQuestions(category: string, count: number, seed?: number | null): Promise<Question[]> {
+  const rng = seed != null ? mulberry32(seed) : Math.random;
+  const qs = await fetchQuestions(category);
 
   if (qs.length === 0) return [];
   const shuffled = [...qs].sort(() => rng() - 0.5);
@@ -137,7 +179,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         .select('*, profile:profiles(*)')
         .eq('session_id', session.id);
 
-      const questions = shuffleQuestions(category, questionCount, seed);
+      const questions = await shuffleQuestions(category, questionCount, seed);
 
       // For endless mode (questionCount === 0), use actual question count in DB record
       if (questionCount === 0) {
@@ -217,7 +259,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       .select('*, profile:profiles(*)')
       .eq('session_id', sessionId);
 
-    const questions = shuffleQuestions(session.category, session.question_count, session.question_seed);
+    const questions = await shuffleQuestions(session.category, session.question_count, session.question_seed);
 
     set({
       session,
@@ -251,6 +293,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       session_id: session.id,
       user_id: user.id,
       question_index: currentQuestionIndex,
+      question_id: question.id,
       answer_index: answerIndex,
       is_correct: isCorrect,
       time_taken_ms: timeTakenMs,
@@ -434,6 +477,8 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   reset: () => {
+    // Clear question cache so fresh data is fetched next game
+    Object.keys(questionCache).forEach(k => delete questionCache[k]);
     set({
       session: null,
       players: [],
