@@ -26,6 +26,7 @@ export function GameResultScreen({
   const correct = myPlayer?.correct_answers || 0;
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
 
+
   const [reportQuestion, setReportQuestion] = useState<Question | null>(null);
   const [reportMessage, setReportMessage] = useState('');
   const [reportSending, setReportSending] = useState(false);
@@ -153,19 +154,33 @@ export function GameResultScreen({
       )}
 
       {/* Actions */}
-      <div className="flex gap-3">
-        {onPlayAgain && (
-          <Button variant="primary" onClick={onPlayAgain} fullWidth>
-            <RotateCcw size={18} />
-            Nochmal spielen
-          </Button>
-        )}
-        <Link to="/" className="flex-1">
-          <Button variant="secondary" fullWidth>
-            <Home size={18} />
-            Startseite
-          </Button>
-        </Link>
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-3">
+          {onPlayAgain && (
+            <Button variant="primary" onClick={onPlayAgain} fullWidth>
+              <RotateCcw size={18} />
+              Nochmal spielen
+            </Button>
+          )}
+          <Link to="/" className="flex-1">
+            <Button variant="secondary" fullWidth>
+              <Home size={18} />
+              Startseite
+            </Button>
+          </Link>
+        </div>
+        <div className="flex justify-center">
+          <a
+            href="https://www.buymeacoffee.com/adrianschuz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-opacity hover:opacity-90"
+            style={{ backgroundColor: '#5F7FFF', color: '#ffffff', border: '2px solid #000000' }}
+          >
+            <span style={{ color: '#FFDD00' }}>☕</span>
+            Buy me a coffee
+          </a>
+        </div>
       </div>
 
       {/* Report Question Modal */}
