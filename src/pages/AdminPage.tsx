@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ShieldCheck, Users, Trash2, Crown, Search, RefreshCw, BarChart3, Pencil, X, Trophy, Zap, RotateCcw, Megaphone, Plus, Eye, EyeOff } from 'lucide-react';
+import { ShieldCheck, Users, Trash2, Crown, Search, RefreshCw, BarChart3, Pencil, X, Trophy, Zap, RotateCcw, Megaphone, Plus, Eye, EyeOff, BookOpen } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/authStore';
 import { getErrorMessage } from '@/lib/errorHandler';
@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
 import type { Profile, Announcement } from '@/types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 type ActiveTab = 'users' | 'lobbies' | 'challenges' | 'tournaments' | 'updates';
 
@@ -263,12 +263,20 @@ export function AdminPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex items-center gap-3 mb-8">
-        <ShieldCheck size={32} className="text-amber-400" />
-        <div>
-          <h1 className="text-3xl font-black text-white">Admin-Panel</h1>
-          <p className="text-nexus-muted text-sm">Benutzer- und Systemverwaltung</p>
+      <div className="flex items-center justify-between gap-3 mb-8">
+        <div className="flex items-center gap-3">
+          <ShieldCheck size={32} className="text-amber-400" />
+          <div>
+            <h1 className="text-3xl font-black text-white">Admin-Panel</h1>
+            <p className="text-nexus-muted text-sm">Benutzer- und Systemverwaltung</p>
+          </div>
         </div>
+        <Link to="/admin/questions">
+          <Button variant="secondary">
+            <BookOpen size={16} />
+            Fragen verwalten
+          </Button>
+        </Link>
       </div>
 
       {error && (

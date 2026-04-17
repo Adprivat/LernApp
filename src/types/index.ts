@@ -54,6 +54,7 @@ export interface Question {
   difficulty: 'easy' | 'medium' | 'hard';
   tags: string[];
   sort_order?: number;
+  is_active?: boolean;
 }
 
 export interface GameSession {

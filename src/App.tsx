@@ -16,6 +16,7 @@ import { TournamentPage } from '@/pages/TournamentPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { AdminPage } from '@/pages/AdminPage';
+import { AdminQuestionsPage } from '@/pages/AdminQuestionsPage';
 import { GuidePage } from '@/pages/GuidePage';
 import { FriendsPage } from '@/pages/FriendsPage';
 import { ImpressumPage } from '@/pages/ImpressumPage';
@@ -305,6 +306,7 @@ function AppLayout() {
           <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
           <Route path="/leaderboard" element={<RequireAuth><LeaderboardPage /></RequireAuth>} />
           <Route path="/admin" element={<RequireAuth><AdminPage /></RequireAuth>} />
+          <Route path="/admin/questions" element={<RequireAuth><AdminQuestionsPage /></RequireAuth>} />
           <Route path="/guide" element={<RequireAuth><GuidePage /></RequireAuth>} />
           <Route path="/friends" element={<RequireAuth><FriendsPage /></RequireAuth>} />
           <Route path="/impressum" element={<ImpressumPage />} />
