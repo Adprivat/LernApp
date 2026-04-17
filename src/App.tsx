@@ -231,7 +231,13 @@ function AppLayout() {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_IN') fetchProfile();
-      if (event === 'SIGNED_OUT') useAuthStore.setState({ user: null });
+      if (event === 'SIGNED_OUT') {
+        const currentUser = useAuthStore.getState().user;
+        if (currentUser) {
+          supabase.from('profiles').update({ is_online: false }).eq('id', currentUser.id).then(() => {});
+        }
+        useAuthStore.setState({ user: null });
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -271,21 +277,29 @@ function AppLayout() {
       .subscribe();
 
     // Online heartbeat
+    const setOffline = () => {
+      supabase.from('profiles').update({ is_online: false }).eq('id', user.id).then(() => {});
+    };
     const updateOnline = () => {
       supabase.from('profiles')
         .update({ is_online: true, last_seen: new Date().toISOString() })
         .eq('id', user.id)
         .then(() => {});
+      supabase.rpc('cleanup_stale_online_status').then(() => {});
     };
     updateOnline();
     heartbeatRef.current = setInterval(updateOnline, 30000);
 
+    window.addEventListener('beforeunload', setOffline);
+
     return () => {
+      window.removeEventListener('beforeunload', setOffline);
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
       }
       if (heartbeatRef.current) clearInterval(heartbeatRef.current);
+      setOffline();
     };
   }, [user?.id]);
 
